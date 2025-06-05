@@ -49,21 +49,7 @@ export default function Footer() {
         <div className={styles.footerMain}>
           <div className={styles.footerBrand}>
             <div className={styles.brandContainer}>
-              <Image 
-                src="/logo.webp" 
-                alt="Aetherbloom Logo" 
-                width={40} 
-                height={40}
-                onError={() => {
-                  // Handle logo error
-                }}
-              />
-              <div className={styles.brandText}>
                 <h3 className={styles.brandName}>Aetherbloom</h3>
-                <p className={styles.brandTagline}>
-                  Your future starts<br />here
-                </p>
-              </div>
             </div>
             <p className={styles.brandDescription}>
               Transform your business with expertly managed BPO solutions. UK expertise meets global talent for sustainable growth and meaningful impact.
@@ -72,28 +58,30 @@ export default function Footer() {
               <span className={styles.socialLabel}>Follow the community</span>
               <div className={styles.socialIcons}>
                 <a href="#" className={styles.socialIcon} aria-label="LinkedIn">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="m5.839 4.101c.05-.071.105-.142.165-.21.379-.42.868-.629 1.394-.629.526 0 1.015.21 1.394.629.06.068.115.139.165.21l6.698 6.897 6.733-6.934c.05-.071.105-.141.165-.209.379-.42.868-.629 1.394-.629.526 0 1.015.21 1.394.629.379.42.394 1.017.033 1.455l-7.365 7.602c-.192.403-.586.629-1.002.629-.416 0-.81-.226-1.002-.629l-7.331-7.554c-.362-.438-.347-1.035.033-1.455z"/>
-                  </svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 
+                        0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.28c-.97 
+                        0-1.75-.79-1.75-1.75s.78-1.75 1.75-1.75 1.75.79 
+                        1.75 1.75-.79 1.75-1.75 1.75zm13.5 11.28h-3v-5.5c0-1.38-1.12-2.5-2.5-2.5s-2.5 
+                        1.12-2.5 2.5v5.5h-3v-10h3v1.28c.73-.84 1.78-1.28 
+                        2.5-1.28 2.21 0 4 1.79 4 4v6z" />
+                    </svg>
                 </a>
-                <a href="#" className={styles.socialIcon} aria-label="Twitter">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
-                  </svg>
+
+                <a href="#" className={styles.socialIcon} aria-label="Facebook">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M22.675 0h-21.35C.596 0 0 .595 0 
+                        1.326v21.348C0 23.404.596 24 1.325 
+                        24H12.82v-9.294H9.692V11.01h3.127V8.41c0-3.1 
+                        1.894-4.788 4.659-4.788 1.325 0 2.464.099 
+                        2.795.143v3.24l-1.918.001c-1.504 
+                        0-1.796.715-1.796 1.763v2.31h3.59l-.467 
+                        3.696h-3.123V24h6.116C23.404 24 24 
+                        23.404 24 22.674V1.326C24 
+                        .595 23.404 0 22.675 0z"/>
+                    </svg>
                 </a>
-                <a href="#" className={styles.socialIcon} aria-label="Instagram">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                    <path d="m16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-                  </svg>
-                </a>
-                <a href="#" className={styles.socialIcon} aria-label="YouTube">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
-                    <polygon points="9.75,15.02 15.5,11.75 9.75,8.48"/>
-                  </svg>
-                </a>
+
               </div>
             </div>
           </div>

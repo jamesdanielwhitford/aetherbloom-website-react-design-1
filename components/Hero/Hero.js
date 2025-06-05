@@ -1,8 +1,14 @@
 // File: components/Hero/Hero.js
 
+import { useState } from 'react'
 import styles from './Hero.module.css'
+import Image from 'next/image'
 
 export default function Hero() {
+    const [imageError, setImageError] = useState(false)
+    const handleImageError = () => {
+        setImageError(true)
+    }
   return (
     <section className={styles.heroSection} id="home">
       <div className={styles.heroContainer}>
@@ -25,11 +31,30 @@ export default function Hero() {
           </div>
         </div>
 
+        <div className={styles.heroVisual}>
         <div className={styles.heroImageContainer}>
+            {!imageError ? (
+            <Image
+                src="/hero-image.jpg" // Replace with your image path
+                alt="Aetherbloom Business Outsourcing"
+                fill
+                style={{ objectFit: 'cover' }}
+                onError={() => setImageError(true)}
+                priority
+            />
+            ) : (
+            <div className={styles.heroImagePlaceholder}>
+                <div className={styles.imageOverlay}></div>
+            </div>
+            )}
+        </div>
+        </div>
+
+        {/* <div className={styles.heroImageContainer}>
           <div className={styles.heroImagePlaceholder}>
             Professional team image will be placed here
           </div>
-        </div>
+        </div> */}
 
         <div className={styles.heroStats}>
           <div className={styles.heroStat}>
