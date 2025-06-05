@@ -49,31 +49,6 @@ export default function Hero() {
             )}
         </div>
         </div>
-
-        {/* <div className={styles.heroImageContainer}>
-          <div className={styles.heroImagePlaceholder}>
-            Professional team image will be placed here
-          </div>
-        </div> */}
-
-        <div className={styles.heroStats}>
-          <div className={styles.heroStat}>
-            <span className={styles.heroStatNumber}>40%+</span>
-            <span className={styles.heroStatLabel}>Cost Reduction</span>
-          </div>
-          <div className={styles.heroStat}>
-            <span className={styles.heroStatNumber}>72hrs</span>
-            <span className={styles.heroStatLabel}>Team Scaling</span>
-          </div>
-          <div className={styles.heroStat}>
-            <span className={styles.heroStatNumber}>92%</span>
-            <span className={styles.heroStatLabel}>English Fluency</span>
-          </div>
-          <div className={styles.heroStat}>
-            <span className={styles.heroStatNumber}>4.9/5</span>
-            <span className={styles.heroStatLabel}>Client Rating</span>
-          </div>
-        </div>
       </div>
     </section>
   )
