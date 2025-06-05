@@ -179,6 +179,17 @@ export default function PricingCalculator() {
     e.target.style.transform = 'scale(1)'
   }
 
+  const resetCalculator = () => {
+    setShowResults(false)
+    setResults(null)
+    setFormData({
+      role: '',
+      salary: '',
+      hours: '40',
+      tier: 'essentials'
+    })
+  }
+
   const calculateSavings = () => {
     const salary = parseFloat(formData.salary.replace(/,/g, ''))
     const hours = parseFloat(formData.hours)
@@ -226,17 +237,6 @@ export default function PricingCalculator() {
 
     setResults(calculatedResults)
     setShowResults(true)
-
-    // Scroll to results
-    setTimeout(() => {
-      const resultsElement = document.getElementById('calculatorResults')
-      if (resultsElement) {
-        resultsElement.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'nearest' 
-        })
-      }
-    }, 100)
   }
 
   const handleKeyPress = (e) => {
@@ -256,105 +256,105 @@ export default function PricingCalculator() {
         </div>
 
         <div className={styles.calculatorCard}>
-          <div className={styles.calculatorForm}>
-            <div className={styles.formSection}>
-              <h3 className={styles.formSectionTitle}>Role Details</h3>
-              
-              <div className={styles.formGroup}>
-                <label htmlFor="role" className={styles.formLabel}>Select Role</label>
-                <select
-                  id="role"
-                  className={styles.formInput}
-                  value={formData.role}
-                  onChange={(e) => handleInputChange('role', e.target.value)}
+          {!showResults ? (
+            <div className={styles.calculatorForm}>
+              <div className={styles.formSection}>
+                <h3 className={styles.formSectionTitle}>Role Details</h3>
+                
+                <div className={styles.formGroup}>
+                  <label htmlFor="role" className={styles.formLabel}>Select Role</label>
+                  <select
+                    id="role"
+                    className={styles.formInput}
+                    value={formData.role}
+                    onChange={(e) => handleInputChange('role', e.target.value)}
+                  >
+                    <option value="">Choose a role</option>
+                    {roleOptions.map((role, index) => (
+                      <option key={index} value={role.value}>
+                        {role.value} (£{parseInt(role.salary).toLocaleString('en-GB')})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label htmlFor="salary" className={styles.formLabel}>Annual Salary (£)</label>
+                  <input
+                    type="text"
+                    id="salary"
+                    className={styles.formInput}
+                    placeholder="e.g. 28,000"
+                    value={formData.salary}
+                    onChange={(e) => {
+                      let value = e.target.value.replace(/[^\d.,]/g, '')
+                      value = value.replace(/,+/g, ',').replace(/\.+/g, '.')
+                      handleInputChange('salary', value)
+                    }}
+                    onFocus={handleSalaryFocus}
+                    onBlur={handleSalaryBlurStyle}
+                    onKeyPress={handleKeyPress}
+                  />
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label htmlFor="hours" className={styles.formLabel}>Hours per Week</label>
+                  <input
+                    type="text"
+                    id="hours"
+                    className={styles.formInput}
+                    placeholder="e.g. 40"
+                    value={formData.hours}
+                    onChange={(e) => {
+                      const value = e.target.value.replace(/[^\d]/g, '')
+                      handleInputChange('hours', value)
+                    }}
+                    onFocus={handleHoursFocus}
+                    onBlur={handleHoursBlur}
+                    onKeyPress={handleKeyPress}
+                  />
+                </div>
+              </div>
+
+              <div className={styles.formSection}>
+                <h3 className={styles.formSectionTitle}>Aetherbloom Solution</h3>
+                
+                <div className={styles.formGroup}>
+                  <label htmlFor="tier" className={styles.formLabel}>Select Service Tier</label>
+                  <select
+                    id="tier"
+                    className={styles.formInput}
+                    value={formData.tier}
+                    onChange={(e) => handleInputChange('tier', e.target.value)}
+                  >
+                    {tierOptions.map((tier, index) => (
+                      <option key={index} value={tier.value}>
+                        {tier.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <button 
+                  className={styles.calculatorBtn}
+                  onClick={calculateSavings}
                 >
-                  <option value="">Choose a role</option>
-                  {roleOptions.map((role, index) => (
-                    <option key={index} value={role.value}>
-                      {role.value} (£{parseInt(role.salary).toLocaleString('en-GB')})
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="salary" className={styles.formLabel}>Annual Salary (£)</label>
-                <input
-                  type="text"
-                  id="salary"
-                  className={styles.formInput}
-                  placeholder="e.g. 28,000"
-                  value={formData.salary}
-                  onChange={(e) => {
-                    let value = e.target.value.replace(/[^\d.,]/g, '')
-                    value = value.replace(/,+/g, ',').replace(/\.+/g, '.')
-                    handleInputChange('salary', value)
-                  }}
-                  onFocus={handleSalaryFocus}
-                  onBlur={handleSalaryBlurStyle}
-                  onKeyPress={handleKeyPress}
-                />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="hours" className={styles.formLabel}>Hours per Week</label>
-                <input
-                  type="text"
-                  id="hours"
-                  className={styles.formInput}
-                  placeholder="e.g. 40"
-                  value={formData.hours}
-                  onChange={(e) => {
-                    const value = e.target.value.replace(/[^\d]/g, '')
-                    handleInputChange('hours', value)
-                  }}
-                  onFocus={handleHoursFocus}
-                  onBlur={handleHoursBlur}
-                  onKeyPress={handleKeyPress}
-                />
+                  Calculate Your Savings
+                  <span className={styles.btnArrow}>→</span>
+                </button>
               </div>
             </div>
-
-            <div className={styles.formSection}>
-              <h3 className={styles.formSectionTitle}>Aetherbloom Solution</h3>
-              
-              <div className={styles.formGroup}>
-                <label htmlFor="tier" className={styles.formLabel}>Select Service Tier</label>
-                <select
-                  id="tier"
-                  className={styles.formInput}
-                  value={formData.tier}
-                  onChange={(e) => handleInputChange('tier', e.target.value)}
-                >
-                  {tierOptions.map((tier, index) => (
-                    <option key={index} value={tier.value}>
-                      {tier.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <button 
-                className={styles.calculatorBtn}
-                onClick={calculateSavings}
-              >
-                Calculate Your Savings
-                <span className={styles.btnArrow}>→</span>
-              </button>
-            </div>
-          </div>
-
-          {showResults && results && (
+          ) : (
             <div className={styles.calculatorResults} id="calculatorResults">
-              <div className={styles.resultsHeader}>
-                <div className={styles.resultsIcon}>
+              {/* <div className={styles.resultsHeader}> */}
+                {/* <div className={styles.resultsIcon}>
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M12 2v20"/>
                     <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                   </svg>
-                </div>
-                <h3 className={styles.resultsTitle}>Your Annual Savings Breakdown</h3>
-              </div>
+                </div> */}
+                {/* <h3 className={styles.resultsTitle}>Your Annual Savings Breakdown</h3> */}
+              {/* </div> */}
               
               <div className={styles.resultsComparison}>
                 <div className={`${styles.costBreakdown} ${styles.ukCost}`}>
@@ -413,6 +413,12 @@ export default function PricingCalculator() {
                   Claim Your Free Strategy Session
                   <span className={styles.btnArrow}>→</span>
                 </a>
+                <button 
+                  className={`btn btn-secondary ${styles.calculateAgainBtn}`}
+                  onClick={resetCalculator}
+                >
+                  Calculate Again
+                </button>
                 <p className={styles.ctaNote}>Start saving within 72 hours with our rapid deployment process</p>
               </div>
             </div>

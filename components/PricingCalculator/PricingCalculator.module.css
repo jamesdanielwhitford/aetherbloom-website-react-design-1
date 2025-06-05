@@ -172,7 +172,6 @@
 }
 
 .calculatorResults {
-    margin-top: 48px;
     padding-top: 48px;
     border-top: 2px solid rgba(201, 100, 66, 0.1);
     animation: slideIn 0.4s ease-out;
@@ -339,12 +338,51 @@
     margin-bottom: 16px;
     padding: 16px 32px;
     font-size: 16px;
+    margin-right: 16px;
+}
+
+.resultsCta .btn:last-of-type {
+    margin-right: 0;
+}
+
+.calculateAgainBtn {
+    background: linear-gradient(135deg, var(--brand-secondary), var(--brand-secondary-hover));
+    color: var(--white);
+    border: none;
+    border-radius: 16px;
+    padding: 16px 32px;
+    margin-left: 24px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        8px 8px 16px rgba(45, 74, 62, 0.3),
+        -8px -8px 16px rgba(255, 255, 255, 0.8);
+}
+
+.calculateAgainBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        10px 10px 20px rgba(45, 74, 62, 0.35),
+        -10px -10px 20px rgba(255, 255, 255, 0.9);
+}
+
+.calculateAgainBtn:active {
+    transform: translateY(0);
+    box-shadow: 
+        inset 4px 4px 8px rgba(0, 0, 0, 0.15),
+        inset -4px -4px 8px rgba(255, 255, 255, 0.2);
 }
 
 .ctaNote {
     font-size: 0.9rem;
     color: var(--text-muted);
     font-style: italic;
+    margin-top: 16px;
 }
 
 /* Mobile Styles */
@@ -430,6 +468,13 @@
     .percentageValue {
         font-size: 1.6rem;
     }
+
+    .resultsCta .btn {
+        display: block;
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 12px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -501,5 +546,11 @@
         width: 45px;
         height: 45px;
         font-size: 0.9rem;
+    }
+
+    .calculateAgainBtn {
+        padding: 14px 24px;
+        font-size: 14px;
+        border-radius: 12px;
     }
 }
