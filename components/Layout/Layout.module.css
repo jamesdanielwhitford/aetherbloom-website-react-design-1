@@ -1,0 +1,10 @@
+/* File: components/Layout/Layout.module.css */
+
+.layout {
+  min-height: 100vh;
+  background-color: var(--background-cream);
+}
+
+.main {
+  position: relative;
+}

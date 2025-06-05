@@ -1,0 +1,334 @@
+/* File: components/Services/ServiceCard/ServiceCard.module.css */
+
+.serviceCard {
+    background-color: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(201, 100, 66, 0.1);
+    box-shadow: 
+        12px 12px 24px rgba(0, 0, 0, 0.08),
+        -12px -12px 24px rgba(255, 255, 255, 0.9);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 480px;
+}
+
+.serviceCard:hover {
+    transform: translateY(-6px);
+    box-shadow: 
+        16px 16px 32px rgba(0, 0, 0, 0.12),
+        -16px -16px 32px rgba(255, 255, 255, 1);
+}
+
+.serviceContent {
+    padding: 32px 28px 24px 28px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.serviceTitle {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+    line-height: 1.3;
+}
+
+.serviceDescription {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+.serviceLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--brand-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.serviceLink:hover {
+    color: var(--brand-primary-hover);
+}
+
+.serviceArrow {
+    transition: transform 0.2s ease;
+}
+
+.serviceLink:hover .serviceArrow {
+    transform: translateX(4px);
+}
+
+.serviceImageContainer {
+    padding: 0 28px 32px 28px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.serviceImagePlaceholder {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(201, 100, 66, 0.1), rgba(232, 145, 95, 0.15));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.serviceMockup {
+    width: 90%;
+    max-width: 220px;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 
+        0 8px 20px rgba(0, 0, 0, 0.15),
+        0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.serviceCard:hover .serviceMockup {
+    transform: scale(1.05);
+}
+
+.mockupHeader {
+    background-color: var(--background-cream);
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(201, 100, 66, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mockupDots {
+    display: flex;
+    gap: 4px;
+}
+
+.mockupDots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--text-muted);
+    opacity: 0.5;
+}
+
+.mockupTitle {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.mockupContent {
+    padding: 16px;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Customer Support Mockup */
+.chatBubble {
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    max-width: 80%;
+    line-height: 1.4;
+}
+
+.chatBubble.incoming {
+    background-color: rgba(201, 100, 66, 0.1);
+    color: var(--text-dark);
+    align-self: flex-start;
+}
+
+.chatBubble.outgoing {
+    background-color: var(--brand-primary);
+    color: var(--white);
+    align-self: flex-end;
+}
+
+/* Technical Support Mockup */
+.statusIndicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.statusIndicator.green {
+    background-color: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+}
+
+.statusDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: currentColor;
+}
+
+.progressBar {
+    width: 100%;
+    height: 6px;
+    background-color: rgba(201, 100, 66, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    width: 75%;
+    background: linear-gradient(90deg, var(--brand-primary), var(--brand-primary-light));
+    border-radius: 3px;
+}
+
+/* Back Office Mockup */
+.documentRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 4px;
+    background-color: rgba(201, 100, 66, 0.05);
+    font-size: 0.75rem;
+}
+
+.docIcon {
+    font-size: 0.9rem;
+}
+
+.docName {
+    flex: 1;
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.docStatus.processed {
+    color: #22c55e;
+    font-weight: 600;
+}
+
+.docStatus.processing {
+    color: var(--brand-primary);
+}
+
+/* Sales Support Mockup */
+.pipelineStage {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: rgba(201, 100, 66, 0.05);
+    border-radius: 6px;
+    font-size: 0.8rem;
+}
+
+.stageName {
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.stageCount {
+    background-color: var(--brand-primary);
+    color: var(--white);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.75rem;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .serviceCard {
+        border-radius: 16px;
+        height: auto;
+        min-height: 460px;
+    }
+
+    .serviceContent {
+        padding: 24px 20px 20px 20px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .serviceTitle {
+        font-size: 1.3rem;
+        margin-bottom: 14px;
+    }
+
+    .serviceDescription {
+        font-size: 0.95rem;
+        margin-bottom: 18px;
+        flex: 1;
+    }
+
+    .serviceImageContainer {
+        padding: 0 20px 24px 20px;
+        height: 180px;
+        flex-shrink: 0;
+    }
+
+    .serviceMockup {
+        max-width: 200px;
+    }
+
+    .mockupContent {
+        padding: 12px;
+        min-height: 100px;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .serviceCard {
+        min-height: 420px;
+    }
+
+    .serviceContent {
+        padding: 20px 16px 16px 16px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .serviceTitle {
+        font-size: 1.2rem;
+        margin-bottom: 12px;
+    }
+
+    .serviceDescription {
+        font-size: 0.9rem;
+        margin-bottom: 16px;
+        flex: 1;
+    }
+
+    .serviceImageContainer {
+        padding: 0 16px 20px 16px;
+        height: 160px;
+        flex-shrink: 0;
+    }
+
+    .serviceMockup {
+        max-width: 180px;
+    }
+}
