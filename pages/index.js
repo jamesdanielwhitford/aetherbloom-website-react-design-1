@@ -23,7 +23,6 @@ export default function Home() {
         <WhyAetherbloom />
         <Services />
         <PricingCalculator />
-        <Testimonials />
         <CTA />
         <Footer />
       </Layout>
