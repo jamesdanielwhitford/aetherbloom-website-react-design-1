@@ -10,33 +10,16 @@
   z-index: 1000;
   transition: all 0.4s cubic-bezier(0.4, 0.0, 0.6, 1);
   
-  /* Enhanced glassmorphism effect */
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  /* Pure white background */
+  background: rgba(255, 255, 255, 1);
   border-radius: 50px;
-  
-  /* Floating animation */
-  animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateX(-50%) translateY(0px);
-  }
-  50% {
-    transform: translateX(-50%) translateY(-2px);
-  }
 }
 
 .navbar.scrolled {
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(25px);
-  border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  background: #ffffff;
+  /* border-color: rgba(216, 78, 40, 0.2); */
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
   top: 0.5rem;
-  animation: none; /* Stop floating animation when scrolled */
 }
 
 .navbar.compact .navContainer {
@@ -72,7 +55,7 @@
 
 .brandLink {
   text-decoration: none;
-  color: var(--text-primary);
+  color: #d84e28;
   font-weight: 700;
   font-size: 1.4rem;
   letter-spacing: -0.5px;
@@ -82,7 +65,7 @@
 }
 
 .brandName {
-  background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+  background: linear-gradient(135deg, #d84e28 0%, #b8411f 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -90,7 +73,7 @@
 }
 
 .brandLink:hover .brandName {
-  background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.9) 100%);
+  background: linear-gradient(135deg, #ff9340 0%, #d84e28 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -109,7 +92,7 @@
 }
 
 .navLink {
-  color: var(--text-primary);
+  color: #d84e28;
   text-decoration: none;
   font-weight: 500;
   font-size: 1.1rem;
@@ -126,14 +109,14 @@
   left: 50%;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0.8));
+  background: #d84e28;
   transition: all 0.3s ease;
   transform: translateX(-50%);
   border-radius: 2px;
 }
 
 .navLink:hover {
-  color: #ffffff;
+  color: #b8411f;
   transform: translateY(-1px);
 }
 
@@ -150,7 +133,7 @@
   display: inline-block;
   padding: 0.6rem 1.4rem;
   border-radius: 50px;
-  color: var(--text-primary);
+  color: #ffffff;
   text-decoration: none;
   font-weight: 600;
   font-size: 1rem;
@@ -160,11 +143,10 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   
-  /* Enhanced glassmorphism effect */
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  /* Orange background */
+  background: #d84e28;
+  border: 1px solid #d84e28;
+  box-shadow: 0 4px 16px rgba(216, 78, 40, 0.3);
 }
 
 .ctaButton::before {
@@ -174,7 +156,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transition: left 0.5s ease;
 }
 
@@ -183,10 +165,10 @@
 }
 
 .ctaButton:hover {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: #ff9340;
+  border-color: #ff9340;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 25px rgba(216, 78, 40, 0.4);
   color: #ffffff;
 }
 
@@ -210,7 +192,7 @@
 }
 
 .hamburger span {
-  background: var(--text-primary);
+  background: #d84e28;
   height: 2px;
   width: 100%;
   border-radius: 2px;
@@ -254,10 +236,9 @@
   transform: translateY(-10px);
   transition: all 0.3s ease;
   
-  /* Enhanced glassmorphism effect */
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* Pure white background */
+  background: #ffffff;
+  border: 1px solid rgba(216, 78, 40, 0.1);
   border-top: none;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
 }
@@ -276,17 +257,17 @@
 }
 
 .mobileNavLink {
-  color: var(--text-primary);
+  color: #d84e28;
   text-decoration: none;
   font-weight: 500;
   font-size: 1.1rem;
   padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(216, 78, 40, 0.1);
   transition: all 0.3s ease;
 }
 
 .mobileNavLink:hover {
-  color: #ffffff;
+  color: #b8411f;
   transform: translateX(5px);
 }
 
@@ -294,7 +275,7 @@
   display: inline-block;
   padding: 1rem 2rem;
   border-radius: 50px;
-  color: var(--text-primary);
+  color: #ffffff;
   text-decoration: none;
   font-weight: 600;
   font-size: 1rem;
@@ -304,17 +285,16 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   
-  /* Enhanced glassmorphism effect */
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  /* Orange background */
+  background: #d84e28;
+  border: 1px solid #d84e28;
+  box-shadow: 0 4px 16px rgba(216, 78, 40, 0.3);
 }
 
 .mobileCtaButton:hover {
-  background: rgba(255, 255, 255, 0.35);
+  background: #ff9340;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 25px rgba(216, 78, 40, 0.4);
   color: #ffffff;
 }
 
