@@ -138,7 +138,7 @@
   position: relative;
   z-index: 10;
   text-align: center;
-  color: #2c1810;
+  color: #ffffff;
   max-width: 900px;
   padding: 2rem;
   animation: fadeInContent 2s ease-out 1s both;
@@ -159,7 +159,7 @@
   font-size: 4rem;
   font-weight: 300;
   margin-bottom: 1.5rem;
-  text-shadow: 0 2px 15px rgba(216, 78, 40, 0.2);
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
   letter-spacing: -2px;
   line-height: 1.1;
 }
@@ -168,8 +168,8 @@
   font-size: 1.4rem;
   font-weight: 300;
   margin-bottom: 2.5rem;
-  opacity: 0.85;
-  text-shadow: 0 1px 8px rgba(216, 78, 40, 0.15);
+  opacity: 0.95;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
   line-height: 1.6;
   max-width: 700px;
   margin-left: auto;
@@ -180,7 +180,7 @@
   display: inline-block;
   padding: 1.2rem 3rem;
   border-radius: 50px;
-  color: #2c1810;
+  color: #ffffff;
   text-decoration: none;
   font-weight: 600;
   font-size: 1.1rem;
@@ -217,7 +217,7 @@
   border-color: rgba(255, 255, 255, 0.4);
   transform: translateY(-3px);
   box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
-  color: #b8411f;
+  color: #ffffff;
 }
 
 /* Utility glassmorphism classes for reuse */

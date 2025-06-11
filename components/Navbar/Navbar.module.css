@@ -82,7 +82,7 @@
 }
 
 .brandName {
-  background: linear-gradient(135deg, var(--brand-color) 0%, var(--brand-color-light) 100%);
+  background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -90,7 +90,7 @@
 }
 
 .brandLink:hover .brandName {
-  background: linear-gradient(135deg, var(--brand-color-dark) 0%, var(--brand-color) 100%);
+  background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.9) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -126,14 +126,14 @@
   left: 50%;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, var(--brand-color), var(--brand-color-light));
+  background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0.8));
   transition: all 0.3s ease;
   transform: translateX(-50%);
   border-radius: 2px;
 }
 
 .navLink:hover {
-  color: var(--brand-color);
+  color: #ffffff;
   transform: translateY(-1px);
 }
 
@@ -187,7 +187,7 @@
   border-color: rgba(255, 255, 255, 0.5);
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-  color: var(--brand-color-dark);
+  color: #ffffff;
 }
 
 /* Mobile Menu Button */
@@ -286,7 +286,7 @@
 }
 
 .mobileNavLink:hover {
-  color: var(--brand-color);
+  color: #ffffff;
   transform: translateX(5px);
 }
 
@@ -315,7 +315,7 @@
   background: rgba(255, 255, 255, 0.35);
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-  color: var(--brand-color-dark);
+  color: #ffffff;
 }
 
 /* Responsive Design */
