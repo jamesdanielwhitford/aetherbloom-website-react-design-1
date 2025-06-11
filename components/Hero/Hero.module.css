@@ -1,17 +1,13 @@
 /* File: components/Hero/Hero.module.css */
 
 .heroContainer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+  position: relative;
   height: 100vh;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #ff9340 0%, #ffcaa3 50%, #ffc093 100%);
-  z-index: 1;
 }
 
 .heroContainer::before {
@@ -146,11 +142,6 @@
   max-width: 900px;
   padding: 2rem;
   animation: fadeInContent 2s ease-out 1s both;
-  pointer-events: none;
-}
-
-.heroContent * {
-  pointer-events: auto;
 }
 
 @keyframes fadeInContent {
@@ -227,14 +218,6 @@
   transform: translateY(-3px);
   box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
   color: #ffffff;
-}
-
-/* Spacer to allow scrolling */
-.heroSpacer {
-  height: 100vh;
-  width: 100%;
-  position: relative;
-  z-index: 2;
 }
 
 /* Utility glassmorphism classes for reuse */
