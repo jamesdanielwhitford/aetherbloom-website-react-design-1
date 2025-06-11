@@ -179,18 +179,22 @@
 .heroCta {
   display: inline-block;
   padding: 1.2rem 3rem;
-  background: rgba(216, 78, 40, 0.1);
-  border: 2px solid rgba(216, 78, 40, 0.3);
   border-radius: 50px;
-  color: #d84e28;
+  color: #2c1810;
   text-decoration: none;
   font-weight: 600;
   font-size: 1.1rem;
   transition: all 0.4s ease;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px rgba(216, 78, 40, 0.15);
   position: relative;
   overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  
+  /* Enhanced glassmorphism effect */
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .heroCta::before {
@@ -209,11 +213,26 @@
 }
 
 .heroCta:hover {
-  background: rgba(216, 78, 40, 0.2);
-  border-color: rgba(216, 78, 40, 0.5);
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
   transform: translateY(-3px);
-  box-shadow: 0 15px 45px rgba(216, 78, 40, 0.25);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
   color: #b8411f;
+}
+
+/* Utility glassmorphism classes for reuse */
+.glass {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.glassDark {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 768px) {
@@ -224,6 +243,10 @@
   
   .heroSubtitle {
     font-size: 1.2rem;
+  }
+  
+  .heroContent {
+    padding: 2rem 1.5rem;
   }
   
   .petal {
@@ -242,7 +265,7 @@
   }
   
   .heroContent {
-    padding: 1rem;
+    padding: 1.5rem 1rem;
   }
 
   .heroCta {
