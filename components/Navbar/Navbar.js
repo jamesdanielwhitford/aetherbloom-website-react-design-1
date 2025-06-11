@@ -36,10 +36,10 @@ export default function Navbar() {
   }
 
   const navLinks = [
-    { href: '#why-aetherbloom', label: 'Why Us', icon: '🎯' },
-    { href: '#services', label: 'Services', icon: '⚙️' },
-    { href: '#pricing', label: 'Pricing', icon: '💰' },
-    { href: '#contact', label: 'Contact', icon: '📞' }
+    { href: '#why-aetherbloom', label: 'Why Us' },
+    { href: '#services', label: 'Services' },
+    { href: '#pricing', label: 'Pricing' },
+    { href: '#contact', label: 'Contact' }
   ]
 
   return (
@@ -48,8 +48,8 @@ export default function Navbar() {
         {/* Logo/Brand */}
         <div className={styles.navBrand}>
           <a href="#" className={styles.brandLink}>
-            <span className={`${styles.brandName} ${isCompact ? styles.brandCompact : ''}`}>
-              {isCompact ? 'A' : 'Aetherbloom'}
+            <span className={styles.brandName}>
+              Aetherbloom
             </span>
           </a>
         </div>
@@ -60,21 +60,16 @@ export default function Navbar() {
             <a
               key={index}
               href={link.href}
-              className={`${styles.navLink} ${isCompact ? styles.navLinkCompact : ''}`}
-              title={isCompact ? link.label : ''}
+              className={styles.navLink}
             >
-              {isCompact ? (
-                <span className={styles.navIcon}>{link.icon}</span>
-              ) : (
-                link.label
-              )}
+              {link.label}
             </a>
           ))}
         </div>
 
         {/* CTA Button */}
         <div className={styles.navCta}>
-          <a href="#pricing" className={`${styles.ctaButton} ${isCompact ? styles.ctaCompact : ''}`}>
+          <a href="#pricing" className={styles.ctaButton}>
             Get Started
           </a>
         </div>
