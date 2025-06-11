@@ -3,12 +3,12 @@
 import Head from 'next/head'
 import Layout from '../components/Layout/Layout'
 import Hero from '../components/Hero/Hero'
-import WhyAetherbloom from '../components/WhyAetherbloom/WhyAetherbloom'
-import Services from '../components/Services/Services'
-import Testimonials from '../components/Testimonials/Testimonials'
-import PricingCalculator from '../components/PricingCalculator/PricingCalculator'
-import CTA from '../components/CTA/CTA'
-import Footer from '../components/Footer/Footer'
+// import WhyAetherbloom from '../components/WhyAetherbloom/WhyAetherbloom'
+// import Services from '../components/Services/Services'
+// import Testimonials from '../components/Testimonials/Testimonials'
+// import PricingCalculator from '../components/PricingCalculator/PricingCalculator'
+// import CTA from '../components/CTA/CTA'
+// import Footer from '../components/Footer/Footer'
 
 export default function Home() {
   return (
@@ -20,11 +20,11 @@ export default function Home() {
       </Head>
       <Layout>
         <Hero />
-        <WhyAetherbloom />
+        {/* <WhyAetherbloom />
         <Services />
-        <PricingCalculator />
-        <CTA />
-        <Footer />
+        <PricingCalculator /> */}
+        {/* <CTA /> */}
+        {/* <Footer /> */}
       </Layout>
     </>
   )
