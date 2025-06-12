@@ -5,6 +5,7 @@ import styles from './Hero.module.css'
 
 export default function Hero() {
   const [currentTextIndex, setCurrentTextIndex] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
   const [videoOpacity, setVideoOpacity] = useState(1)
   const [isVisible, setIsVisible] = useState(true)
   const sectionRef = useRef(null)
@@ -15,12 +16,21 @@ export default function Hero() {
     "in Full Bloom."
   ]
 
-  // Text animation effect
+  // Text animation effect with proper fade in/out
   useEffect(() => {
+    const initialDelay = currentTextIndex === 0 ? 3000 : 2500; // Longer delay for first transition
+    
     if (currentTextIndex < textSequence.length - 1) {
       const timer = setTimeout(() => {
-        setCurrentTextIndex(currentTextIndex + 1)
-      }, 2000) // Change every 2 seconds
+        setIsAnimating(true)
+        
+        // After fade out completes, change text and fade in
+        setTimeout(() => {
+          setCurrentTextIndex(currentTextIndex + 1)
+          setIsAnimating(false)
+        }, 500) // Half second for fade out
+        
+      }, initialDelay) // Longer initial delay, then normal timing
       
       return () => clearTimeout(timer)
     }
@@ -82,7 +92,10 @@ export default function Hero() {
         <div className={styles.heroText}>
           <h1 className={styles.heroTitle}>
             <span className={styles.titleLine1}>Your Business</span>
-            <span className={styles.titleLine2} key={currentTextIndex}>
+            <span 
+              className={`${styles.titleLine2} ${isAnimating ? styles.fadeOut : styles.fadeIn}`}
+              key={currentTextIndex}
+            >
               {textSequence[currentTextIndex]}
             </span>
           </h1>
