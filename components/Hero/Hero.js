@@ -1,50 +1,81 @@
 // File: components/Hero/Hero.js
 
+import { useState, useEffect } from 'react'
 import styles from './Hero.module.css'
 
 export default function Hero() {
+  const [currentTextIndex, setCurrentTextIndex] = useState(0)
+  const [videoOpacity, setVideoOpacity] = useState(1)
+
+  const textSequence = [
+    "Transformed.",
+    "Empowered.", 
+    "in Full Bloom."
+  ]
+
+  // Text animation effect
+  useEffect(() => {
+    if (currentTextIndex < textSequence.length - 1) {
+      const timer = setTimeout(() => {
+        setCurrentTextIndex(currentTextIndex + 1)
+      }, 2000) // Change every 2 seconds
+      
+      return () => clearTimeout(timer)
+    }
+  }, [currentTextIndex, textSequence.length])
+
+  // Scroll effect for video fade
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset
+      const windowHeight = window.innerHeight
+      const fadeStart = windowHeight * 0.3 // Start fading at 30% scroll
+      const fadeEnd = windowHeight * 0.8   // Complete fade at 80% scroll
+      
+      if (scrollTop <= fadeStart) {
+        setVideoOpacity(1)
+      } else if (scrollTop >= fadeEnd) {
+        setVideoOpacity(0)
+      } else {
+        // Calculate opacity between fadeStart and fadeEnd
+        const fadeProgress = (scrollTop - fadeStart) / (fadeEnd - fadeStart)
+        setVideoOpacity(1 - fadeProgress)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <div className={styles.heroContainer}>
+      {/* Video Background */}
+      <div 
+        className={styles.videoBackground}
+        style={{ opacity: videoOpacity }}
+      >
+        <video
+          className={styles.heroVideo}
+          autoPlay
+          muted
+          loop
+          playsInline
+        >
+          <source src="/hero-video.mp4" type="video/mp4" />
+          {/* Fallback for browsers that don't support video */}
+          <div className={styles.videoFallback}></div>
+        </video>
+      </div>
+
+      {/* Hero Content */}
       <div className={styles.heroContent}>
-        <div className={styles.heroGrid}>
-          {/* Main Typography Section */}
-          <div className={styles.heroText}>
-            <h1 className={styles.heroTitle}>
-              <span className={styles.titleLine1}>We Transform</span>
-              <span className={styles.titleLine2}>UK Business</span>
-              <span className={styles.titleLine3}>Through Strategic</span>
-              <span className={styles.titleLine4}>Outsourcing</span>
-            </h1>
-            
-            <p className={styles.heroSubtitle}>
-              Backed by decades of UK Civil Service expertise and data-driven talent matching. 
-              Cut costs by 40%+ while scaling with South African professionals trained to UK standards.
-            </p>
-            
-            <div className={styles.heroActions}>
-              <a href="#pricing" className={styles.primaryCta}>
-                Claim Your Free Strategy Session
-              </a>
-              <a href="#services" className={styles.secondaryCta}>
-                See Our Services
-              </a>
-            </div>
-          </div>
-          
-          {/* Media Square Section */}
-          <div className={styles.mediaContainer}>
-            <div className={styles.mediaSquare}>
-              <div className={styles.videoPlaceholder}>
-                <div className={styles.playIcon}>
-                  <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                    <circle cx="30" cy="30" r="30" fill="rgba(255, 255, 255, 0.1)" />
-                    <path d="M23 20L40 30L23 40V20Z" fill="white" />
-                  </svg>
-                </div>
-                <p className={styles.placeholderText}>Video will be placed here</p>
-              </div>
-            </div>
-          </div>
+        <div className={styles.heroText}>
+          <h1 className={styles.heroTitle}>
+            <span className={styles.titleLine1}>Your Business</span>
+            <span className={styles.titleLine2} key={currentTextIndex}>
+              {textSequence[currentTextIndex]}
+            </span>
+          </h1>
         </div>
       </div>
     </div>
