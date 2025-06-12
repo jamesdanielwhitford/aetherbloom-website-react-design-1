@@ -1,5 +1,7 @@
 /* File: styles/globals.css */
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 :root {
   --brand-color: #d84e28;
   --brand-color-light: #ff9340;
@@ -8,6 +10,10 @@
   --text-secondary: rgba(255, 255, 255, 0.8);
   --background-light: #fefefe;
   --background-gradient: linear-gradient(135deg, #ff9340 0%, #ffcaa3 50%, #ffc093 100%);
+  
+  /* Font families */
+  --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 * {
@@ -21,15 +27,14 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--text-primary);
   line-height: 1.6;
   position: relative;
   overflow-x: hidden;
+  font-weight: 300;
 }
 
 /* Fixed background for entire website */
@@ -170,9 +175,23 @@ body::after {
   }
 }
 
+/* Typography improvements */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+p {
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
 a {
   color: inherit;
   text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 button {
@@ -180,12 +199,25 @@ button {
   cursor: pointer;
   border: none;
   background: none;
+  transition: all 0.3s ease;
 }
 
 img {
   max-width: 100%;
   height: auto;
 }
+
+/* Selection styling */
+::selection {
+  background: rgba(216, 78, 40, 0.3);
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background: rgba(216, 78, 40, 0.3);
+  color: #ffffff;
+}
+
 
 /* Utility classes */
 .container {
@@ -216,7 +248,32 @@ img {
   border: 0;
 }
 
+/* Focus states for accessibility */
+*:focus {
+  outline: 2px solid var(--brand-color);
+  outline-offset: 2px;
+}
+
+/* Improved button and input focus */
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--brand-color);
+  outline-offset: 2px;
+}
+
+/* Smooth transitions for interactive elements */
+a, button, input, select, textarea {
+  transition: all 0.3s cubic-bezier(0.4, 0.0, 0.6, 1);
+}
+
+/* Responsive font scaling */
 @media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+  
   .fixed-petal {
     width: 35vw;
     height: 60vh;
@@ -224,9 +281,54 @@ img {
 }
 
 @media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+  
   .fixed-petal {
     width: 30vw;
     height: 50vh;
     filter: blur(6px);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --text-primary: #ffffff;
+    --text-secondary: #ffffff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .fixed-petal {
+    animation: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .fixed-petals-container,
+  .fixed-petal {
+    display: none;
+  }
+  
+  body::before,
+  body::after {
+    display: none;
+  }
+  
+  body {
+    background: white;
+    color: black;
   }
 }
