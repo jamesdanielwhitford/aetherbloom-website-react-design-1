@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   position: relative;
-  padding: 6rem 0 2rem; /* Reduced padding for navbar */
+  padding: 6rem 0 1rem; /* Removed bottom padding */
   overflow: hidden;
 }
 
@@ -29,24 +29,25 @@
   padding: 0 2rem;
   position: relative;
   z-index: 2;
-  height: calc(100vh - 8rem); /* Account for navbar and padding */
+  height: calc(100vh - 6rem); /* Account for navbar only */
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 2.5rem; /* Reduced gap */
+  justify-content: flex-start;
+  gap: 1.5rem; /* Reduced gap for header */
 }
 
 .whyHeader {
   text-align: left;
   max-width: 800px;
+  flex-shrink: 0;
 }
 
 .mainTitle {
   font-family: 'Poppins', -apple-system, sans-serif;
-  font-size: clamp(2rem, 4vw, 3rem); /* Reduced font size */
+  font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 300;
   line-height: 1.1;
-  margin-bottom: 1rem; /* Reduced margin */
+  margin-bottom: 1rem;
   color: #ffffff;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
@@ -75,7 +76,7 @@
 
 .descriptionText {
   font-family: 'Inter', -apple-system, sans-serif;
-  font-size: clamp(1rem, 1.8vw, 1.2rem); /* Reduced font size */
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
   font-weight: 300;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.9);
@@ -98,9 +99,11 @@
 .cardsGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+  gap: 0; /* Removed gaps between cards */
   animation: fadeInCards 1.5s ease-out 1.2s forwards;
   opacity: 0;
+  flex: 1; /* Take remaining height */
+  min-height: 0; /* Allow grid to shrink if needed */
 }
 
 @keyframes fadeInCards {
@@ -116,12 +119,17 @@
 
 .card {
   position: relative;
-  height: 200px; /* Reduced height to fit viewport */
+  height: 100%; /* Take full height of grid area */
   overflow: hidden;
   cursor: pointer;
   transition: all 0.6s cubic-bezier(0.4, 0.0, 0.6, 1);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: none; /* Remove right border except for last card */
   /* Sharp corners - no border radius */
+}
+
+.card:last-child {
+  border-right: 1px solid rgba(255, 255, 255, 0.1); /* Keep right border on last card */
 }
 
 .card:hover {
@@ -214,27 +222,29 @@
 .cardContent {
   position: relative;
   z-index: 2;
-  padding: 1.5rem; /* Reduced padding */
+  padding: 2rem;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  gap: 0.8rem; /* Reduced gap */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  text-align: center; /* Center text */
+  gap: 1rem;
 }
 
 .cardTitle {
   font-family: 'Poppins', -apple-system, sans-serif;
-  font-size: 1.3rem; /* Reduced font size */
+  font-size: 1.4rem;
   font-weight: 600;
   color: #ffffff;
   line-height: 1.2;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-  margin-bottom: 0.3rem; /* Reduced margin */
+  margin-bottom: 0.5rem;
 }
 
 .cardDescription {
   font-family: 'Inter', -apple-system, sans-serif;
-  font-size: 0.9rem; /* Reduced font size */
+  font-size: 1rem;
   font-weight: 300;
   color: rgba(255, 255, 255, 0.9);
   line-height: 1.4;
@@ -243,17 +253,18 @@
 
 .cardDetails {
   position: absolute;
-  bottom: 1.5rem; /* Adjusted for smaller cards */
-  left: 1.5rem;
-  right: 1.5rem;
+  bottom: 2rem;
+  left: 2rem;
+  right: 2rem;
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.6s cubic-bezier(0.4, 0.0, 0.6, 1);
   background: rgba(0, 0, 0, 0.8);
-  padding: 1rem; /* Reduced padding */
+  padding: 1.5rem;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center; /* Center details text */
 }
 
 .cardDetails.visible {
@@ -272,60 +283,90 @@
 
 @media (max-width: 1200px) {
   .cardsGrid {
-    gap: 1.2rem;
-  }
-  
-  .card {
-    height: 190px;
+    gap: 0;
   }
 }
 
 @media (max-width: 1024px) {
   .whyContainer {
-    gap: 2rem;
+    gap: 1.5rem;
     padding: 0 1.5rem;
-    height: calc(100vh - 7rem);
+    height: calc(100vh - 6rem);
   }
   
   .cardsGrid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.2rem;
+    gap: 0;
   }
   
   .card {
-    height: 180px;
+    border-right: none;
+    border-bottom: none;
+  }
+  
+  .card:nth-child(2n) {
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .card:nth-child(3),
+  .card:nth-child(4) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
   
   .cardContent {
-    padding: 1.2rem;
+    padding: 1.5rem;
   }
   
   .cardDetails {
-    bottom: 1.2rem;
-    left: 1.2rem;
-    right: 1.2rem;
-    padding: 0.8rem;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    padding: 1rem;
   }
 }
 
 @media (max-width: 768px) {
   .whySection {
-    padding: 5rem 0 1.5rem;
+    padding: 5rem 0 0;
   }
   
   .whyContainer {
-    gap: 1.8rem;
+    gap: 1.2rem;
     padding: 0 1rem;
-    height: calc(100vh - 6.5rem);
+    height: calc(100vh - 5rem);
   }
   
   .cardsGrid {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 0;
   }
   
   .card {
-    height: 120px; /* Smaller for mobile single column */
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: none;
+  }
+  
+  .card:last-child {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .cardTitle {
+    font-size: 1.3rem;
+  }
+  
+  .cardDescription {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .whyContainer {
+    gap: 1rem;
+    height: calc(100vh - 4.5rem);
+  }
+  
+  .cardContent {
+    padding: 1.2rem;
   }
   
   .cardTitle {
@@ -335,39 +376,16 @@
   .cardDescription {
     font-size: 0.85rem;
   }
-}
-
-@media (max-width: 480px) {
-  .whyContainer {
-    gap: 1.5rem;
-    height: calc(100vh - 6rem);
-  }
   
-  .card {
-    height: 110px; /* Smaller for small mobile */
-  }
-  
-  .cardContent {
+  .cardDetails {
+    bottom: 1.2rem;
+    left: 1.2rem;
+    right: 1.2rem;
     padding: 1rem;
   }
   
-  .cardTitle {
-    font-size: 1.1rem;
-  }
-  
-  .cardDescription {
-    font-size: 0.8rem;
-  }
-  
-  .cardDetails {
-    bottom: 1rem;
-    left: 1rem;
-    right: 1rem;
-    padding: 0.8rem;
-  }
-  
   .cardDetails p {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
 }
 
