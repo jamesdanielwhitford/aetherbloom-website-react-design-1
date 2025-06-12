@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   position: relative;
-  padding: 6rem 0 1rem; /* Removed bottom padding */
+  padding: 8rem 0 1rem; /* Increased top padding to move content lower */
   overflow: hidden;
 }
 
@@ -29,25 +29,27 @@
   padding: 0 2rem;
   position: relative;
   z-index: 2;
-  height: calc(100vh - 6rem); /* Account for navbar only */
+  height: calc(100vh - 8rem); /* Account for increased padding */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 1.5rem; /* Reduced gap for header */
+  gap: 3rem; /* Increased gap to push cards lower */
 }
 
 .whyHeader {
-  text-align: left;
-  max-width: 800px;
+  text-align: center; /* Changed from left to center */
+  max-width: 900px; /* Increased max-width for centered layout */
+  margin: 0 auto; /* Center the header */
   flex-shrink: 0;
+  margin-top: 2rem; /* Added top margin to move title lower */
 }
 
 .mainTitle {
   font-family: 'Poppins', -apple-system, sans-serif;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(2.5rem, 5vw, 4rem); /* Increased font size for better prominence */
   font-weight: 300;
   line-height: 1.1;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem; /* Increased margin */
   color: #ffffff;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
@@ -56,31 +58,36 @@
   display: block;
   animation: slideInTitle 1.2s ease-out forwards;
   opacity: 0;
-  transform: translateX(-50px);
+  transform: translateY(-30px); /* Changed from translateX for vertical slide */
 }
 
 .titleLine:first-child {
   animation-delay: 0.2s;
 }
 
+.titleLine:last-child {
+  animation-delay: 0.4s;
+}
+
 @keyframes slideInTitle {
   0% {
     opacity: 0;
-    transform: translateX(-50px);
+    transform: translateY(-30px);
   }
   100% {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 }
 
 .descriptionText {
   font-family: 'Inter', -apple-system, sans-serif;
-  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  font-size: clamp(1.1rem, 2vw, 1.4rem); /* Increased font size */
   font-weight: 300;
-  line-height: 1.5;
+  line-height: 1.6;
   color: rgba(255, 255, 255, 0.9);
-  max-width: 600px;
+  max-width: 700px; /* Increased max-width */
+  margin: 0 auto; /* Center the description */
   animation: fadeInDescription 1.5s ease-out 0.8s forwards;
   opacity: 0;
 }
@@ -99,11 +106,12 @@
 .cardsGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 0; /* Removed gaps between cards */
+  gap: 2rem; /* Added gap between cards */
   animation: fadeInCards 1.5s ease-out 1.2s forwards;
   opacity: 0;
-  flex: 1; /* Take remaining height */
-  min-height: 0; /* Allow grid to shrink if needed */
+  flex: 1;
+  min-height: 0;
+  margin-top: 1rem; /* Additional spacing to push cards lower */
 }
 
 @keyframes fadeInCards {
@@ -119,23 +127,33 @@
 
 .card {
   position: relative;
-  height: 100%; /* Take full height of grid area */
+  height: 100%;
   overflow: hidden;
   cursor: pointer;
   transition: all 0.6s cubic-bezier(0.4, 0.0, 0.6, 1);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-right: none; /* Remove right border except for last card */
-  /* Sharp corners - no border radius */
-}
-
-.card:last-child {
-  border-right: 1px solid rgba(255, 255, 255, 0.1); /* Keep right border on last card */
+  border-radius: 20px; /* Added border radius for modern look */
+  
+  /* Glassmorphic styling by default */
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .card:hover {
   transform: translateY(-12px) scale(1.03);
   z-index: 10;
-  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+  box-shadow: 
+    0 25px 80px rgba(0, 0, 0, 0.3),
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  
+  /* Enhanced glassmorphism on hover */
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .cardBackground {
@@ -145,30 +163,48 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+  border-radius: 20px;
 }
 
-.cardPattern {
+.cardImage {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.8;
-  transition: all 0.6s ease;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transform: scale(1.1);
+  transition: all 0.8s cubic-bezier(0.4, 0.0, 0.6, 1);
 }
 
-.cardOverlay {
+.card:hover .cardImage {
+  opacity: 0.6; /* Reveal image on hover */
+  transform: scale(1);
+}
+
+.cardGlassOverlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 100%);
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    rgba(255, 255, 255, 0.05) 50%, 
+    rgba(0, 0, 0, 0.1) 100%
+  );
   transition: all 0.6s ease;
 }
 
-.card:hover .cardOverlay {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%);
+.card:hover .cardGlassOverlay {
+  background: linear-gradient(135deg, 
+    rgba(0, 0, 0, 0.3) 0%, 
+    rgba(0, 0, 0, 0.5) 50%, 
+    rgba(0, 0, 0, 0.7) 100%
+  );
 }
 
 .cardSheen {
@@ -177,7 +213,7 @@
   left: -50%;
   width: 200%;
   height: 200%;
-  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.4) 50%, transparent 70%);
   transform: translateX(-100%);
   transition: transform 0.8s ease;
 }
@@ -186,37 +222,37 @@
   transform: translateX(100%);
 }
 
-/* Pattern backgrounds for each card type */
-.recruitment .cardPattern {
-  background: 
-    radial-gradient(circle at 20% 20%, rgba(16, 185, 129, 0.4) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.3) 0%, transparent 50%),
-    linear-gradient(45deg, #10b981 0%, #059669 25%, #10b981 50%, #059669 75%, #10b981 100%);
-  background-size: 100% 100%, 100% 100%, 20px 20px;
+/* Color accents for different card types - subtle borders on hover */
+.recruitment:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 
+    0 25px 80px rgba(0, 0, 0, 0.3),
+    0 8px 32px rgba(16, 185, 129, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-.pricing .cardPattern {
-  background: 
-    radial-gradient(circle at 30% 70%, rgba(59, 130, 246, 0.4) 0%, transparent 50%),
-    radial-gradient(circle at 70% 30%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
-    linear-gradient(135deg, #3b82f6 0%, #2563eb 25%, #3b82f6 50%, #2563eb 75%, #3b82f6 100%);
-  background-size: 100% 100%, 100% 100%, 30px 30px;
+.pricing:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 
+    0 25px 80px rgba(0, 0, 0, 0.3),
+    0 8px 32px rgba(59, 130, 246, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-.compliance .cardPattern {
-  background: 
-    radial-gradient(circle at 40% 40%, rgba(147, 51, 234, 0.4) 0%, transparent 50%),
-    radial-gradient(circle at 60% 60%, rgba(147, 51, 234, 0.3) 0%, transparent 50%),
-    repeating-linear-gradient(45deg, #9333ea 0%, #7c3aed 10%, #9333ea 20%);
-  background-size: 100% 100%, 100% 100%, 15px 15px;
+.compliance:hover {
+  border-color: rgba(147, 51, 234, 0.4);
+  box-shadow: 
+    0 25px 80px rgba(0, 0, 0, 0.3),
+    0 8px 32px rgba(147, 51, 234, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-.impact .cardPattern {
-  background: 
-    radial-gradient(circle at 50% 20%, rgba(249, 115, 22, 0.4) 0%, transparent 50%),
-    radial-gradient(circle at 20% 80%, rgba(249, 115, 22, 0.3) 0%, transparent 50%),
-    conic-gradient(from 45deg, #f97316 0%, #ea580c 25%, #f97316 50%, #ea580c 75%, #f97316 100%);
-  background-size: 100% 100%, 100% 100%, 25px 25px;
+.impact:hover {
+  border-color: rgba(249, 115, 22, 0.4);
+  box-shadow: 
+    0 25px 80px rgba(0, 0, 0, 0.3),
+    0 8px 32px rgba(249, 115, 22, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .cardContent {
@@ -226,9 +262,9 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center content vertically */
-  align-items: center; /* Center content horizontally */
-  text-align: center; /* Center text */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   gap: 1rem;
 }
 
@@ -240,6 +276,11 @@
   line-height: 1.2;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
   margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.card:hover .cardTitle {
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
 }
 
 .cardDescription {
@@ -249,6 +290,12 @@
   color: rgba(255, 255, 255, 0.9);
   line-height: 1.4;
   text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.card:hover .cardDescription {
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
 }
 
 .cardDetails {
@@ -259,12 +306,13 @@
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.6s cubic-bezier(0.4, 0.0, 0.6, 1);
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.9);
   padding: 1.5rem;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  text-align: center; /* Center details text */
+  border-radius: 12px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
 }
 
 .cardDetails.visible {
@@ -283,34 +331,28 @@
 
 @media (max-width: 1200px) {
   .cardsGrid {
-    gap: 0;
+    gap: 1.5rem;
+  }
+  
+  .whyContainer {
+    gap: 2.5rem;
   }
 }
 
 @media (max-width: 1024px) {
+  .whySection {
+    padding: 7rem 0 1rem;
+  }
+  
   .whyContainer {
-    gap: 1.5rem;
+    gap: 2rem;
     padding: 0 1.5rem;
-    height: calc(100vh - 6rem);
+    height: calc(100vh - 7rem);
   }
   
   .cardsGrid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 0;
-  }
-  
-  .card {
-    border-right: none;
-    border-bottom: none;
-  }
-  
-  .card:nth-child(2n) {
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  
-  .card:nth-child(3),
-  .card:nth-child(4) {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 1.5rem;
   }
   
   .cardContent {
@@ -327,27 +369,23 @@
 
 @media (max-width: 768px) {
   .whySection {
-    padding: 5rem 0 0;
+    padding: 6rem 0 0;
   }
   
   .whyContainer {
-    gap: 1.2rem;
+    gap: 1.5rem;
     padding: 0 1rem;
-    height: calc(100vh - 5rem);
+    height: calc(100vh - 6rem);
+  }
+  
+  .whyHeader {
+    margin-top: 1rem;
   }
   
   .cardsGrid {
     grid-template-columns: 1fr;
-    gap: 0;
-  }
-  
-  .card {
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
-    border-bottom: none;
-  }
-  
-  .card:last-child {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 1.5rem;
+    margin-top: 0.5rem;
   }
   
   .cardTitle {
@@ -362,7 +400,15 @@
 @media (max-width: 480px) {
   .whyContainer {
     gap: 1rem;
-    height: calc(100vh - 4.5rem);
+    height: calc(100vh - 5.5rem);
+  }
+  
+  .whyHeader {
+    margin-top: 0.5rem;
+  }
+  
+  .cardsGrid {
+    gap: 1rem;
   }
   
   .cardContent {
@@ -398,8 +444,12 @@
       0 1px 4px rgba(0, 0, 0, 1);
   }
   
-  .cardOverlay {
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 100%);
+  .card {
+    background: rgba(255, 255, 255, 0.15);
+  }
+  
+  .cardGlassOverlay {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.9) 100%);
   }
 }
 
@@ -425,7 +475,9 @@
     display: none;
   }
   
-  .cardDetails {
+  .cardDetails,
+  .cardImage,
+  .cardGlassOverlay {
     transition: none;
   }
 }

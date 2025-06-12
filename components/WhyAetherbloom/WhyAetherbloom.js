@@ -13,25 +13,29 @@ export default function WhyAetherbloom() {
       title: "High Quality Recruitment and Training",
       description: "UK-trained teams delivering exceptional customer experiences with rigorous selection processes and ongoing development programs.",
       details: "Our comprehensive 10-step talent selection process ensures only top-tier professionals join your team. From cultural fit analysis to technical interviews and background checks.",
-      pattern: "recruitment"
+      pattern: "recruitment",
+      image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=600&fit=crop&crop=faces"
     },
     {
       title: "Transparent Pricing",
       description: "No hidden fees with real-time reporting dashboards and flexible contracts that scale with your business needs.",
       details: "SLA guarantees with real consequences, live performance dashboards, and the ability to scale your team in just 72 hours with complete cost transparency.",
-      pattern: "pricing"
+      pattern: "pricing",
+      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=600&fit=crop&crop=entropy"
     },
     {
       title: "GDPR Compliance",
       description: "Built-in UK compliance standards with civil service-grade audits and data protection protocols from day one.",
       details: "ISO standards integrated, comprehensive data protection training, and regular compliance audits ensure your business meets all UK regulatory requirements.",
-      pattern: "compliance"
+      pattern: "compliance",
+      image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=600&fit=crop&crop=entropy"
     },
     {
       title: "Ethical Impact",
       description: "Creating meaningful opportunities for South African youth through job readiness programs and leadership development.",
       details: "Free training programs, paid internships, leadership pipelines, and partnerships with community organizations to uplift individuals and communities.",
-      pattern: "impact"
+      pattern: "impact",
+      image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&h=600&fit=crop&crop=faces"
     }
   ]
 
@@ -86,8 +90,11 @@ export default function WhyAetherbloom() {
               onMouseLeave={() => setHoveredCard(null)}
             >
               <div className={styles.cardBackground}>
-                <div className={styles.cardPattern}></div>
-                <div className={styles.cardOverlay}></div>
+                <div 
+                  className={styles.cardImage}
+                  style={{ backgroundImage: `url(${card.image})` }}
+                ></div>
+                <div className={styles.cardGlassOverlay}></div>
                 <div className={styles.cardSheen}></div>
               </div>
               
