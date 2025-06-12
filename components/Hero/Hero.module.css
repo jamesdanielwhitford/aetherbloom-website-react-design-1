@@ -36,6 +36,18 @@
   background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 100%);
 }
 
+/* Video Overlay */
+.videoOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 5;
+  pointer-events: none;
+}
+
 /* Hero Content */
 .heroContent {
   position: relative;
@@ -46,6 +58,7 @@
   align-items: center;
   padding: 0 4rem;
   padding-top: 5rem;
+  transition: opacity 0.8s ease-out;
 }
 
 .heroText {
@@ -62,9 +75,6 @@
   line-height: 0.9;
   letter-spacing: -0.02em;
   color: #ffffff;
-  text-shadow: 
-    0 4px 20px rgba(0, 0, 0, 0.8),
-    0 2px 10px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -77,17 +87,14 @@
 
 .titleLine2 {
   display: block;
-  background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.9) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
   position: relative;
   min-height: 1.2em; /* Prevent layout shift */
 }
 
 /* Initial animation for the first text */
 .titleLine2:not(.fadeIn):not(.fadeOut) {
-  animation: fadeInLeft 1.2s ease-out both, textPulse 0.5s ease-in-out;
+  animation: fadeInLeft 1.2s ease-out both;
   animation-delay: 0.2s;
   opacity: 0;
 }
@@ -104,10 +111,9 @@
 .heroSubtitle {
   font-family: 'Inter', -apple-system, sans-serif;
   font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
   max-width: 600px;
   animation: fadeInUp 1.2s ease-out both;
   animation-delay: 0.5s;
@@ -216,18 +222,6 @@
   }
 }
 
-@keyframes textPulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.02);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
 /* Text transition animations */
 @keyframes textFadeInUp {
   from {
@@ -314,17 +308,8 @@
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {
-  .heroTitle {
-    color: #ffffff;
-    text-shadow: 
-      0 2px 8px rgba(0, 0, 0, 1),
-      0 1px 4px rgba(0, 0, 0, 1);
-  }
-  
-  .titleLine2 {
-    -webkit-text-fill-color: #ffffff;
-  }
-  
+  .heroTitle,
+  .titleLine2,
   .heroSubtitle {
     color: #ffffff;
   }

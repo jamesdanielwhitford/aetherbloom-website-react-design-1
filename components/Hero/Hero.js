@@ -87,6 +87,9 @@ export default function Hero() {
         </video>
       </div>
 
+      {/* Video Overlay */}
+      <div className={styles.videoOverlay}></div>
+
       {/* Hero Content */}
       <div className={`${styles.heroContent} section-content ${isVisible ? 'fade-in' : 'fade-out'}`}>
         <div className={styles.heroText}>
