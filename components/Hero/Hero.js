@@ -5,13 +5,6 @@ import styles from './Hero.module.css'
 export default function Hero() {
   return (
     <div className={styles.heroContainer}>
-      <div className={styles.petalsContainer}>
-        <div className={`${styles.petal} ${styles.petal1}`}></div>
-        <div className={`${styles.petal} ${styles.petal2}`}></div>
-        <div className={`${styles.petal} ${styles.petal3}`}></div>
-        <div className={`${styles.petal} ${styles.petal4}`}></div>
-      </div>
-      
       <div className={styles.heroContent}>
         <h1 className={styles.heroTitle}>Elevate Your UK Business</h1>
         <p className={styles.heroSubtitle}>
