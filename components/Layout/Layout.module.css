@@ -36,9 +36,9 @@
   background: linear-gradient(135deg, #ff9340 0%, #ffcaa3 50%, #ffc093 100%);
 }
 
-/* Why Aetherbloom Section - Bright White */
+/* Why Aetherbloom Section - Bright Pure White */
 .globalBackground.whyAetherbloom {
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #f1f3f5 100%) !important;
+  background: linear-gradient(135deg, #ffffff 0%, #ffffff 50%, #fefefe 100%) !important;
 }
 
 /* Petals Container */
@@ -73,9 +73,18 @@
   background: rgba(216, 78, 40, 0.6);
 }
 
-/* Why Aetherbloom Section Petals - Dark Green for visibility on white */
+/* Why Aetherbloom Section Petals - Subtle light tones for bright white theme */
 .globalBackground.whyAetherbloom .petal {
-  background: rgba(10, 77, 58, 0.4) !important;
+  background: linear-gradient(135deg, 
+    rgba(248, 249, 250, 0.8) 0%, 
+    rgba(241, 243, 245, 0.6) 30%, 
+    rgba(233, 236, 239, 0.7) 60%, 
+    rgba(222, 226, 230, 0.5) 100%) !important;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.04),
+    0 2px 16px rgba(0, 0, 0, 0.02),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.02);
 }
 
 /* Petal 1 - Top Left */
