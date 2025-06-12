@@ -6,43 +6,23 @@
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 2rem);
-  max-width: 1200px;
+  max-width: 1500px;
   z-index: 1000;
   transition: all 0.4s cubic-bezier(0.4, 0.0, 0.6, 1);
   
-  /* Glassmorphic white background */
-  background: rgba(255, 255, 255, 0.8);
+  /* Glassmorphic white background with radial fade */
+  background: 
+    radial-gradient(ellipse 90% 100% at center, rgba(255, 255, 255, 0.8) 90%, rgba(255, 255, 255, 0.4) 70%, rgba(255, 255, 255, 0.1) 100%);
   
   border-radius: 40px;
-  
-  /* White glow/drop shadow effect */
-  box-shadow: 
-    0 8px 32px rgba(255, 255, 255, 0.4),
-    0 2px 16px rgba(255, 255, 255, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
-}
-
-.navbar.scrolled {
-  /* Enhanced glassmorphism when scrolled */
-  background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  
-  /* Enhanced white glow effect */
-  box-shadow: 
-    0 12px 40px rgba(255, 255, 255, 0.5),
-    0 4px 20px rgba(255, 255, 255, 0.3),
-    0 1px 3px rgba(0, 0, 0, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  top: 0.5rem;
+  background-clip: padding-box;
 }
 
 .navContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.6rem 1.5rem;
+  padding: 0.6rem 2rem;
   position: relative;
   transition: all 0.4s cubic-bezier(0.4, 0.0, 0.6, 1);
 }
