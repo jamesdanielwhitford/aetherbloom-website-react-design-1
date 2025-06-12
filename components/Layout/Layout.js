@@ -41,22 +41,16 @@ export default function Layout({ children }) {
     }
   }, [])
 
-  // Handle scroll-based video opacity
+  // Handle scroll-based video opacity with snap-scroll friendly transitions
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY
       const windowHeight = window.innerHeight
       
-      // More precise section-based fading
-      if (scrollPosition <= windowHeight * 0.4) {
+      // Tighter fade range for snap scrolling - fade happens closer to section boundary
+      if (scrollPosition <= windowHeight * 0.7) {
         // Fully visible in hero section
         setVideoOpacity(1)
-      } else if (scrollPosition <= windowHeight * 0.85) {
-        // Fade out as we approach the next section
-        const fadeStart = windowHeight * 0.4
-        const fadeEnd = windowHeight * 0.85
-        const fadeProgress = (scrollPosition - fadeStart) / (fadeEnd - fadeStart)
-        setVideoOpacity(Math.max(0, 1 - fadeProgress))
       } else {
         // Completely hidden in other sections
         setVideoOpacity(0)
@@ -67,7 +61,7 @@ export default function Layout({ children }) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Combine intersection observer and scroll position for more accurate control
+  // Use intersection observer as primary control for snap scrolling
   const finalVideoOpacity = isInHeroSection ? videoOpacity : 0
 
   return (
