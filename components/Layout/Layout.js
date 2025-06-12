@@ -1,25 +1,64 @@
 // File: components/Layout/Layout.js
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Navbar from '../Navbar/Navbar'
 import styles from './Layout.module.css'
 
 export default function Layout({ children }) {
   const [videoOpacity, setVideoOpacity] = useState(1)
+  const [isInHeroSection, setIsInHeroSection] = useState(true)
+  const heroSectionRef = useRef(null)
 
+  // Intersection Observer to detect when hero section is visible
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target.id === 'hero-section' || entry.target.className?.includes('heroContainer')) {
+            setIsInHeroSection(entry.isIntersecting)
+          }
+        })
+      },
+      {
+        threshold: [0, 0.1, 0.5, 0.9],
+        rootMargin: '-10% 0px -10% 0px'
+      }
+    )
+
+    // Find hero section in the DOM
+    const heroSection = document.querySelector('[class*="heroContainer"]') || 
+                       document.querySelector('#hero-section')
+    
+    if (heroSection) {
+      heroSectionRef.current = heroSection
+      observer.observe(heroSection)
+    }
+
+    return () => {
+      if (heroSectionRef.current) {
+        observer.unobserve(heroSectionRef.current)
+      }
+    }
+  }, [])
+
+  // Handle scroll-based video opacity
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY
       const windowHeight = window.innerHeight
       
-      // Calculate opacity based on scroll position within the first viewport
-      if (scrollPosition <= windowHeight * 0.3) {
+      // More precise section-based fading
+      if (scrollPosition <= windowHeight * 0.4) {
+        // Fully visible in hero section
         setVideoOpacity(1)
-      } else if (scrollPosition <= windowHeight * 0.8) {
-        // Fade out gradually as we scroll through the hero section
-        const fadeProgress = (scrollPosition - windowHeight * 0.3) / (windowHeight * 0.5)
+      } else if (scrollPosition <= windowHeight * 0.85) {
+        // Fade out as we approach the next section
+        const fadeStart = windowHeight * 0.4
+        const fadeEnd = windowHeight * 0.85
+        const fadeProgress = (scrollPosition - fadeStart) / (fadeEnd - fadeStart)
         setVideoOpacity(Math.max(0, 1 - fadeProgress))
       } else {
+        // Completely hidden in other sections
         setVideoOpacity(0)
       }
     }
@@ -27,6 +66,9 @@ export default function Layout({ children }) {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Combine intersection observer and scroll position for more accurate control
+  const finalVideoOpacity = isInHeroSection ? videoOpacity : 0
 
   return (
     <div className={styles.layout}>
@@ -39,7 +81,13 @@ export default function Layout({ children }) {
       </div>
       
       {/* Fixed video background - only visible on hero section */}
-      <div className={styles.fixedVideoContainer} style={{ opacity: videoOpacity }}>
+      <div 
+        className={styles.fixedVideoContainer} 
+        style={{ 
+          opacity: finalVideoOpacity,
+          visibility: finalVideoOpacity > 0 ? 'visible' : 'hidden'
+        }}
+      >
         <video
           className={styles.fixedVideo}
           autoPlay

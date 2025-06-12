@@ -17,7 +17,7 @@ export default function Hero() {
 
   // Text animation effect with proper fade in/out
   useEffect(() => {
-    const initialDelay = currentTextIndex === 0 ? 3000 : 2500; // Longer delay for first transition
+    const initialDelay = currentTextIndex === 0 ? 3000 : 3000; // Longer delay for first transition
     
     if (currentTextIndex < textSequence.length - 1) {
       const timer = setTimeout(() => {
@@ -27,7 +27,7 @@ export default function Hero() {
         setTimeout(() => {
           setCurrentTextIndex(currentTextIndex + 1)
           setIsAnimating(false)
-        }, 500) // Half second for fade out
+        }, 700) // Half second for fade out
         
       }, initialDelay) // Longer initial delay, then normal timing
       
