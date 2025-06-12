@@ -4,10 +4,178 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .main {
   flex: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 2;
+}
+
+/* Global Background Container */
+.globalBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  overflow: hidden;
+  will-change: background;
+  transform: translate3d(0, 0, 0); /* Hardware acceleration */
+  transition: background 0.3s ease;
+  /* Default fallback - orange gradient */
+  background: linear-gradient(135deg, #ff9340 0%, #ffcaa3 50%, #ffc093 100%);
+}
+
+/* Hero Section - Orange Gradient */
+.globalBackground.hero {
+  background: linear-gradient(135deg, #ff9340 0%, #ffcaa3 50%, #ffc093 100%);
+}
+
+/* Why Aetherbloom Section - Bright White */
+.globalBackground.whyAetherbloom {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #f1f3f5 100%) !important;
+}
+
+/* Petals Container */
+.petalsContainer {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 1px;
+}
+
+.petal {
+  position: absolute;
+  width: 120vw;
+  height: 160vh;
+  filter: blur(6px); /* Reduced blur for better performance */
+  animation-timing-function: cubic-bezier(0.4, 0.0, 0.6, 1);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  transform-origin: 50% 100%;
+  border-radius: 40% 60% 55% 45% / 30% 45% 55% 70%;
+  will-change: background;
+  transform: translate3d(0, 0, 0); /* Hardware acceleration */
+  transition: background 0.3s ease;
+  /* Default fallback - orange petals */
+  background: rgba(216, 78, 40, 0.6);
+}
+
+/* Hero Section Petals - Orange */
+.globalBackground.hero .petal {
+  background: rgba(216, 78, 40, 0.6);
+}
+
+/* Why Aetherbloom Section Petals - Dark Green for visibility on white */
+.globalBackground.whyAetherbloom .petal {
+  background: rgba(10, 77, 58, 0.4) !important;
+}
+
+/* Petal 1 - Top Left */
+.petal1 {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) rotate(-45deg);
+  animation: swayPetal1 25s infinite;
+  border-radius: 40% 60% 55% 45% / 30% 45% 55% 70%;
+}
+
+/* Petal 2 - Top Right */
+.petal2 {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  animation: swayPetal2 25s infinite;
+  animation-delay: -2s;
+  border-radius: 40% 60% 55% 45% / 30% 45% 55% 70%;
+}
+
+/* Petal 3 - Left */
+.petal3 {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) rotate(-90deg);
+  animation: swayPetal3 25s infinite;
+  animation-delay: -4s;
+  border-radius: 40% 60% 55% 45% / 30% 45% 55% 70%;
+}
+
+/* Petal 4 - Right */
+.petal4 {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) rotate(90deg);
+  animation: swayPetal4 25s infinite;
+  animation-delay: -6s;
+  border-radius: 40% 60% 55% 45% / 30% 45% 55% 70%;
+}
+
+@keyframes swayPetal1 {
+  0% {
+    transform: translateX(-50%) rotate(-45deg) rotate(-30deg) scale(0.9);
+  }
+  50% {
+    transform: translateX(-50%) rotate(-45deg) rotate(-30deg) scale(1.1);
+  }
+  100% {
+    transform: translateX(-50%) rotate(-45deg) rotate(-30deg) scale(0.9);
+  }
+}
+
+@keyframes swayPetal2 {
+  0% {
+    transform: translateX(-50%) rotate(45deg) rotate(0deg) scale(1.0);
+  }
+  50% {
+    transform: translateX(-50%) rotate(45deg) rotate(30deg) scale(0.95);
+  }
+  100% {
+    transform: translateX(-50%) rotate(45deg) rotate(0deg) scale(1.0);
+  }
+}
+
+@keyframes swayPetal3 {
+  0% {
+    transform: translateX(-50%) rotate(-90deg) rotate(-30deg) scale(1.05);
+  }
+  50% {
+    transform: translateX(-50%) rotate(-90deg) rotate(70deg) scale(0.9);
+  }
+  100% {
+    transform: translateX(-50%) rotate(-90deg) rotate(-30deg) scale(1.05);
+  }
+}
+
+@keyframes swayPetal4 {
+  0% {
+    transform: translateX(-50%) rotate(90deg) rotate(0deg) scale(0.95);
+  }
+  50% {
+    transform: translateX(-50%) rotate(90deg) rotate(-70deg) scale(1.1);
+  }
+  100% {
+    transform: translateX(-50%) rotate(90deg) rotate(0deg) scale(0.95);
+  }
+}
+
+@media (max-width: 768px) {
+  .petal {
+    width: 140vw;
+    height: 120vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .petal {
+    width: 160vw;
+    height: 100vh;
+    filter: blur(6px);
+  }
 }
