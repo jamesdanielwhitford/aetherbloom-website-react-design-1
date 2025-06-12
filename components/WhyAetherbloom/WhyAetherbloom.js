@@ -5,38 +5,33 @@ import styles from './WhyAetherbloom.module.css'
 
 export default function WhyAetherbloom() {
   const [isVisible, setIsVisible] = useState(false)
+  const [hoveredCard, setHoveredCard] = useState(null)
   const sectionRef = useRef(null)
 
-  const differentiators = [
+  const cards = [
     {
-      icon: "💼",
-      title: "UK Civil Service Foundation",
-      description: "Built on public sector rigor and data-driven excellence"
+      title: "High Quality Recruitment and Training",
+      description: "UK-trained teams delivering exceptional customer experiences with rigorous selection processes and ongoing development programs.",
+      details: "Our comprehensive 10-step talent selection process ensures only top-tier professionals join your team. From cultural fit analysis to technical interviews and background checks.",
+      pattern: "recruitment"
     },
     {
-      icon: "🔒",
-      title: "UK Compliance Ready",
-      description: "GDPR, ISO standards integrated from day one"
-    },
-    {
-      icon: "📊",
-      title: "20% Faster Matching",
-      description: "Proprietary analytics ensure perfect cultural fit"
-    },
-    {
-      icon: "💰",
       title: "Transparent Pricing",
-      description: "No hidden fees with real-time reporting dashboards"
+      description: "No hidden fees with real-time reporting dashboards and flexible contracts that scale with your business needs.",
+      details: "SLA guarantees with real consequences, live performance dashboards, and the ability to scale your team in just 72 hours with complete cost transparency.",
+      pattern: "pricing"
     },
     {
-      icon: "🎓",
-      title: "#1 STEM Graduates",
-      description: "QS Rankings verified talent pool from South Africa"
+      title: "GDPR Compliance",
+      description: "Built-in UK compliance standards with civil service-grade audits and data protection protocols from day one.",
+      details: "ISO standards integrated, comprehensive data protection training, and regular compliance audits ensure your business meets all UK regulatory requirements.",
+      pattern: "compliance"
     },
     {
-      icon: "🗣️",
-      title: "92% English Fluency",
-      description: "Professional workforce with native-level communication"
+      title: "Ethical Impact",
+      description: "Creating meaningful opportunities for South African youth through job readiness programs and leadership development.",
+      details: "Free training programs, paid internships, leadership pipelines, and partnerships with community organizations to uplift individuals and communities.",
+      pattern: "impact"
     }
   ]
 
@@ -73,45 +68,38 @@ export default function WhyAetherbloom() {
     <section ref={sectionRef} id="why-aetherbloom" className={`${styles.whySection} snap-section`}>
       <div className={`${styles.whyContainer} section-content ${isVisible ? 'fade-in' : 'fade-out'}`}>
         <div className={styles.whyHeader}>
-          <span className={styles.sectionLabel}>Our Foundation</span>
-          <h2 className={styles.sectionTitle}>
-            <span className={styles.titleWord}>Where</span>
-            <span className={styles.titleWord}>Expertise</span>
-            <span className={styles.titleWord}>Meets</span>
-            <span className={styles.titleWordHighlight}>Impact</span>
+          <h2 className={styles.mainTitle}>
+            <span className={styles.titleLine}>This is Aetherbloom.</span>
+            <span className={styles.titleLine}>How can we help you?</span>
           </h2>
-          <p className={styles.sectionSubtitle}>
-            Bridging UK business needs with South Africa's untapped potential through 
-            <strong> best-in-class outsourcing</strong> and <strong>meaningful opportunities</strong>.
+          <p className={styles.descriptionText}>
+            Get your business ready to scale with high-quality, ethical outsourcing that streamline your business processes.
           </p>
         </div>
 
-        <div className={styles.differentiatorsList}>
-          {differentiators.map((item, index) => (
-            <div key={index} className={styles.differentiatorItem}>
-              <div className={styles.differentiatorIcon}>{item.icon}</div>
-              <div className={styles.differentiatorContent}>
-                <h3 className={styles.differentiatorTitle}>{item.title}</h3>
-                <p className={styles.differentiatorDescription}>{item.description}</p>
+        <div className={styles.cardsGrid}>
+          {cards.map((card, index) => (
+            <div 
+              key={index} 
+              className={`${styles.card} ${styles[card.pattern]}`}
+              onMouseEnter={() => setHoveredCard(index)}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
+              <div className={styles.cardBackground}>
+                <div className={styles.cardPattern}></div>
+                <div className={styles.cardOverlay}></div>
+                <div className={styles.cardSheen}></div>
+              </div>
+              
+              <div className={styles.cardContent}>
+                <h3 className={styles.cardTitle}>{card.title}</h3>
+                <p className={styles.cardDescription}>{card.description}</p>
+                <div className={`${styles.cardDetails} ${hoveredCard === index ? styles.visible : ''}`}>
+                  <p>{card.details}</p>
+                </div>
               </div>
             </div>
           ))}
-        </div>
-
-        <div className={styles.missionStatement}>
-          <div className={styles.missionContent}>
-            <h3 className={styles.missionTitle}>Our Dual Mission</h3>
-            <div className={styles.missionPoints}>
-              <div className={styles.missionPoint}>
-                <span className={styles.missionNumber}>01</span>
-                <span className={styles.missionText}>Deliver best-in-class outsourcing for UK businesses</span>
-              </div>
-              <div className={styles.missionPoint}>
-                <span className={styles.missionNumber}>02</span>
-                <span className={styles.missionText}>Create meaningful opportunities for South African youth</span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

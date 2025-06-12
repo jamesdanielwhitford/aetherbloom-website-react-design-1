@@ -79,7 +79,7 @@ export default function Hero() {
             </span>
           </h1>
           <p className={styles.heroSubtitle}>
-            Transform your operations with expertly-sourced<br/>South African professionals trained to UK standards.<br/>
+            Scale your operations with expertly-sourced<br/>South African professionals trained to UK standards.<br/>
             Cut costs by 40%+ while scaling with confidence.
           </p>
           <div className={styles.heroActions}>
