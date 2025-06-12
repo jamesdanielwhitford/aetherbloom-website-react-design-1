@@ -11,10 +11,8 @@
   transition: all 0.4s cubic-bezier(0.4, 0.0, 0.6, 1);
   
   /* Glassmorphic white background */
-  background: rgba(255, 255, 255, 0.706);
-  /* backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px); */
-  /* border: 1px solid rgba(255, 255, 255, 0.3); */
+  background: rgba(255, 255, 255, 0.8);
+  
   border-radius: 40px;
   
   /* White glow/drop shadow effect */
