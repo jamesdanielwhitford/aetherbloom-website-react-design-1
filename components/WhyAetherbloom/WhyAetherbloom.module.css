@@ -131,7 +131,7 @@
   overflow: hidden;
   cursor: pointer;
   transition: all 0.6s cubic-bezier(0.4, 0.0, 0.6, 1);
-  border-radius: 20px; /* Added border radius for modern look */
+  border-radius: 0px; 
   
   /* Glassmorphic styling by default */
   background: rgba(255, 255, 255, 0.08);
@@ -163,7 +163,7 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 0px;
 }
 
 .cardImage {
