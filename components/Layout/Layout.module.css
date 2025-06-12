@@ -1,7 +1,7 @@
 /* File: components/Layout/Layout.module.css */
 
 .layout {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -10,8 +10,34 @@
 
 .main {
   flex: 1;
-  display: flex;
-  flex-direction: column;
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
   position: relative;
   z-index: 1;
+}
+
+/* Custom scrollbar styling */
+.main::-webkit-scrollbar {
+  width: 6px;
+}
+
+.main::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.main::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #d84e28 0%, #ff9340 100%);
+  border-radius: 3px;
+}
+
+.main::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ff9340 0%, #d84e28 100%);
+}
+
+/* Firefox scrollbar */
+.main {
+  scrollbar-width: thin;
+  scrollbar-color: #d84e28 rgba(255, 255, 255, 0.1);
 }

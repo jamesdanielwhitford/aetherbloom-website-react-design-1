@@ -1,11 +1,13 @@
 // File: components/Hero/Hero.js
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import styles from './Hero.module.css'
 
 export default function Hero() {
   const [currentTextIndex, setCurrentTextIndex] = useState(0)
   const [videoOpacity, setVideoOpacity] = useState(1)
+  const [isVisible, setIsVisible] = useState(true)
+  const sectionRef = useRef(null)
 
   const textSequence = [
     "Transformed.",
@@ -24,31 +26,39 @@ export default function Hero() {
     }
   }, [currentTextIndex, textSequence.length])
 
-  // Scroll effect for video fade
+  // Intersection Observer for section visibility and animations
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.pageYOffset
-      const windowHeight = window.innerHeight
-      const fadeStart = windowHeight * 0.3 // Start fading at 30% scroll
-      const fadeEnd = windowHeight * 0.8   // Complete fade at 80% scroll
-      
-      if (scrollTop <= fadeStart) {
-        setVideoOpacity(1)
-      } else if (scrollTop >= fadeEnd) {
-        setVideoOpacity(0)
-      } else {
-        // Calculate opacity between fadeStart and fadeEnd
-        const fadeProgress = (scrollTop - fadeStart) / (fadeEnd - fadeStart)
-        setVideoOpacity(1 - fadeProgress)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true)
+            setVideoOpacity(1)
+          } else {
+            setIsVisible(false)
+            setVideoOpacity(0.3)
+          }
+        })
+      },
+      {
+        threshold: 0.5,
+        rootMargin: '-10% 0px -10% 0px'
       }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
     }
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current)
+      }
+    }
   }, [])
 
   return (
-    <div className={styles.heroContainer}>
+    <section ref={sectionRef} className={`${styles.heroContainer} snap-section`}>
       {/* Video Background */}
       <div 
         className={styles.videoBackground}
@@ -68,7 +78,7 @@ export default function Hero() {
       </div>
 
       {/* Hero Content */}
-      <div className={styles.heroContent}>
+      <div className={`${styles.heroContent} section-content ${isVisible ? 'fade-in' : 'fade-out'}`}>
         <div className={styles.heroText}>
           <h1 className={styles.heroTitle}>
             <span className={styles.titleLine1}>Your Business</span>
@@ -76,8 +86,20 @@ export default function Hero() {
               {textSequence[currentTextIndex]}
             </span>
           </h1>
+          <p className={styles.heroSubtitle}>
+            Transform your operations with South African professionals trained to UK standards. 
+            Cut costs by 40%+ while scaling with confidence.
+          </p>
+          <div className={styles.heroActions}>
+            <a href="#why-aetherbloom" className={styles.primaryButton}>
+              Discover How
+            </a>
+            <a href="#contact" className={styles.secondaryButton}>
+              Get Started
+            </a>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }

@@ -1,33 +1,37 @@
 // File: components/WhyAetherbloom/WhyAetherbloom.js
 
+import { useState, useEffect, useRef } from 'react'
 import styles from './WhyAetherbloom.module.css'
 
 export default function WhyAetherbloom() {
+  const [isVisible, setIsVisible] = useState(false)
+  const sectionRef = useRef(null)
+
   const differentiators = [
     {
       icon: "💼",
-      title: "Founded by UK Civil Service HR Leader & Met Office Data Analyst",
+      title: "UK Civil Service Foundation",
       description: "Built on public sector rigor and data-driven excellence"
     },
     {
       icon: "🔒",
-      title: "BPO Teams Pre-Trained in UK Compliance",
+      title: "UK Compliance Ready",
       description: "GDPR, ISO standards integrated from day one"
     },
     {
       icon: "📊",
-      title: "20% Faster Talent Matching",
+      title: "20% Faster Matching",
       description: "Proprietary analytics ensure perfect cultural fit"
     },
     {
       icon: "💰",
-      title: "No Hidden Fees",
-      description: "Transparent SLAs with real-time reporting dashboards"
+      title: "Transparent Pricing",
+      description: "No hidden fees with real-time reporting dashboards"
     },
     {
       icon: "🎓",
-      title: "#1 in Africa for STEM Graduates",
-      description: "QS Rankings verified talent pool"
+      title: "#1 STEM Graduates",
+      description: "QS Rankings verified talent pool from South Africa"
     },
     {
       icon: "🗣️",
@@ -36,9 +40,38 @@ export default function WhyAetherbloom() {
     }
   ]
 
+  // Intersection Observer for section visibility and animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true)
+          } else {
+            setIsVisible(false)
+          }
+        })
+      },
+      {
+        threshold: 0.5,
+        rootMargin: '-10% 0px -10% 0px'
+      }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current)
+      }
+    }
+  }, [])
+
   return (
-    <section id="why-aetherbloom" className={styles.whySection}>
-      <div className={styles.whyContainer}>
+    <section ref={sectionRef} id="why-aetherbloom" className={`${styles.whySection} snap-section`}>
+      <div className={`${styles.whyContainer} section-content ${isVisible ? 'fade-in' : 'fade-out'}`}>
         <div className={styles.whyHeader}>
           <span className={styles.sectionLabel}>Our Foundation</span>
           <h2 className={styles.sectionTitle}>
@@ -48,9 +81,8 @@ export default function WhyAetherbloom() {
             <span className={styles.titleWordHighlight}>Impact</span>
           </h2>
           <p className={styles.sectionSubtitle}>
-            Aetherbloom bridges UK business needs with South Africa's untapped potential, 
-            delivering <strong>best-in-class outsourcing</strong> while creating 
-            <strong> meaningful opportunities</strong> for South African youth.
+            Bridging UK business needs with South Africa's untapped potential through 
+            <strong> best-in-class outsourcing</strong> and <strong>meaningful opportunities</strong>.
           </p>
         </div>
 
@@ -76,7 +108,7 @@ export default function WhyAetherbloom() {
               </div>
               <div className={styles.missionPoint}>
                 <span className={styles.missionNumber}>02</span>
-                <span className={styles.missionText}>Create meaningful job opportunities for South African youth</span>
+                <span className={styles.missionText}>Create meaningful opportunities for South African youth</span>
               </div>
             </div>
           </div>

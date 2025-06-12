@@ -1,11 +1,11 @@
 /* File: components/WhyAetherbloom/WhyAetherbloom.module.css */
 
 .whySection {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   position: relative;
-  padding: 0;
+  padding: var(--navbar-height) 0 0;
   overflow: hidden;
 }
 
@@ -24,18 +24,22 @@
 
 .whyContainer {
   width: 100%;
-  max-width: none;
+  max-width: 1400px;
+  margin: 0 auto;
   padding: 0 2rem;
   position: relative;
   z-index: 2;
+  height: calc(100vh - var(--navbar-height));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3rem;
 }
 
 .whyHeader {
   text-align: center;
-  margin-bottom: 4rem;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .sectionLabel {
@@ -46,14 +50,14 @@
   letter-spacing: 3px;
   text-transform: uppercase;
   color: #d84e28;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   position: relative;
 }
 
 .sectionLabel::after {
   content: '';
   position: absolute;
-  bottom: -8px;
+  bottom: -6px;
   left: 50%;
   transform: translateX(-50%);
   width: 40px;
@@ -63,24 +67,18 @@
 
 .sectionTitle {
   font-family: 'Poppins', -apple-system, sans-serif;
-  font-size: 4rem;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 300;
   line-height: 1.1;
-  margin: 2rem 0;
+  margin: 1rem 0;
   color: #ffffff;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .titleWord {
   display: inline-block;
-  margin-right: 1rem;
-  animation: fadeInWord 1s ease-out forwards;
-  opacity: 0;
+  margin-right: 0.8rem;
 }
-
-.titleWord:nth-child(1) { animation-delay: 0.2s; }
-.titleWord:nth-child(2) { animation-delay: 0.4s; }
-.titleWord:nth-child(3) { animation-delay: 0.6s; }
 
 .titleWordHighlight {
   display: inline-block;
@@ -89,28 +87,15 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: fadeInWord 1s ease-out 0.8s forwards;
-  opacity: 0;
-}
-
-@keyframes fadeInWord {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .sectionSubtitle {
   font-family: 'Inter', -apple-system, sans-serif;
-  font-size: 1.3rem;
+  font-size: clamp(1rem, 2vw, 1.2rem);
   font-weight: 300;
-  line-height: 1.7;
+  line-height: 1.6;
   color: rgba(255, 255, 255, 0.9);
-  max-width: 800px;
+  max-width: 700px;
   margin: 0 auto;
 }
 
@@ -121,18 +106,20 @@
 
 .differentiatorsList {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 0;
-  margin: 4rem 0;
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .differentiatorItem {
   display: flex;
-  align-items: flex-start;
-  padding: 2.5rem 3rem;
+  align-items: center;
+  padding: 1.5rem 2rem;
   position: relative;
   transition: all 0.4s ease;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -142,16 +129,21 @@
   border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.differentiatorItem:nth-child(5),
+.differentiatorItem:nth-child(6) {
+  border-bottom: none;
+}
+
 .differentiatorItem:hover {
-  background: rgba(255, 255, 255, 0.03);
-  transform: translateX(10px);
+  background: rgba(255, 255, 255, 0.05);
+  transform: scale(1.02);
 }
 
 .differentiatorIcon {
-  font-size: 2.5rem;
-  margin-right: 2rem;
+  font-size: 1.8rem;
+  margin-right: 1.5rem;
   flex-shrink: 0;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
 }
 
 .differentiatorContent {
@@ -160,86 +152,82 @@
 
 .differentiatorTitle {
   font-family: 'Poppins', -apple-system, sans-serif;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: #ffffff;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.5rem;
   line-height: 1.3;
 }
 
 .differentiatorDescription {
   font-family: 'Inter', -apple-system, sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 300;
   color: rgba(255, 255, 255, 0.8);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 .missionStatement {
   background: linear-gradient(135deg, rgba(216, 78, 40, 0.08) 0%, rgba(255, 147, 64, 0.05) 100%);
-  padding: 4rem 0;
-  margin-top: 4rem;
+  padding: 2rem;
+  border-radius: 24px;
   position: relative;
-}
-
-.missionStatement::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .missionContent {
-  max-width: 1200px;
-  margin: 0 auto;
   text-align: center;
-  padding: 0 2rem;
 }
 
 .missionTitle {
   font-family: 'Poppins', -apple-system, sans-serif;
-  font-size: 2.5rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 400;
   color: #ffffff;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
 }
 
 .missionPoints {
   display: flex;
   justify-content: center;
-  gap: 4rem;
+  gap: 3rem;
   flex-wrap: wrap;
 }
 
 .missionPoint {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  max-width: 400px;
+  gap: 1rem;
+  max-width: 300px;
 }
 
 .missionNumber {
   font-family: 'Poppins', -apple-system, sans-serif;
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 200;
   color: #d84e28;
   text-shadow: 0 2px 10px rgba(216, 78, 40, 0.3);
+  flex-shrink: 0;
 }
 
 .missionText {
   font-family: 'Inter', -apple-system, sans-serif;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 400;
   color: #ffffff;
-  line-height: 1.5;
+  line-height: 1.4;
   text-align: left;
 }
 
 @media (max-width: 1024px) {
+  .whyContainer {
+    gap: 2.5rem;
+    padding: 0 1.5rem;
+  }
+  
   .differentiatorsList {
     grid-template-columns: 1fr;
   }
@@ -248,81 +236,96 @@
     border-right: none;
   }
   
-  .sectionTitle {
-    font-size: 3.5rem;
+  .differentiatorItem:nth-child(6) {
+    border-bottom: none;
   }
   
   .missionPoints {
-    gap: 3rem;
+    gap: 2rem;
   }
 }
 
 @media (max-width: 768px) {
   .whyContainer {
-    padding: 0 1.5rem;
-  }
-  
-  .sectionTitle {
-    font-size: 2.8rem;
-  }
-  
-  .titleWord {
-    margin-right: 0.5rem;
+    gap: 2rem;
+    padding: 0 1rem;
   }
   
   .differentiatorItem {
-    padding: 2rem 1.5rem;
+    padding: 1.2rem 1.5rem;
     flex-direction: column;
     text-align: center;
   }
   
   .differentiatorIcon {
     margin-right: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
   }
   
   .missionPoints {
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
   }
   
   .missionPoint {
     flex-direction: column;
     text-align: center;
-    gap: 1rem;
+    gap: 0.8rem;
   }
   
   .missionText {
     text-align: center;
   }
   
-  .missionTitle {
-    font-size: 2rem;
+  .missionStatement {
+    padding: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
-  .sectionTitle {
-    font-size: 2.2rem;
+  .whyContainer {
+    gap: 1.5rem;
   }
   
   .differentiatorItem {
-    padding: 1.5rem 1rem;
+    padding: 1rem;
   }
   
   .differentiatorIcon {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   
   .differentiatorTitle {
-    font-size: 1.1rem;
-  }
-  
-  .missionStatement {
-    padding: 3rem 0;
+    font-size: 1rem;
   }
   
   .missionNumber {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
+  }
+  
+  .missionStatement {
+    padding: 1.2rem;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .sectionTitle,
+  .differentiatorTitle,
+  .missionTitle {
+    text-shadow: 
+      0 2px 8px rgba(0, 0, 0, 1),
+      0 1px 4px rgba(0, 0, 0, 1);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .differentiatorItem {
+    transition: none;
+  }
+  
+  .differentiatorItem:hover {
+    transform: none;
   }
 }

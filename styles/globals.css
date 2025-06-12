@@ -10,6 +10,7 @@
   --text-secondary: rgba(255, 255, 255, 0.8);
   --background-light: #fefefe;
   --background-gradient: linear-gradient(135deg, #ff9340 0%, #ffcaa3 50%, #ffc093 100%);
+  --navbar-height: 80px;
   
   /* Font families */
   --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -35,6 +36,8 @@ body {
   position: relative;
   overflow-x: hidden;
   font-weight: 300;
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* Fixed background for entire website - Always visible behind video */
@@ -175,6 +178,34 @@ body::after {
   }
 }
 
+/* Snap Scroll Sections */
+.snap-section {
+  height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* Section Content Animation */
+.section-content {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s cubic-bezier(0.4, 0.0, 0.6, 1);
+}
+
+.section-content.fade-out {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.section-content.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Typography improvements */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
@@ -223,12 +254,6 @@ img {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
-}
-
-.section {
-  padding: 5rem 0;
-  position: relative;
-  z-index: 1;
 }
 
 .text-center {
@@ -307,6 +332,10 @@ a, button, input, select, textarea {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  
+  .section-content {
+    transition: none !important;
   }
   
   .fixed-petal {
