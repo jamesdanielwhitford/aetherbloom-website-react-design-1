@@ -45,7 +45,7 @@
   display: flex;
   align-items: center;
   padding: 0 4rem;
-  padding-top: var(--navbar-height);
+  padding-top: 5rem;
 }
 
 .heroText {
@@ -219,7 +219,7 @@
 @media (max-width: 1200px) {
   .heroContent {
     padding: 0 3rem;
-    padding-top: var(--navbar-height);
+    padding-top: 5rem;
   }
   
   .heroActions {
@@ -230,7 +230,7 @@
 @media (max-width: 968px) {
   .heroContent {
     padding: 0 2rem;
-    padding-top: var(--navbar-height);
+    padding-top: 5rem;
   }
   
   .heroText {
@@ -247,7 +247,7 @@
 @media (max-width: 640px) {
   .heroContent {
     padding: 0 1.5rem;
-    padding-top: var(--navbar-height);
+    padding-top: 5rem;
     text-align: center;
   }
   
@@ -268,7 +268,7 @@
 @media (max-width: 480px) {
   .heroContent {
     padding: 0 1rem;
-    padding-top: var(--navbar-height);
+    padding-top: 5rem;
   }
   
   .heroText {
