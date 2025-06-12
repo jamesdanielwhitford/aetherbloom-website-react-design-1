@@ -5,31 +5,17 @@ import styles from './Navbar.module.css'
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isCompact, setIsCompact] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [lastScrollY, setLastScrollY] = useState(0)
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
-      const isScrollingDown = currentScrollY > lastScrollY
-      
       setIsScrolled(currentScrollY > 50)
-      
-      // Make compact when scrolling down past 100px
-      // Expand when scrolling up or at top
-      if (currentScrollY > 100 && isScrollingDown) {
-        setIsCompact(true)
-      } else if (!isScrollingDown || currentScrollY <= 100) {
-        setIsCompact(false)
-      }
-      
-      setLastScrollY(currentScrollY)
     }
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [lastScrollY])
+  }, [])
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -43,7 +29,7 @@ export default function Navbar() {
   ]
 
   return (
-    <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''} ${isCompact ? styles.compact : ''}`}>
+    <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''}`}>
       <div className={styles.navContainer}>
         {/* Logo/Brand */}
         <div className={styles.navBrand}>
