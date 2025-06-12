@@ -50,6 +50,7 @@
   font-weight: 300;
   line-height: 1.1;
   margin-bottom: 1.5rem; /* Increased margin */
+  margin-top: 1.5rem; /* Increased margin */
   color: #ffffff;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
@@ -90,6 +91,8 @@
   margin: 0 auto; /* Center the description */
   animation: fadeInDescription 1.5s ease-out 0.8s forwards;
   opacity: 0;
+  transition: all 0.6s ease-in-out;
+  min-height: 2.4rem; /* Prevent layout shift when text changes */
 }
 
 @keyframes fadeInDescription {
@@ -133,27 +136,19 @@
   transition: all 0.6s cubic-bezier(0.4, 0.0, 0.6, 1);
   border-radius: 0px; 
   
-  /* Glassmorphic styling by default */
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  /* Completely transparent by default */
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  /* border: 1px solid transparent; */
+  box-shadow: none;
 }
 
-.card:hover {
+.card:hover,
+.card.active {
   transform: translateY(-12px) scale(1.03);
   z-index: 10;
-  box-shadow: 
-    0 25px 80px rgba(0, 0, 0, 0.3),
-    0 8px 32px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  
-  /* Enhanced glassmorphism on hover */
   background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .cardBackground {
@@ -177,11 +172,12 @@
   background-repeat: no-repeat;
   opacity: 0;
   transform: scale(1.1);
-  transition: all 0.8s cubic-bezier(0.4, 0.0, 0.6, 1);
+  transition: all 0.4s cubic-bezier(0.4, 0.0, 0.6, 1);
 }
 
-.card:hover .cardImage {
-  opacity: 0.6; /* Reveal image on hover */
+.card:hover .cardImage,
+.card.active .cardImage {
+  opacity: 0.6; /* Reveal image on hover/active */
   transform: scale(1);
 }
 
@@ -191,15 +187,12 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.1) 0%, 
-    rgba(255, 255, 255, 0.05) 50%, 
-    rgba(0, 0, 0, 0.1) 100%
-  );
+  background: transparent;
   transition: all 0.6s ease;
 }
 
-.card:hover .cardGlassOverlay {
+.card:hover .cardGlassOverlay,
+.card.active .cardGlassOverlay {
   background: linear-gradient(135deg, 
     rgba(0, 0, 0, 0.3) 0%, 
     rgba(0, 0, 0, 0.5) 50%, 
@@ -218,12 +211,14 @@
   transition: transform 0.8s ease;
 }
 
-.card:hover .cardSheen {
+.card:hover .cardSheen,
+.card.active .cardSheen {
   transform: translateX(100%);
 }
 
-/* Color accents for different card types - subtle borders on hover */
-.recruitment:hover {
+/* Color accents for different card types - subtle borders on hover/active */
+.recruitment:hover,
+.recruitment.active {
   border-color: rgba(16, 185, 129, 0.4);
   box-shadow: 
     0 25px 80px rgba(0, 0, 0, 0.3),
@@ -231,7 +226,8 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-.pricing:hover {
+.pricing:hover,
+.pricing.active {
   border-color: rgba(59, 130, 246, 0.4);
   box-shadow: 
     0 25px 80px rgba(0, 0, 0, 0.3),
@@ -239,7 +235,8 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-.compliance:hover {
+.compliance:hover,
+.compliance.active {
   border-color: rgba(147, 51, 234, 0.4);
   box-shadow: 
     0 25px 80px rgba(0, 0, 0, 0.3),
@@ -247,7 +244,8 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-.impact:hover {
+.impact:hover,
+.impact.active {
   border-color: rgba(249, 115, 22, 0.4);
   box-shadow: 
     0 25px 80px rgba(0, 0, 0, 0.3),
@@ -272,14 +270,16 @@
   font-family: 'Poppins', -apple-system, sans-serif;
   font-size: 1.4rem;
   font-weight: 600;
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.7); /* More subtle by default */
   line-height: 1.2;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   margin-bottom: 0.5rem;
-  transition: all 0.3s ease;
+  transition: all 0.1s ease;
 }
 
-.card:hover .cardTitle {
+.card:hover .cardTitle,
+.card.active .cardTitle {
+  color: #ffffff;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
 }
 
@@ -287,46 +287,16 @@
   font-family: 'Inter', -apple-system, sans-serif;
   font-size: 1rem;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.6); /* More subtle by default */
   line-height: 1.4;
-  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
 }
 
-.card:hover .cardDescription {
-  color: #ffffff;
+.card:hover .cardDescription,
+.card.active .cardDescription {
+  color: rgba(255, 255, 255, 0.9);
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
-}
-
-.cardDetails {
-  position: absolute;
-  bottom: 2rem;
-  left: 2rem;
-  right: 2rem;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s cubic-bezier(0.4, 0.0, 0.6, 1);
-  background: rgba(0, 0, 0, 0.9);
-  padding: 1.5rem;
-  border-radius: 12px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  text-align: center;
-}
-
-.cardDetails.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.cardDetails p {
-  font-family: 'Inter', -apple-system, sans-serif;
-  font-size: 0.9rem;
-  font-weight: 400;
-  color: #ffffff;
-  line-height: 1.4;
-  margin: 0;
 }
 
 @media (max-width: 1200px) {
@@ -357,13 +327,6 @@
   
   .cardContent {
     padding: 1.5rem;
-  }
-  
-  .cardDetails {
-    bottom: 1.5rem;
-    left: 1.5rem;
-    right: 1.5rem;
-    padding: 1rem;
   }
 }
 
@@ -422,17 +385,6 @@
   .cardDescription {
     font-size: 0.85rem;
   }
-  
-  .cardDetails {
-    bottom: 1.2rem;
-    left: 1.2rem;
-    right: 1.2rem;
-    padding: 1rem;
-  }
-  
-  .cardDetails p {
-    font-size: 0.8rem;
-  }
 }
 
 /* High contrast mode support */
@@ -444,11 +396,13 @@
       0 1px 4px rgba(0, 0, 0, 1);
   }
   
-  .card {
+  .card:hover,
+  .card.active {
     background: rgba(255, 255, 255, 0.15);
   }
   
-  .cardGlassOverlay {
+  .card:hover .cardGlassOverlay,
+  .card.active .cardGlassOverlay {
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.9) 100%);
   }
 }
@@ -467,7 +421,8 @@
     transition: none;
   }
   
-  .card:hover {
+  .card:hover,
+  .card.active {
     transform: none;
   }
   
@@ -475,7 +430,6 @@
     display: none;
   }
   
-  .cardDetails,
   .cardImage,
   .cardGlassOverlay {
     transition: none;
