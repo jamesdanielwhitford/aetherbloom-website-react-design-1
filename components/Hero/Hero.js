@@ -6,7 +6,6 @@ import styles from './Hero.module.css'
 export default function Hero() {
   const [currentTextIndex, setCurrentTextIndex] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
-  const [videoOpacity, setVideoOpacity] = useState(1)
   const [isVisible, setIsVisible] = useState(true)
   const sectionRef = useRef(null)
 
@@ -43,10 +42,8 @@ export default function Hero() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsVisible(true)
-            setVideoOpacity(1)
           } else {
             setIsVisible(false)
-            setVideoOpacity(0.3)
           }
         })
       },
@@ -69,27 +66,6 @@ export default function Hero() {
 
   return (
     <section ref={sectionRef} className={`${styles.heroContainer} snap-section`}>
-      {/* Video Background */}
-      <div 
-        className={styles.videoBackground}
-        style={{ opacity: videoOpacity }}
-      >
-        <video
-          className={styles.heroVideo}
-          autoPlay
-          muted
-          loop
-          playsInline
-        >
-          <source src="/hero-video.mp4" type="video/mp4" />
-          {/* Fallback for browsers that don't support video */}
-          <div className={styles.videoFallback}></div>
-        </video>
-      </div>
-
-      {/* Video Overlay */}
-      <div className={styles.videoOverlay}></div>
-
       {/* Hero Content */}
       <div className={`${styles.heroContent} section-content ${isVisible ? 'fade-in' : 'fade-out'}`}>
         <div className={styles.heroText}>

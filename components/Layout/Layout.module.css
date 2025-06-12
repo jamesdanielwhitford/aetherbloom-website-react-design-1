@@ -18,6 +18,44 @@
   z-index: 1;
 }
 
+/* Fixed Video Background */
+.fixedVideoContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0; /* Above petals (-5) but below content (1+) */
+  pointer-events: none;
+  transition: opacity 0.6s cubic-bezier(0.4, 0.0, 0.6, 1);
+}
+
+.fixedVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.videoFallback {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.fixedVideoOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  pointer-events: none;
+}
+
 /* Custom scrollbar styling */
 .main::-webkit-scrollbar {
   width: 6px;
