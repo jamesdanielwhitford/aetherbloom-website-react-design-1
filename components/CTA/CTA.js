@@ -1,93 +1,75 @@
 // File: components/CTA/CTA.js
 
-import { useEffect, useRef } from 'react'
 import styles from './CTA.module.css'
 
 export default function CTA() {
-  const sectionRef = useRef(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const ctaContent = entry.target.querySelector(`.${styles.ctaContent}`)
-            if (ctaContent) {
-              ctaContent.style.opacity = '1'
-              ctaContent.style.transform = 'translateY(0)'
-            }
-          }
-        })
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      }
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-      
-      // Initially hide content for animation
-      const ctaContent = sectionRef.current.querySelector(`.${styles.ctaContent}`)
-      if (ctaContent) {
-        ctaContent.style.opacity = '0'
-        ctaContent.style.transform = 'translateY(30px)'
-        ctaContent.style.transition = 'opacity 0.8s ease, transform 0.8s ease'
-      }
-    }
-
-    return () => observer.disconnect()
-  }, [])
+  const trustSignals = [
+    { metric: "50+", label: "UK SMEs Trust Us" },
+    { metric: "4.9/5", label: "Client Satisfaction" },
+    { metric: "GDPR", label: "Compliant Operations" },
+    { metric: "72hrs", label: "Scale Time" }
+  ]
 
   return (
-    <section className={styles.ctaSection} ref={sectionRef}>
+    <section id="contact" className={styles.ctaSection}>
       <div className={styles.ctaContainer}>
         <div className={styles.ctaContent}>
           <div className={styles.ctaHeader}>
-            <div className={styles.ctaLabel}>Ready to transform your business?</div>
-            <h2 className={styles.ctaHeadline}>
-              Create <span className={styles.highlightText}>partnership.</span><br />
-              not just <span className={styles.highlightText}>outsourcing.</span>
+            <h2 className={styles.ctaTitle}>
+              <span className={styles.titleLine1}>Ready to</span>
+              <span className={styles.titleLine2}>Transform</span>
+              <span className={styles.titleLine3}>Your Business?</span>
             </h2>
-            <p className={styles.ctaSubheadline}>
-              Join 50+ UK businesses already saving 40%+ on operational costs while scaling with confidence. Start your transformation today.
+            <p className={styles.ctaSubtitle}>
+              Join 50+ UK SMEs who have already reduced costs by 40%+ while scaling 
+              their operations with South African professionals trained to UK standards.
             </p>
           </div>
 
           <div className={styles.ctaActions}>
-            <a href="#strategy-session" className={`btn btn-primary ${styles.ctaPrimary}`}>
+            <a href="#contact" className={styles.primaryCta}>
               Claim Your Free Strategy Session
-              <span className={styles.ctaArrow}>→</span>
             </a>
-            <a href="#pricing" className={`btn btn-secondary ${styles.ctaSecondary}`}>
-              View Pricing Calculator
-            </a>
+            <div className={styles.ctaNote}>
+              <span className={styles.noteIcon}>⚡</span>
+              <span className={styles.noteText}>No setup fees • Scale in 72 hours • SLA guarantees</span>
+            </div>
           </div>
 
-          <div className={styles.ctaTrustSignals}>
-            <div className={styles.trustItem}>
-              <span className={styles.trustIcon}>✓</span>
-              <span>Get instant access</span>
-            </div>
-            <div className={styles.trustDivider}>|</div>
-            <div className={styles.trustItem}>
-              <span className={styles.trustIcon}>✓</span>
-              <span>No setup fees</span>
-            </div>
-            <div className={styles.trustDivider}>|</div>
-            <div className={styles.trustItem}>
-              <span className={styles.trustIcon}>✓</span>
-              <span>Scale in 72 hours</span>
-            </div>
+          <div className={styles.trustSignals}>
+            {trustSignals.map((signal, index) => (
+              <div key={index} className={styles.trustSignal}>
+                <span className={styles.trustMetric}>{signal.metric}</span>
+                <span className={styles.trustLabel}>{signal.label}</span>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Decorative Elements */}
-        <div className={styles.decorativeElements}>
-          <div className={styles.decorativeShape1}></div>
-          <div className={styles.decorativeShape2}></div>
-          <div className={styles.decorativeShape3}></div>
+        <div className={styles.contactInfo}>
+          <div className={styles.contactMethods}>
+            <div className={styles.contactMethod}>
+              <span className={styles.contactIcon}>📍</span>
+              <div className={styles.contactDetails}>
+                <span className={styles.contactLabel}>UK Office</span>
+                <span className={styles.contactValue}>London, UK</span>
+              </div>
+            </div>
+            <div className={styles.contactMethod}>
+              <span className={styles.contactIcon}>📧</span>
+              <div className={styles.contactDetails}>
+                <span className={styles.contactLabel}>Email</span>
+                <span className={styles.contactValue}>info@aetherbloom.com</span>
+              </div>
+            </div>
+            <div className={styles.contactMethod}>
+              <span className={styles.contactIcon}>💬</span>
+              <div className={styles.contactDetails}>
+                <span className={styles.contactLabel}>Live Chat</span>
+                <span className={styles.contactValue}>UK-based consultants available</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -1,156 +1,161 @@
 // File: components/WhyAetherbloom/WhyAetherbloom.js
 
-import { useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import styles from './WhyAetherbloom.module.css'
 
 export default function WhyAetherbloom() {
+  const [isVisible, setIsVisible] = useState(false)
+  const [hoveredCard, setHoveredCard] = useState(null)
+  const [isCycling, setIsCycling] = useState(true)
+  const [currentCycleIndex, setCurrentCycleIndex] = useState(0)
+  const [userHasHovered, setUserHasHovered] = useState(false)
+  const [lastHoveredCard, setLastHoveredCard] = useState(null)
   const sectionRef = useRef(null)
-  const featuresRef = useRef([])
+  const cycleTimerRef = useRef(null)
 
+  const cards = [
+    {
+      title: "High Quality Recruitment and Training",
+      description: "UK-trained teams delivering exceptional customer experiences with rigorous selection processes and ongoing development programs.",
+      detailedDescription: "Our comprehensive 10-step talent selection process ensures only top-tier professionals join your team. From cultural fit analysis to technical interviews and background checks, we maintain the highest standards.",
+      pattern: "recruitment",
+      image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=600&fit=crop&crop=faces"
+    },
+    {
+      title: "Transparent Pricing",
+      description: "No hidden fees with real-time reporting dashboards and flexible contracts that scale with your business needs.",
+      detailedDescription: "SLA guarantees with real consequences, live performance dashboards, and the ability to scale your team in just 72 hours with complete cost transparency. No setup fees, just clear value.",
+      pattern: "pricing",
+      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=600&fit=crop&crop=entropy"
+    },
+    {
+      title: "GDPR Compliance",
+      description: "Built-in UK compliance standards with civil service-grade audits and data protection protocols from day one.",
+      detailedDescription: "ISO standards integrated, comprehensive data protection training, and regular compliance audits ensure your business meets all UK regulatory requirements with zero risk.",
+      pattern: "compliance",
+      image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=600&fit=crop&crop=entropy"
+    },
+    {
+      title: "Ethical Impact",
+      description: "Creating meaningful opportunities for South African youth through job readiness programs and leadership development.",
+      detailedDescription: "Free training programs, paid internships, leadership pipelines, and partnerships with community organizations to uplift individuals and communities while delivering excellence.",
+      pattern: "impact",
+      image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&h=600&fit=crop&crop=faces"
+    }
+  ]
+
+  // Auto-cycling logic
+  useEffect(() => {
+    if (isCycling && isVisible && !userHasHovered) {
+      cycleTimerRef.current = setInterval(() => {
+        setCurrentCycleIndex((prevIndex) => (prevIndex + 1) % cards.length)
+      }, 4500) // Change card every 3 seconds
+    } else {
+      if (cycleTimerRef.current) {
+        clearInterval(cycleTimerRef.current)
+      }
+    }
+
+    return () => {
+      if (cycleTimerRef.current) {
+        clearInterval(cycleTimerRef.current)
+      }
+    }
+  }, [isCycling, isVisible, userHasHovered, cards.length])
+
+  // Handle user hover
+  const handleCardHover = (index) => {
+    if (!userHasHovered) {
+      setUserHasHovered(true)
+      setIsCycling(false)
+    }
+    setHoveredCard(index)
+    setLastHoveredCard(index)
+  }
+
+  const handleCardLeave = () => {
+    setHoveredCard(null)
+  }
+
+  // Determine which card should be "active" (either from cycling or user hover)
+  const getActiveCard = () => {
+    if (userHasHovered) {
+      return hoveredCard !== null ? hoveredCard : lastHoveredCard
+    }
+    return isCycling ? currentCycleIndex : null
+  }
+
+  const activeCardIndex = getActiveCard()
+
+  // Intersection Observer for section visibility and animations
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const features = entry.target.querySelectorAll(`.${styles.whyFeature}`)
-            features.forEach((feature, index) => {
-              setTimeout(() => {
-                feature.style.opacity = '1'
-                feature.style.transform = 'translateY(0)'
-              }, index * 150)
-            })
+            setIsVisible(true)
+          } else {
+            setIsVisible(false)
           }
         })
       },
       {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: 0.5,
+        rootMargin: '-10% 0px -10% 0px'
       }
     )
 
     if (sectionRef.current) {
       observer.observe(sectionRef.current)
-      
-      // Initially hide features for animation
-      const features = sectionRef.current.querySelectorAll(`.${styles.whyFeature}`)
-      features.forEach(feature => {
-        feature.style.opacity = '0'
-        feature.style.transform = 'translateY(20px)'
-        feature.style.transition = 'opacity 0.6s ease, transform 0.6s ease'
-      })
     }
 
-    return () => observer.disconnect()
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current)
+      }
+    }
   }, [])
 
-  const features = [
-    {
-      icon: (
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-          <circle cx="9" cy="7" r="4"/>
-          <path d="m22 21-3-3m0 0-3-3m3 3 3-3m-3 3-3 3"/>
-        </svg>
-      ),
-      title: "Civil Service Expertise",
-      description: "Founded by UK public sector leaders with decades of HR and data analysis experience"
-    },
-    {
-      icon: (
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M9 12l2 2 4-4"/>
-          <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"/>
-          <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"/>
-          <path d="M13 12h3"/>
-          <path d="M11 12H8"/>
-        </svg>
-      ),
-      title: "UK Compliance Ready",
-      description: "Teams pre-trained in GDPR, ISO standards, and UK regulatory requirements from day one"
-    },
-    {
-      icon: (
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M12 2v20"/>
-          <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-        </svg>
-      ),
-      title: "Transparent Pricing",
-      description: "No hidden fees, flexible contracts, and real-time performance dashboards with SLA guarantees"
-    },
-    {
-      icon: (
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <circle cx="12" cy="12" r="10"/>
-          <polyline points="12,6 12,12 16,14"/>
-        </svg>
-      ),
-      title: "Rapid Deployment",
-      description: "Scale your team in 72 hours with our streamlined onboarding and talent matching process"
-    },
-    {
-      icon: (
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-        </svg>
-      ),
-      title: "Data-Driven Matching",
-      description: "20% faster talent placement through proprietary analytics and cultural fit assessment"
-    },
-    {
-      icon: (
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M3 6v12a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V6"/>
-          <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-          <path d="M10 12h4"/>
-        </svg>
-      ),
-      title: "Premium Talent Pool",
-      description: "Access to South Africa's top STEM graduates with 92% English fluency in professional workforce"
-    },
-    {
-      icon: (
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-      ),
-      title: "Proven Track Record",
-      description: "4.9/5 client satisfaction rating across 50+ UK SMEs with 4.8/5 employee happiness score"
-    },
-    {
-      icon: (
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          <path d="M9 12l2 2 4-4"/>
-        </svg>
-      ),
-      title: "Ethical Partnership",
-      description: "Supporting South African youth through training programs while delivering exceptional service"
-    }
-  ]
-
   return (
-    <section className={styles.whyAetherbloomSection} ref={sectionRef}>
-      <div className={styles.whyContainer}>
+    <section ref={sectionRef} id="why-aetherbloom" className={`${styles.whySection} snap-section`}>
+      <div className={`${styles.whyContainer} section-content ${isVisible ? 'fade-in' : 'fade-out'}`}>
         <div className={styles.whyHeader}>
-          <h2 className={styles.whyHeadline}>
-            Everything you need <br />to scale with confidence
+          <h2 className={styles.mainTitle}>
+            <span className={styles.titleLine}>This is Aetherbloom.</span>
+            <span className={styles.titleLine}>How can we help you?</span>
           </h2>
-          <p className={styles.whySubheadline}>
-            Founded by a UK Civil Service HR Leader and Met Office Data Analyst, Aetherbloom combines public sector rigor with data-driven talent matching to deliver exceptional BPO solutions.
+          <p className={styles.descriptionText}>
+            Get your business ready to scale with high-quality, ethical outsourcing that streamline your business processes.
           </p>
         </div>
 
-        <div className={styles.whyFeaturesGrid}>
-          {features.map((feature, index) => (
-            <div key={index} className={styles.whyFeature}>
-              <div className={styles.whyFeatureIcon}>
-                {feature.icon}
+        <div className={styles.cardsGrid}>
+          {cards.map((card, index) => {
+            const isCardActive = activeCardIndex === index
+            
+            return (
+              <div 
+                key={index} 
+                className={`${styles.card} ${styles[card.pattern]} ${isCardActive ? styles.active : ''}`}
+                onMouseEnter={() => handleCardHover(index)}
+                onMouseLeave={handleCardLeave}
+              >
+                <div className={styles.cardBackground}>
+                  <div 
+                    className={styles.cardImage}
+                    style={{ backgroundImage: `url(${card.image})` }}
+                  ></div>
+                  <div className={styles.cardGlassOverlay}></div>
+                  <div className={styles.cardSheen}></div>
+                </div>
+                
+                <div className={styles.cardContent}>
+                  <h3 className={styles.cardTitle}>{card.title}</h3>
+                  <p className={styles.cardDescription}>{card.description}</p>
+                </div>
               </div>
-              <h3 className={styles.whyFeatureTitle}>{feature.title}</h3>
-              <p className={styles.whyFeatureDescription}>{feature.description}</p>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>

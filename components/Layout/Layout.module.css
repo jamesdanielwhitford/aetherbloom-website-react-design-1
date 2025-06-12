@@ -1,10 +1,82 @@
 /* File: components/Layout/Layout.module.css */
 
 .layout {
-  min-height: 100vh;
-  background-color: var(--background-cream);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
 }
 
 .main {
+  flex: 1;
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
   position: relative;
+  z-index: 1;
+}
+
+/* Fixed Video Background */
+.fixedVideoContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0; /* Above petals (-5) but below content (1+) */
+  pointer-events: none;
+  /* Much longer transition for snap scrolling - video fades gradually even when scroll snaps */
+  transition: opacity 0.6s cubic-bezier(0.4, 0.0, 0.6, 1), visibility 0.6s cubic-bezier(0.4, 0.0, 0.6, 1);
+}
+
+.fixedVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.videoFallback {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.fixedVideoOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Custom scrollbar styling */
+.main::-webkit-scrollbar {
+  width: 6px;
+}
+
+.main::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.main::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #d84e28 0%, #ff9340 100%);
+  border-radius: 3px;
+}
+
+.main::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ff9340 0%, #d84e28 100%);
+}
+
+/* Firefox scrollbar */
+.main {
+  scrollbar-width: thin;
+  scrollbar-color: #d84e28 rgba(255, 255, 255, 0.1);
 }

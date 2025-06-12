@@ -1,53 +1,95 @@
 // File: components/Hero/Hero.js
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import styles from './Hero.module.css'
-import Image from 'next/image'
 
 export default function Hero() {
-    const [imageError, setImageError] = useState(false)
-    const handleImageError = () => {
-        setImageError(true)
-    }
-  return (
-    <section className={styles.heroSection} id="home">
-      <div className={styles.heroContainer}>
-        <div className={styles.heroContent}>
-          <h1 className={styles.heroHeadline}>
-            UK expertise meets<br />
-            global talent.
-          </h1>
-          <p className={styles.heroSubheadline}>
-            Transform your business with expertly managed BPO solutions. Cut costs by 40%+ while scaling with South African professionals trained to UK standards.
-          </p>
-          <div className={styles.heroCtaContainer}>
-            <a href="#strategy-session" className={`btn btn-primary ${styles.heroCta}`}>
-              Claim Your Free Strategy Session
-              <span className={styles.heroCtaArrow}>→</span>
-            </a>
-            <div className={styles.heroTrustLine}>
-              Trusted by 50+ UK SMEs • 4.9/5 Client Satisfaction
-            </div>
-          </div>
-        </div>
+  const [currentTextIndex, setCurrentTextIndex] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
+  const sectionRef = useRef(null)
 
-        <div className={styles.heroVisual}>
-        <div className={styles.heroImageContainer}>
-            {!imageError ? (
-            <Image
-                src="/hero-image.jpg" // Replace with your image path
-                alt="Aetherbloom Business Outsourcing"
-                fill
-                style={{ objectFit: 'cover' }}
-                onError={() => setImageError(true)}
-                priority
-            />
-            ) : (
-            <div className={styles.heroImagePlaceholder}>
-                <div className={styles.imageOverlay}></div>
-            </div>
-            )}
-        </div>
+  const textSequence = [
+    "Transformed.",
+    "Empowered.", 
+    "in Full Bloom."
+  ]
+
+  // Text animation effect with proper fade in/out
+  useEffect(() => {
+    const initialDelay = currentTextIndex === 0 ? 4000 : 4000; // Longer delay for first transition
+    
+    if (currentTextIndex < textSequence.length - 1) {
+      const timer = setTimeout(() => {
+        setIsAnimating(true)
+        
+        // After fade out completes, change text and fade in
+        setTimeout(() => {
+          setCurrentTextIndex(currentTextIndex + 1)
+          setIsAnimating(false)
+        }, 700) // Half second for fade out
+        
+      }, initialDelay) // Longer initial delay, then normal timing
+      
+      return () => clearTimeout(timer)
+    }
+  }, [currentTextIndex, textSequence.length])
+
+  // Intersection Observer for section visibility and animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true)
+          } else {
+            setIsVisible(false)
+          }
+        })
+      },
+      {
+        threshold: 0.5,
+        rootMargin: '-10% 0px -10% 0px'
+      }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current)
+      }
+    }
+  }, [])
+
+  return (
+    <section ref={sectionRef} className={`${styles.heroContainer} snap-section`}>
+      {/* Hero Content */}
+      <div className={`${styles.heroContent} section-content ${isVisible ? 'fade-in' : 'fade-out'}`}>
+        <div className={styles.heroText}>
+          <h1 className={styles.heroTitle}>
+            <span className={styles.titleLine1}>Your Business</span>
+            <span 
+              className={`${styles.titleLine2} ${isAnimating ? styles.fadeOut : styles.fadeIn}`}
+              key={currentTextIndex}
+            >
+              {textSequence[currentTextIndex]}
+            </span>
+          </h1>
+          <p className={styles.heroSubtitle}>
+            Scale your operations with expertly-sourced<br/>South African professionals trained to UK standards.<br/>
+            Cut costs by 40%+ while scaling with confidence.
+          </p>
+          <div className={styles.heroActions}>
+            <a href="#why-aetherbloom" className={styles.primaryButton}>
+              Discover How
+            </a>
+            <a href="#contact" className={styles.secondaryButton}>
+              Get Started
+            </a>
+          </div>
         </div>
       </div>
     </section>
