@@ -17,7 +17,7 @@ export default function Hero() {
 
   // Text animation effect with proper fade in/out
   useEffect(() => {
-    const initialDelay = currentTextIndex === 0 ? 3000 : 3000; // Longer delay for first transition
+    const initialDelay = currentTextIndex === 0 ? 4000 : 4000; // Longer delay for first transition
     
     if (currentTextIndex < textSequence.length - 1) {
       const timer = setTimeout(() => {
@@ -79,7 +79,7 @@ export default function Hero() {
             </span>
           </h1>
           <p className={styles.heroSubtitle}>
-            Transform your operations with South African professionals trained to UK standards. 
+            Transform your operations with expertly-sourced<br/>South African professionals trained to UK standards.<br/>
             Cut costs by 40%+ while scaling with confidence.
           </p>
           <div className={styles.heroActions}>
