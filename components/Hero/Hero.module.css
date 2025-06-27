@@ -23,200 +23,11 @@
   transition: opacity 0.8s ease-out;
 }
 
-.heroText {
-  max-width: 800px;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.heroTitle {
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  font-weight: 700;
-  font-size: clamp(3rem, 8vw, 6rem);
-  line-height: 0.9;
-  letter-spacing: -0.02em;
-  color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.titleLine1 {
-  display: block;
-  opacity: 1;
-}
-
-.titleLine2 {
-  display: block;
-  color: #ffffff;
-  position: relative;
-  min-height: 1.2em; /* Prevent layout shift */
-}
-
-/* Initial animation for the first text */
-.titleLine2:not(.fadeIn):not(.fadeOut) {
-  animation: fadeInLeft 1.2s ease-out both;
-  animation-delay: 0.2s;
-  opacity: 0;
-}
-
-/* Text change animations */
-.fadeIn {
-  animation: textFadeInUp 0.6s ease-out both;
-}
-
-.fadeOut {
-  animation: textFadeOutDown 0.5s ease-in both;
-}
-
-.heroSubtitle {
-  font-family: 'Inter', -apple-system, sans-serif;
-  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-  font-weight: 400;
-  line-height: 1.6;
-  color: #ffffff;
-  max-width: 600px;
-  animation: fadeInUp 1.2s ease-out both;
-  animation-delay: 0.5s;
-  opacity: 0;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
-}
-
-.heroActions {
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  animation: fadeInUp 1.2s ease-out both;
-  animation-delay: 0.8s;
-  opacity: 0;
-}
-
-.primaryButton {
-  display: inline-block;
-  padding: 1.2rem 2.5rem;
-  border-radius: 60px;
-  color: #ffffff;
-  text-decoration: none;
-  font-family: 'Inter', -apple-system, sans-serif;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: all 0.6s cubic-bezier(0.4, 0.0, 0.6, 1);
-  position: relative;
-  overflow: hidden;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  
-  background: linear-gradient(135deg, #d84e28 0%, #ff9340 100%);
-  box-shadow: 
-    0 15px 40px rgba(216, 78, 40, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-}
-
-.primaryButton::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  transition: left 0.6s ease;
-}
-
-.primaryButton:hover::before {
-  left: 100%;
-}
-
-.primaryButton:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 
-    0 25px 60px rgba(216, 78, 40, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  background: linear-gradient(135deg, #ff9340 0%, #d84e28 100%);
-}
-
-.secondaryButton {
-  display: inline-block;
-  padding: 1.2rem 2.5rem;
-  border-radius: 60px;
-  color: #ffffff;
-  text-decoration: none;
-  font-family: 'Inter', -apple-system, sans-serif;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: all 0.6s cubic-bezier(0.4, 0.0, 0.6, 1);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.secondaryButton:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.5);
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 15px 40px rgba(255, 255, 255, 0.1);
-}
-
-/* Text Animations */
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-100px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Text transition animations */
-@keyframes textFadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes textFadeOutDown {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-}
-
 /* Responsive Design */
 @media (max-width: 1200px) {
   .heroContent {
     padding: 0 3rem;
     padding-top: 5rem;
-  }
-  
-  .heroActions {
-    gap: 1.2rem;
   }
 }
 
@@ -224,16 +35,6 @@
   .heroContent {
     padding: 0 2rem;
     padding-top: 5rem;
-  }
-  
-  .heroText {
-    gap: 1.5rem;
-  }
-  
-  .primaryButton,
-  .secondaryButton {
-    padding: 1rem 2rem;
-    font-size: 1rem;
   }
 }
 
@@ -243,19 +44,6 @@
     padding-top: 5rem;
     text-align: center;
   }
-  
-  .heroActions {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  .primaryButton,
-  .secondaryButton {
-    width: 100%;
-    max-width: 280px;
-    text-align: center;
-  }
 }
 
 @media (max-width: 480px) {
@@ -263,42 +51,11 @@
     padding: 0 1rem;
     padding-top: 5rem;
   }
-  
-  .heroText {
-    gap: 1.2rem;
-  }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  .heroTitle,
-  .titleLine2,
-  .heroSubtitle {
-    color: #ffffff;
-    text-shadow: 
-      0 2px 8px rgba(0, 0, 0, 1),
-      0 1px 4px rgba(0, 0, 0, 1);
-  }
 }
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  .titleLine2,
-  .heroSubtitle,
-  .heroActions {
-    animation: none !important;
-    opacity: 1;
-    transform: none;
-  }
-  
-  .fadeIn,
-  .fadeOut {
-    animation: none !important;
-    opacity: 1;
-  }
-  
-  .primaryButton,
-  .secondaryButton {
-    transition: none;
+  .heroContent {
+    transition: none !important;
   }
 }

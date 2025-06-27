@@ -1,7 +1,6 @@
 // File: components/Layout/Layout.js
 
 import { useState, useEffect, useRef } from 'react'
-import Navbar from '../Navbar/Navbar'
 import styles from './Layout.module.css'
 
 export default function Layout({ children }) {
@@ -95,7 +94,6 @@ export default function Layout({ children }) {
         <div className={styles.fixedVideoOverlay}></div>
       </div>
       
-      <Navbar />
       <main className={styles.main}>
         {children}
       </main>
