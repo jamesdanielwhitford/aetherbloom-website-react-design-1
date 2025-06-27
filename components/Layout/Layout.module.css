@@ -23,38 +23,33 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   z-index: 0; /* Above petals (-5) but below content (1+) */
   pointer-events: none;
+  background: transparent;
+  border: none;
   /* Much longer transition for snap scrolling - video fades gradually even when scroll snaps */
   transition: opacity 0.6s cubic-bezier(0.4, 0.0, 0.6, 1), visibility 0.6s cubic-bezier(0.4, 0.0, 0.6, 1);
 }
 
 .fixedVideo {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
+  background: transparent;
+  border: none;
+  display: block;
 }
 
 .videoFallback {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 100%);
-}
-
-.fixedVideoOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  z-index: 1;
-  pointer-events: none;
+  background: transparent;
+  border: none;
 }
 
 /* Custom scrollbar styling */

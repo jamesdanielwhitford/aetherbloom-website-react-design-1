@@ -20,7 +20,10 @@
   align-items: center;
   padding: 0 4rem;
   padding-top: 5rem;
-  transition: opacity 0.8s ease-out;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 /* Responsive Design */

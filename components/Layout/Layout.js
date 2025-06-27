@@ -91,7 +91,6 @@ export default function Layout({ children }) {
           <source src="/hero-video.mp4" type="video/mp4" />
           <div className={styles.videoFallback}></div>
         </video>
-        <div className={styles.fixedVideoOverlay}></div>
       </div>
       
       <main className={styles.main}>
