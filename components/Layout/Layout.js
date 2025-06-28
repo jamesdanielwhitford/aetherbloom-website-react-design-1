@@ -13,7 +13,7 @@ export default function Layout({ children }) {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.target.id === 'hero-section' || entry.target.className?.includes('heroContainer')) {
+          if (entry.target.className?.includes('heroContainer')) {
             setIsInHeroSection(entry.isIntersecting)
           }
         })
@@ -25,8 +25,7 @@ export default function Layout({ children }) {
     )
 
     // Find hero section in the DOM
-    const heroSection = document.querySelector('[class*="heroContainer"]') || 
-                       document.querySelector('#hero-section')
+    const heroSection = document.querySelector('[class*="heroContainer"]')
     
     if (heroSection) {
       heroSectionRef.current = heroSection
@@ -40,18 +39,15 @@ export default function Layout({ children }) {
     }
   }, [])
 
-  // Handle scroll-based video opacity with snap-scroll friendly transitions
+  // Handle scroll-based video opacity
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY
       const windowHeight = window.innerHeight
       
-      // Tighter fade range for snap scrolling - fade happens closer to section boundary
       if (scrollPosition <= windowHeight * 0.7) {
-        // Fully visible in hero section
         setVideoOpacity(1)
       } else {
-        // Completely hidden in other sections
         setVideoOpacity(0)
       }
     }
@@ -60,7 +56,6 @@ export default function Layout({ children }) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Use intersection observer as primary control for snap scrolling
   const finalVideoOpacity = isInHeroSection ? videoOpacity : 0
 
   return (

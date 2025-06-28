@@ -9,19 +9,6 @@
   overflow: hidden;
 }
 
-.whySection::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: 
-    linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(216, 78, 40, 0.04) 0%, transparent 50%);
-  z-index: 1;
-}
-
 .whyContainer {
   width: 100%;
   max-width: 1400px;
@@ -64,7 +51,6 @@
   }
 }
 
-/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   .whyContainer {
     transition: none !important;

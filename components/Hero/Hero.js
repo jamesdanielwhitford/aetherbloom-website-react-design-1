@@ -7,16 +7,11 @@ export default function Hero() {
   const [isVisible, setIsVisible] = useState(true)
   const sectionRef = useRef(null)
 
-  // Intersection Observer for section visibility and animations
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true)
-          } else {
-            setIsVisible(false)
-          }
+          setIsVisible(entry.isIntersecting)
         })
       },
       {
@@ -38,9 +33,8 @@ export default function Hero() {
 
   return (
     <section ref={sectionRef} className={`${styles.heroContainer} snap-section`}>
-      {/* Empty hero content - just the container for background animations */}
       <div className={`${styles.heroContent} section-content ${isVisible ? 'fade-in' : 'fade-out'}`}>
-        {/* Content removed - keeping just the structure */}
+        {/* Empty content - just for video background */}
       </div>
     </section>
   )

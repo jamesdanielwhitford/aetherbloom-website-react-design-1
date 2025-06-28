@@ -7,16 +7,11 @@ export default function WhyAetherbloom() {
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef(null)
 
-  // Intersection Observer for section visibility and animations
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true)
-          } else {
-            setIsVisible(false)
-          }
+          setIsVisible(entry.isIntersecting)
         })
       },
       {
@@ -39,7 +34,7 @@ export default function WhyAetherbloom() {
   return (
     <section ref={sectionRef} id="why-aetherbloom" className={`${styles.whySection} snap-section`}>
       <div className={`${styles.whyContainer} section-content ${isVisible ? 'fade-in' : 'fade-out'}`}>
-        {/* Content removed - keeping just the structure for smooth scrolling */}
+        {/* Empty content - reveals petal animation */}
       </div>
     </section>
   )
