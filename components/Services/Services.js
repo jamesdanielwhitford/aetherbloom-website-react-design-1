@@ -84,10 +84,10 @@ export default function Services() {
                   className={`${styles.serviceMenuItem} ${activeService === index ? styles.active : ''}`}
                   onMouseEnter={() => setActiveService(index)}
                 >
-                  <h3 className={styles.serviceTitle}>{service.title}</h3>
                   <div className={`${styles.serviceArrow} ${activeService === index ? styles.visible : ''}`}>
                     →
                   </div>
+                  <h3 className={styles.serviceTitle}>{service.title}</h3>
                 </div>
               ))}
             </div>

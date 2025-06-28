@@ -90,14 +90,14 @@
 .servicesMenu {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 3rem;
 }
 
 .serviceMenuItem {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0.0, 0.6, 1);
   padding: 1rem 0;
@@ -107,6 +107,25 @@
 .serviceMenuItem:hover,
 .serviceMenuItem.active {
   transform: translateX(10px);
+}
+
+.serviceArrow {
+  font-size: 1.5rem;
+  color: #ffffff;
+  opacity: 0;
+  transform: translateX(-5px);
+  transition: all 0.3s ease;
+  font-weight: 300;
+  flex-shrink: 0;
+  width: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.serviceArrow.visible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .serviceTitle {
@@ -125,22 +144,6 @@
   color: #ffffff;
   font-weight: 400;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-}
-
-.serviceArrow {
-  font-size: 2rem;
-  color: #ffffff;
-  opacity: 0;
-  transform: translateX(-10px);
-  transition: all 0.3s ease;
-  font-weight: 300;
-  position: absolute;
-  right: -3rem;
-}
-
-.serviceArrow.visible {
-  opacity: 1;
-  transform: translateX(0);
 }
 
 /* Right Side - Service Card */
@@ -318,7 +321,7 @@
   
   .serviceMenuItem {
     padding: 0.5rem 0;
-    justify-content: center;
+    justify-content: flex-start;
   }
   
   .serviceMenuItem:hover,
@@ -327,7 +330,7 @@
   }
   
   .serviceArrow {
-    display: none;
+    display: flex;
   }
   
   .cardContent {
