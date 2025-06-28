@@ -1,12 +1,13 @@
 /* File: components/WhyAetherbloom/WhyAetherbloom.module.css */
 
 .whySection {
-  height: 100vh;
+  min-height: 200vh; /* Taller than viewport to allow scrolling */
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
-  padding: 8rem 0 1rem;
-  overflow: hidden;
+  padding: 8rem 0 4rem;
+  overflow: visible;
+  scroll-snap-align: start; /* Snap to the beginning of this section */
 }
 
 .whyContainer {
@@ -16,43 +17,185 @@
   padding: 0 2rem;
   position: relative;
   z-index: 2;
-  height: calc(100vh - 8rem);
+  min-height: calc(200vh - 12rem);
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.textContent {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 4rem;
+  text-align: left;
+}
+
+.sectionTitle {
+  font-family: 'Poppins', -apple-system, sans-serif;
+  font-size: 3.5rem;
+  font-weight: 300;
+  line-height: 1.2;
+  color: #ffffff;
+  margin-bottom: 2rem;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.textParagraph {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.textParagraph p {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.cardsContainer {
+  width: 100%;
+  flex: 1;
+  display: flex;
   justify-content: center;
-  align-items: center;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 4rem;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(216, 78, 40, 0.3);
+  transform: translateY(-4px);
+}
+
+.cardTitle {
+  font-family: 'Poppins', -apple-system, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.cardContent {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 @media (max-width: 1024px) {
   .whySection {
-    padding: 7rem 0 1rem;
+    min-height: 180vh;
+    padding: 7rem 0 3rem;
   }
   
   .whyContainer {
     padding: 0 1.5rem;
-    height: calc(100vh - 7rem);
+    min-height: calc(180vh - 10rem);
+  }
+
+  .sectionTitle {
+    font-size: 3rem;
+  }
+
+  .cardsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
   }
 }
 
 @media (max-width: 768px) {
   .whySection {
-    padding: 6rem 0 0;
+    min-height: 160vh;
+    padding: 6rem 0 2rem;
   }
   
   .whyContainer {
     padding: 0 1rem;
-    height: calc(100vh - 6rem);
+    min-height: calc(160vh - 8rem);
+  }
+
+  .sectionTitle {
+    font-size: 2.5rem;
+  }
+
+  .textParagraph p {
+    font-size: 1.1rem;
+  }
+
+  .cardsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .cardTitle {
+    font-size: 1.3rem;
   }
 }
 
 @media (max-width: 480px) {
+  .whySection {
+    min-height: 150vh;
+  }
+
   .whyContainer {
-    height: calc(100vh - 5.5rem);
+    min-height: calc(150vh - 7rem);
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .textParagraph p {
+    font-size: 1rem;
+  }
+
+  .card {
+    padding: 1.2rem;
+  }
+
+  .cardTitle {
+    font-size: 1.2rem;
+  }
+
+  .cardContent {
+    font-size: 0.95rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .whyContainer {
     transition: none !important;
+  }
+  
+  .card {
+    transition: none !important;
+  }
+  
+  .card:hover {
+    transform: none;
   }
 }
