@@ -167,6 +167,17 @@
   overflow-y: auto;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
   transition: all 0.5s cubic-bezier(0.4, 0.0, 0.6, 1);
+  transform-style: preserve-3d;
+  cursor: pointer;
+  will-change: transform;
+}
+
+.cardContent:hover {
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.3),
+    0 10px 30px rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 .cardHeader {
@@ -335,6 +346,13 @@
   
   .cardContent {
     padding: 2rem;
+    /* Disable 3D effects on mobile */
+    transform: none !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .cardContent:hover {
+    transform: none !important;
   }
   
   .cardHeader {
@@ -396,5 +414,14 @@
   .serviceMenuItem:hover,
   .serviceMenuItem.active {
     transform: none;
+  }
+  
+  .cardContent {
+    transform: none !important;
+    will-change: auto;
+  }
+  
+  .cardContent:hover {
+    transform: none !important;
   }
 }
