@@ -1,65 +1,120 @@
 // File: components/Services/Services.js
 
+import { useState, useEffect, useRef } from 'react'
 import styles from './Services.module.css'
 
 export default function Services() {
+  const [activeService, setActiveService] = useState(0)
+  const [isVisible, setIsVisible] = useState(false)
+  const sectionRef = useRef(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsVisible(entry.isIntersecting)
+        })
+      },
+      {
+        threshold: 0.5,
+        rootMargin: '-10% 0px -10% 0px'
+      }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current)
+      }
+    }
+  }, [])
+
   const services = [
     {
       title: "Customer Support",
       subtitle: "Omnichannel Excellence",
-      description: "UK-trained teams delivering exceptional customer experiences across all touchpoints with native-level communication skills.",
-      features: ["24/7 Multi-channel Support", "UK Compliance Training", "Real-time Quality Monitoring"],
-      accent: "emerald"
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      features: [
+        "24/7 Multi-channel Support",
+        "UK Compliance Training", 
+        "Real-time Quality Monitoring",
+        "Native-level Communication"
+      ]
     },
     {
       title: "Back Office Operations", 
       subtitle: "Streamlined Efficiency",
-      description: "Comprehensive administrative support including data entry, finance, HR, and operational tasks with civil service-grade accuracy.",
-      features: ["Data Processing & Entry", "Financial Administration", "HR Support Services"],
-      accent: "blue"
+      description: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.",
+      features: [
+        "Data Processing & Entry",
+        "Financial Administration", 
+        "HR Support Services",
+        "Document Management"
+      ]
     },
     {
       title: "Technical Support",
-      subtitle: "Expert Problem Solving",
-      description: "Tiered IT helpdesk and software support from STEM graduates, ensuring rapid resolution and technical excellence.",
-      features: ["Tiered IT Helpdesk", "Software Support", "Technical Documentation"],
-      accent: "purple"
-    },
-    {
-      title: "Sales Support",
-      subtitle: "Revenue Acceleration",
-      description: "Lead generation, CRM management, and appointment setting services designed to fuel your growth pipeline.",
-      features: ["Lead Generation", "CRM Management", "Appointment Setting"],
-      accent: "orange"
+      subtitle: "Expert Problem Solving", 
+      description: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi.",
+      features: [
+        "Tiered IT Helpdesk",
+        "Software Support",
+        "Technical Documentation", 
+        "System Troubleshooting"
+      ]
     }
   ]
 
   return (
-    <section id="services" className={styles.servicesSection}>
-      <div className={styles.servicesContainer}>
-        <div className={styles.servicesHeader}>
-          <span className={styles.sectionLabel}>Our Services</span>
-          <h2 className={styles.sectionTitle}>
-            Tailored BPO Solutions for 
-            <span className={styles.titleHighlight}> Every Business Need</span>
-          </h2>
-        </div>
-
-        <div className={styles.servicesGrid}>
-          {services.map((service, index) => (
-            <div key={index} className={`${styles.serviceItem} ${styles[service.accent]}`}>
-              <div className={styles.serviceNumber}>
-                {String(index + 1).padStart(2, '0')}
-              </div>
-              <div className={styles.serviceContent}>
-                <div className={styles.serviceHeader}>
+    <section ref={sectionRef} id="services" className={`${styles.servicesSection} snap-section`}>
+      <div className={styles.backgroundImage}></div>
+      <div className={styles.overlay}></div>
+      
+      <div className={`${styles.servicesContainer} ${isVisible ? 'fade-in' : 'fade-out'}`}>
+        <div className={styles.servicesContent}>
+          {/* Left Side - Services List */}
+          <div className={styles.servicesList}>
+            <div className={styles.servicesMenu}>
+              {services.map((service, index) => (
+                <div 
+                  key={index}
+                  className={`${styles.serviceMenuItem} ${activeService === index ? styles.active : ''}`}
+                  onMouseEnter={() => setActiveService(index)}
+                >
                   <h3 className={styles.serviceTitle}>{service.title}</h3>
-                  <span className={styles.serviceSubtitle}>{service.subtitle}</span>
+                  <div className={`${styles.serviceArrow} ${activeService === index ? styles.visible : ''}`}>
+                    →
+                  </div>
                 </div>
-                <p className={styles.serviceDescription}>{service.description}</p>
-                <ul className={styles.serviceFeatures}>
-                  {service.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className={styles.serviceFeature}>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Side - Service Details Card */}
+          <div className={styles.serviceCard}>
+            <div className={styles.cardContent}>
+              <div className={styles.cardHeader}>
+                <span className={styles.cardNumber}>
+                  {String(activeService + 1).padStart(2, '0')}
+                </span>
+                <div className={styles.cardTitleGroup}>
+                  <h3 className={styles.cardTitle}>{services[activeService].title}</h3>
+                  <span className={styles.cardSubtitle}>{services[activeService].subtitle}</span>
+                </div>
+              </div>
+              
+              <p className={styles.cardDescription}>
+                {services[activeService].description}
+              </p>
+              
+              <div className={styles.cardFeatures}>
+                <h4 className={styles.featuresTitle}>Key Features:</h4>
+                <ul className={styles.featuresList}>
+                  {services[activeService].features.map((feature, index) => (
+                    <li key={index} className={styles.featureItem}>
                       <span className={styles.featureIcon}>✓</span>
                       {feature}
                     </li>
@@ -67,14 +122,7 @@ export default function Services() {
                 </ul>
               </div>
             </div>
-          ))}
-        </div>
-
-        <div className={styles.servicesFooter}>
-          <p className={styles.footerText}>
-            All services include <strong>UK compliance training</strong>, <strong>real-time reporting</strong>, 
-            and <strong>dedicated account management</strong> to ensure seamless integration with your business.
-          </p>
+          </div>
         </div>
       </div>
     </section>

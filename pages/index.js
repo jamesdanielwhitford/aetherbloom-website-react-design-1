@@ -5,6 +5,7 @@ import Layout from '../components/Layout/Layout'
 import Navbar from '../components/Navbar/Navbar'
 import Hero from '../components/Hero/Hero'
 import WhyAetherbloom from '../components/WhyAetherbloom/WhyAetherbloom'
+import Services from '../components/Services/Services'
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
         <Navbar />
         <Hero />
         <WhyAetherbloom />
+        <Services />
       </Layout>
     </>
   )
