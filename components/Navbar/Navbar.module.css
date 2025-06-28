@@ -2,22 +2,35 @@
 
 .navbar {
   position: fixed;
-  top: 0.5rem;
+  top: 1rem;
   left: 50%;
   transform: translateX(-50%);
-  width: 100%; 
-  max-width: 1500px;
+  width: calc(100% - 4rem);
+  max-width: 1400px;
   z-index: 1000;
   transition: all 0.4s cubic-bezier(0.4, 0.0, 0.6, 1);
-  background: rgba(255, 255, 255, 0);
-  border-radius: 0px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 60px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.navbar.scrolled {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 .navContainer {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding: 0.6rem 2rem;
+  justify-content: space-between;
+  padding: 0.4rem 2rem;
   position: relative;
   transition: all 0.4s cubic-bezier(0.4, 0.0, 0.6, 1);
 }
@@ -27,6 +40,9 @@
 }
 
 .brandLink {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   text-decoration: none;
   color: #ffffff;
   font-weight: 700;
@@ -35,19 +51,167 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+}
+
+.brandIcon {
+  font-size: 1.6rem;
+  filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.3));
 }
 
 .brandName {
-  background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+  background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.9) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   transition: all 0.4s ease;
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
 }
 
 .brandLink:hover .brandName {
-  text-shadow: 0 4px 12px rgba(255, 147, 64, 0.4);
+  background: linear-gradient(135deg, #ffffff 0%, #ff9340 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.navLink {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  padding: 0.4rem 0.9rem;
+  border-radius: 25px;
+  transition: all 0.3s cubic-bezier(0.4, 0.0, 0.6, 1);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.navLink::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s cubic-bezier(0.4, 0.0, 0.6, 1);
+  z-index: -1;
+}
+
+.navLink:hover {
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.navLink:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.navActions {
+  flex-shrink: 0;
+}
+
+.getStartedBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 1.8rem;
+  background: linear-gradient(135deg, #d84e28 0%, #ff9340 100%);
+  color: #ffffff;
+  text-decoration: none;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 40px;
+  transition: all 0.4s cubic-bezier(0.4, 0.0, 0.6, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 4px 20px rgba(216, 78, 40, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.getStartedBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.getStartedBtn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 
+    0 8px 30px rgba(216, 78, 40, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, #ff9340 0%, #d84e28 100%);
+}
+
+.getStartedBtn:hover::before {
+  left: 100%;
+}
+
+.getStartedBtn:active {
+  transform: translateY(-1px) scale(1.01);
+}
+
+/* Mobile Menu Toggle (hidden for now, can be implemented later) */
+.mobileMenuToggle {
+  display: none;
+  flex-direction: column;
+  gap: 3px;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.mobileMenuToggle span {
+  width: 20px;
+  height: 2px;
+  background: #ffffff;
+  border-radius: 1px;
+  transition: all 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .navbar {
+    width: calc(100% - 2rem);
+  }
+  
+  .navContainer {
+    padding: 0.35rem 1.5rem;
+  }
+  
+  .navLinks {
+    gap: 1.5rem;
+  }
+  
+  .navLink {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.7rem;
+  }
+  
+  .getStartedBtn {
+    padding: 0.5rem 1.3rem;
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -56,26 +220,87 @@
     top: 0.5rem;
   }
   
-  .navbar.scrolled {
-    top: 0.25rem;
+  .navContainer {
+    padding: 0.3rem 1rem;
   }
   
-  .navContainer {
-    padding: 0.75rem 1.5rem;
+  .navLinks {
+    display: none; /* Hide navigation links on mobile - can implement mobile menu later */
   }
   
   .brandLink {
     font-size: 1.2rem;
+  }
+  
+  .brandIcon {
+    font-size: 1.4rem;
+  }
+  
+  .getStartedBtn {
+    padding: 0.45rem 1.1rem;
+    font-size: 0.85rem;
   }
 }
 
 @media (max-width: 480px) {
   .navbar {
     width: calc(100% - 0.5rem);
-    border-radius: 50px;
+    top: 0.25rem;
   }
   
   .navContainer {
-    padding: 0.4rem 0.75rem;
+    padding: 0.25rem 0.75rem;
+  }
+  
+  .brandLink {
+    font-size: 1.1rem;
+  }
+  
+  .brandIcon {
+    font-size: 1.2rem;
+  }
+  
+  .getStartedBtn {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .navbar,
+  .navLink,
+  .getStartedBtn,
+  .brandLink {
+    transition: none !important;
+  }
+  
+  .getStartedBtn::before {
+    display: none;
+  }
+  
+  .navLink::before {
+    display: none;
+  }
+}
+
+/* Focus states for accessibility */
+.navLink:focus,
+.getStartedBtn:focus,
+.brandLink:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .navbar {
+    background: rgba(0, 0, 0, 0.9);
+    border-color: #ffffff;
+  }
+  
+  .navLink,
+  .brandName {
+    color: #ffffff;
   }
 }
