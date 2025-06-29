@@ -16,9 +16,10 @@ export default function Navbar() {
   }, [])
 
   const navLinks = [
-    { name: 'Home', href: '#' },
     { name: 'About us', href: '#why-aetherbloom' },
     { name: 'Services', href: '#services' },
+    { name: 'Impact', href: '#impact' },
+    { name: 'Pricing', href: '#pricing' },
     { name: 'Contact', href: '#contact' }
   ]
 
