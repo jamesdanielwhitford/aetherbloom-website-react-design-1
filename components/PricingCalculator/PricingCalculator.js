@@ -166,7 +166,7 @@ export default function PricingCalculator() {
           </p>
         </div>
 
-        <div className={`${styles.calculatorCard} ${isVisible ? styles.visible : ''}`}>
+        <div className={`${styles.calculatorWrapper} ${isVisible ? styles.visible : ''}`}>
           <div className={styles.comparisonGrid}>
             
             {/* UK Employee Costs */}
@@ -233,11 +233,6 @@ export default function PricingCalculator() {
                   <span className={styles.costValue}>{formatCurrency(ukCosts.total)}</span>
                 </div>
               </div>
-            </div>
-
-            {/* VS Divider */}
-            <div className={styles.vsDivider}>
-              <span className={styles.vsText}>VS</span>
             </div>
 
             {/* Aetherbloom Solution */}
