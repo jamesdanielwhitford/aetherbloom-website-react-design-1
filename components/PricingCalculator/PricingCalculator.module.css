@@ -61,6 +61,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   margin-bottom: 3rem;
+  align-items: stretch;
 }
 
 /* UK Section Styling */
@@ -70,7 +71,9 @@
   padding: 3rem;
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-  height: fit-content;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .sectionHeader {
@@ -239,7 +242,9 @@
   border-radius: 20px;
   padding: 3rem;
   color: white;
-  height: fit-content;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .aetherbloomSection .dropdownLabel {
@@ -284,6 +289,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  flex: 1;
 }
 
 .tierInfo {
@@ -311,6 +317,73 @@
   color: rgba(255, 255, 255, 0.8);
 }
 
+/* Savings Information */
+.savingsInfo {
+  margin-top: auto;
+  padding-top: 1.5rem;
+}
+
+.savingsDivider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.3);
+  margin-bottom: 1.5rem;
+}
+
+.savingsDisplay {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.savingsAmount {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.savingsLabel {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.savingsValue {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #00ff88;
+  text-shadow: 0 2px 10px rgba(0, 255, 136, 0.3);
+}
+
+.savingsPercentage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.percentageValue {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ff9340;
+  text-shadow: 0 2px 15px rgba(255, 147, 64, 0.4);
+}
+
+.percentageLabel {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 .aetherbloomSection .costItem {
   border-bottom-color: rgba(255, 255, 255, 0.2);
 }
@@ -327,79 +400,18 @@
   color: #ffffff;
 }
 
-/* Savings Summary */
-.savingsSummary {
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 2.5rem;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 2rem;
-}
-
-.savingsCard {
-  display: flex;
-  gap: 4rem;
-  align-items: center;
-}
-
-.savingsAmount {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.savingsLabel {
-  font-family: 'Inter', -apple-system, sans-serif;
-  font-size: 0.9rem;
-  color: #666;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.savingsValue {
-  font-family: 'Inter', -apple-system, sans-serif;
-  font-size: 2.2rem;
-  font-weight: 600;
-  color: #27ae60;
-}
-
-.savingsPercentage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.percentageValue {
-  font-family: 'Inter', -apple-system, sans-serif;
-  font-size: 2.8rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #d84e28 0%, #ff9340 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.percentageLabel {
-  font-family: 'Inter', -apple-system, sans-serif;
-  font-size: 0.8rem;
-  color: #666;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
 /* CTA Section */
 .ctaSection {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  margin-top: 1rem;
 }
 
 .ctaButton {
@@ -444,6 +456,25 @@
   font-style: italic;
 }
 
+/* Custom scrollbar for card content */
+.cardContent::-webkit-scrollbar {
+  width: 4px;
+}
+
+.cardContent::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+.cardContent::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+.cardContent::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .calculatorContainer {
@@ -460,6 +491,10 @@
   
   .ukSection,
   .aetherbloomSection {
+    padding: 2rem;
+  }
+  
+  .ctaSection {
     padding: 2rem;
   }
 }
@@ -486,13 +521,17 @@
     gap: 1.5rem;
   }
   
-  .savingsSummary {
-    flex-direction: column;
-    gap: 2rem;
+  .ukSection,
+  .aetherbloomSection {
+    height: auto;
+  }
+  
+  .ctaSection {
+    padding: 2rem;
     text-align: center;
   }
   
-  .savingsCard {
+  .savingsDisplay {
     justify-content: center;
     gap: 2rem;
   }
@@ -502,11 +541,11 @@
   }
   
   .savingsValue {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
   
   .percentageValue {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
   
   .dropdownLabel {
@@ -524,8 +563,8 @@
     padding: 1.5rem;
   }
   
-  .savingsSummary {
-    padding: 2rem;
+  .ctaSection {
+    padding: 2rem 1.5rem;
   }
   
   .sectionTitle {
@@ -540,17 +579,18 @@
     font-size: 1.8rem;
   }
   
-  .savingsCard {
+  .savingsDisplay {
     flex-direction: column;
     gap: 1.5rem;
+    text-align: center;
   }
   
   .savingsValue {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
   }
   
   .percentageValue {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
   
   .ctaButton {

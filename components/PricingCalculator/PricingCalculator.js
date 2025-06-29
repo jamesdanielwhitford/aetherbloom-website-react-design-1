@@ -285,32 +285,34 @@ export default function PricingCalculator() {
                     <span className={styles.costValue}>{formatCurrency(tierData.cost)}</span>
                   </div>
                 </div>
+                
+                {/* Savings Information */}
+                <div className={styles.savingsInfo}>
+                  <div className={styles.savingsDivider}></div>
+                  <div className={styles.savingsDisplay}>
+                    <div className={styles.savingsAmount}>
+                      <span className={styles.savingsLabel}>Annual Savings</span>
+                      <span className={styles.savingsValue}>{formatCurrency(savingsData.savings)}</span>
+                    </div>
+                    <div className={styles.savingsPercentage}>
+                      <span className={styles.percentageValue}>{savingsData.percentage}%</span>
+                      <span className={styles.percentageLabel}>cost reduction</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Savings Summary */}
-          <div className={styles.savingsSummary}>
-            <div className={styles.savingsCard}>
-              <div className={styles.savingsAmount}>
-                <span className={styles.savingsLabel}>Annual Savings</span>
-                <span className={styles.savingsValue}>{formatCurrency(savingsData.savings)}</span>
-              </div>
-              <div className={styles.savingsPercentage}>
-                <span className={styles.percentageValue}>{savingsData.percentage}%</span>
-                <span className={styles.percentageLabel}>cost reduction</span>
-              </div>
-            </div>
-            
-            <div className={styles.ctaSection}>
-              <a href="#contact" className={styles.ctaButton}>
-                Claim Your Free Strategy Session
-                <span className={styles.buttonArrow}>→</span>
-              </a>
-              <p className={styles.ctaNote}>
-                Start saving within 72 hours with our rapid deployment process
-              </p>
-            </div>
+          {/* CTA Section */}
+          <div className={styles.ctaSection}>
+            <a href="#contact" className={styles.ctaButton}>
+              Claim Your Free Strategy Session
+              <span className={styles.buttonArrow}>→</span>
+            </a>
+            <p className={styles.ctaNote}>
+              Start saving within 72 hours with our rapid deployment process
+            </p>
           </div>
         </div>
       </div>
