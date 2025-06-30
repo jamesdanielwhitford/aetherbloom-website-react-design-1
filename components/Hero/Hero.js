@@ -32,7 +32,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section ref={sectionRef} className={`${styles.heroContainer} snap-section`}>
+    <section ref={sectionRef} className={styles.heroContainer}>
       <div className={`${styles.heroContent} section-content ${isVisible ? 'fade-in' : 'fade-out'}`}>
         {/* Empty content - just for video background */}
       </div>

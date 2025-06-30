@@ -166,22 +166,11 @@ body::after {
   }
 }
 
-/* Snap scroll sections - excludes why-aetherbloom */
-.snap-section {
-  height: 100vh;
+/* Regular sections */
+.section {
   width: 100%;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
   position: relative;
   overflow: hidden;
-  flex-shrink: 0;
-}
-
-/* Special handling for scrollable sections like why-aetherbloom */
-.scrollable-section {
-  width: 100%;
-  scroll-snap-align: none;
-  position: relative;
   flex-shrink: 0;
 }
 

@@ -7,8 +7,6 @@
   position: relative;
   padding: 6rem 0;
   background: linear-gradient(135deg, rgba(216, 78, 40, 0.06) 0%, rgba(255, 147, 64, 0.04) 100%);
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 .calculatorContainer {

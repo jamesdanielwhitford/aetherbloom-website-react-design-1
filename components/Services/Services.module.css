@@ -7,7 +7,6 @@
   align-items: center;
   position: relative;
   overflow: hidden;
-  scroll-snap-align: start;
 }
 
 .backgroundImage {

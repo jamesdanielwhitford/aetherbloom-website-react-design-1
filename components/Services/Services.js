@@ -135,7 +135,7 @@ export default function Services() {
   ]
 
   return (
-    <section ref={sectionRef} id="services" className={`${styles.servicesSection} snap-section`}>
+    <section ref={sectionRef} id="services" className={styles.servicesSection}>
       <div className={styles.backgroundImage}></div>
       <div className={styles.overlay}></div>
       
