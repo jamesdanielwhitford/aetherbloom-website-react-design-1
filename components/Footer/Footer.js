@@ -28,8 +28,8 @@ export default function Footer() {
   }
 
   const socialLinks = [
-    { name: 'LinkedIn', href: '#', icon: '💼' },
-    { name: 'Facebook', href: '#', icon: '📘' }
+    { name: 'LinkedIn', href: '#', icon: '⚡' },
+    { name: 'Facebook', href: '#', icon: '⬛' }
   ]
 
   return (
@@ -39,18 +39,20 @@ export default function Footer() {
         {/* Main Footer Content */}
         <div className={styles.footerMain}>
           
-          {/* Brand Section with Social Links and Email */}
+          {/* Brand Section with Logo, Social Links and Email */}
           <div className={styles.brandSection}>
-            <a href="#" className={styles.brandLink}>
-              <span className={styles.brandIcon}>🌸</span>
-              <span className={styles.brandName}>Aetherbloom</span>
-            </a>
+            <div className={styles.logoContainer}>
+              <div className={styles.logo}>
+                <div className={styles.logoSymbol}>✦</div>
+                <span className={styles.logoText}>Aetherbloom</span>
+              </div>
+            </div>
             <p className={styles.brandDescription}>
               Transforming businesses through expertly managed BPO solutions. 
               UK expertise meets global talent for exceptional results.
             </p>
             <div className={styles.contactEmail}>
-              <span className={styles.contactIcon}>📧</span>
+              <span className={styles.contactIcon}>@</span>
               <a href="mailto:hello@aetherbloom.com" className={styles.contactLink}>
                 hello@aetherbloom.com
               </a>
@@ -118,13 +120,13 @@ export default function Footer() {
             <h3 className={styles.columnTitle}>Contact Us</h3>
             <div className={styles.contactInfo}>
               <div className={styles.contactItem}>
-                <span className={styles.contactIcon}>📞</span>
+                <span className={styles.contactIcon}>☎</span>
                 <a href="tel:+44207123456" className={styles.contactLink}>
                   +44 20 7123 4567
                 </a>
               </div>
               <div className={styles.contactItem}>
-                <span className={styles.contactIcon}>🏢</span>
+                <span className={styles.contactIcon}>⬜</span>
                 <div className={styles.addressGroup}>
                   <span className={styles.addressLine}>London, United Kingdom</span>
                   <span className={styles.addressLine}>Johannesburg, South Africa</span>
