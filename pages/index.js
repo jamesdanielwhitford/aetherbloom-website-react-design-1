@@ -24,6 +24,8 @@ export default function Home() {
         <WhyAetherbloom />
         <Services />
         <PricingCalculator />
+        <CTA />
+        <Footer />
       </Layout>
     </>
   )
