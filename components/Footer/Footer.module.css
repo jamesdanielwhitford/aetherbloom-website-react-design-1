@@ -1,11 +1,14 @@
 /* File: components/Footer/Footer.module.css */
 
 .footer {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-  color: #ffffff;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px) brightness(1.5) saturate(0.5);
+  -webkit-backdrop-filter: blur(12px) brightness(1.5) saturate(0.5);
+  color: #1a1a1a;
   position: relative;
   overflow: hidden;
   margin-top: auto;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .footer::before {
@@ -15,7 +18,7 @@
   left: 0;
   width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(216, 78, 40, 0.5) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.3) 50%, transparent 100%);
 }
 
 .footerContainer {
@@ -28,8 +31,8 @@
 
 .footerMain {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  gap: 4rem;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr 1.2fr;
+  gap: 3rem;
   padding: 4rem 2rem 3rem;
   align-items: start;
 }
@@ -38,7 +41,7 @@
 .brandSection {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .brandLink {
@@ -46,7 +49,7 @@
   align-items: center;
   gap: 0.75rem;
   text-decoration: none;
-  color: #ffffff;
+  color: #1a1a1a;
   font-weight: 700;
   font-size: 1.8rem;
   letter-spacing: -0.5px;
@@ -56,22 +59,16 @@
 
 .brandIcon {
   font-size: 2rem;
-  filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.3));
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
 }
 
 .brandName {
-  background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.9) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #1a1a1a;
   transition: all 0.4s ease;
 }
 
 .brandLink:hover .brandName {
-  background: linear-gradient(135deg, #ffffff 0%, #ff9340 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #d84e28;
 }
 
 .brandDescription {
@@ -79,8 +76,16 @@
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(0, 0, 0, 0.7);
   max-width: 280px;
+  margin-bottom: 1rem;
+}
+
+.contactEmail {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
 }
 
 .socialLinks {
@@ -94,17 +99,17 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   text-decoration: none;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
 }
 
 .socialLink:hover {
-  background: rgba(216, 78, 40, 0.2);
-  border-color: rgba(216, 78, 40, 0.5);
+  background: rgba(216, 78, 40, 0.1);
+  border-color: rgba(216, 78, 40, 0.3);
   transform: translateY(-2px);
 }
 
@@ -112,13 +117,7 @@
   font-size: 1.2rem;
 }
 
-/* Links Grid */
-.linksGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-}
-
+/* Link Columns */
 .linkColumn {
   display: flex;
   flex-direction: column;
@@ -129,7 +128,7 @@
   font-family: 'Poppins', -apple-system, sans-serif;
   font-size: 1.1rem;
   font-weight: 600;
-  color: #ffffff;
+  color: #1a1a1a;
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -148,14 +147,14 @@
   font-family: 'Inter', -apple-system, sans-serif;
   font-size: 0.95rem;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(0, 0, 0, 0.6);
   text-decoration: none;
   transition: all 0.3s ease;
   padding: 0.25rem 0;
 }
 
 .footerLink:hover {
-  color: #ff9340;
+  color: #d84e28;
   transform: translateX(4px);
 }
 
@@ -163,7 +162,7 @@
 .contactSection {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .contactInfo {
@@ -190,13 +189,13 @@
   font-family: 'Inter', -apple-system, sans-serif;
   font-size: 0.95rem;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(0, 0, 0, 0.7);
   text-decoration: none;
   transition: all 0.3s ease;
 }
 
 .contactLink:hover {
-  color: #ff9340;
+  color: #d84e28;
 }
 
 .addressGroup {
@@ -209,23 +208,28 @@
   font-family: 'Inter', -apple-system, sans-serif;
   font-size: 0.95rem;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(0, 0, 0, 0.7);
 }
 
-/* Newsletter */
+/* Newsletter Section */
+.newsletterSection {
+  display: flex;
+  flex-direction: column;
+}
+
 .newsletter {
   padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 12px;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
 }
 
 .newsletterTitle {
   font-family: 'Poppins', -apple-system, sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  color: #ffffff;
+  color: #1a1a1a;
   margin-bottom: 0.5rem;
 }
 
@@ -233,7 +237,7 @@
   font-family: 'Inter', -apple-system, sans-serif;
   font-size: 0.85rem;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(0, 0, 0, 0.6);
   margin-bottom: 1rem;
   line-height: 1.5;
 }
@@ -246,23 +250,24 @@
 .newsletterInput {
   flex: 1;
   padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   font-family: 'Inter', -apple-system, sans-serif;
   font-size: 0.9rem;
-  color: #ffffff;
+  color: #1a1a1a;
   transition: all 0.3s ease;
 }
 
 .newsletterInput::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .newsletterInput:focus {
   outline: none;
-  border-color: #ff9340;
-  background: rgba(255, 255, 255, 0.12);
+  border-color: #d84e28;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 0 2px rgba(216, 78, 40, 0.2);
 }
 
 .newsletterButton {
@@ -287,61 +292,35 @@
 
 /* Footer Bottom */
 .footerBottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding: 2rem;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .bottomContent {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  gap: 2rem;
 }
 
 .copyright {
-  flex: 1;
+  text-align: center;
 }
 
 .copyright p {
   font-family: 'Inter', -apple-system, sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.5);
   margin: 0;
-}
-
-.certifications {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-}
-
-.certification {
-  font-family: 'Inter', -apple-system, sans-serif;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
   .footerMain {
-    grid-template-columns: 1fr 1.5fr 1fr;
-    gap: 3rem;
-    padding: 3rem 1.5rem 2rem;
-  }
-  
-  .linksGrid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1.2fr;
     gap: 2rem;
+    padding: 3rem 1.5rem 2rem;
   }
   
   .brandDescription {
@@ -351,20 +330,14 @@
 
 @media (max-width: 768px) {
   .footerMain {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    padding: 3rem 1rem 2rem;
-    text-align: center;
-  }
-  
-  .linksGrid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr;
     gap: 2rem;
-    justify-items: start;
-    text-align: left;
+    padding: 3rem 1rem 2rem;
   }
   
   .brandSection {
+    grid-column: 1 / -1;
+    text-align: center;
     align-items: center;
   }
   
@@ -377,9 +350,51 @@
     justify-content: center;
   }
   
+  .contactEmail {
+    justify-content: center;
+  }
+  
+  .newsletterSection {
+    grid-column: 1 / -1;
+  }
+  
+  .linkColumn {
+    text-align: left;
+  }
+  
   .contactSection {
-    align-items: center;
+    text-align: left;
+  }
+  
+  .contactItem {
+    justify-content: flex-start;
+  }
+  
+  .addressGroup {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .footerMain {
+    grid-template-columns: 1fr;
+    padding: 2rem 1rem 1.5rem;
+    gap: 2rem;
     text-align: center;
+  }
+  
+  .brandSection {
+    align-items: center;
+  }
+  
+  .linkColumn {
+    text-align: center;
+    align-items: center;
+  }
+  
+  .contactSection {
+    text-align: center;
+    align-items: center;
   }
   
   .contactInfo {
@@ -391,34 +406,6 @@
   }
   
   .addressGroup {
-    align-items: center;
-  }
-  
-  .bottomContent {
-    flex-direction: column;
-    gap: 1.5rem;
-    text-align: center;
-  }
-  
-  .certifications {
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-}
-
-@media (max-width: 480px) {
-  .footerMain {
-    padding: 2rem 1rem 1.5rem;
-    gap: 2rem;
-  }
-  
-  .linksGrid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    text-align: center;
-  }
-  
-  .linkColumn {
     align-items: center;
   }
   
@@ -444,15 +431,6 @@
     font-size: 1rem;
   }
   
-  .certifications {
-    gap: 1rem;
-  }
-  
-  .certification {
-    font-size: 0.75rem;
-    padding: 0.4rem 0.8rem;
-  }
-  
   .brandLink {
     font-size: 1.6rem;
   }
@@ -466,8 +444,8 @@
 .newsletterInput:-webkit-autofill,
 .newsletterInput:-webkit-autofill:hover,
 .newsletterInput:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.08) inset;
-  -webkit-text-fill-color: #ffffff;
+  -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.4) inset;
+  -webkit-text-fill-color: #1a1a1a;
   transition: background-color 5000s ease-in-out 0s;
 }
 
@@ -495,27 +473,22 @@
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   .footer {
-    background: #000000;
-    border-top: 2px solid #ffffff;
+    background: rgba(255, 255, 255, 0.7);
+    border-top: 2px solid #000000;
   }
   
   .socialLink,
   .newsletter {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: #ffffff;
+    background: rgba(255, 255, 255, 0.5);
+    border-color: #000000;
   }
   
   .newsletterInput {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: #ffffff;
+    background: rgba(255, 255, 255, 0.7);
+    border-color: #000000;
   }
   
   .footerBottom {
-    border-top-color: #ffffff;
-  }
-  
-  .certification {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: #ffffff;
+    border-top-color: #000000;
   }
 }
