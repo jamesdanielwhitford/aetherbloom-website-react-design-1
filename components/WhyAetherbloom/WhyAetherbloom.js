@@ -5,7 +5,10 @@ import styles from './WhyAetherbloom.module.css'
 
 export default function WhyAetherbloom() {
   const [isVisible, setIsVisible] = useState(false)
+  const [hoveredCard, setHoveredCard] = useState(null)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const sectionRef = useRef(null)
+  const cardRefs = useRef([])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -31,14 +34,91 @@ export default function WhyAetherbloom() {
     }
   }, [])
 
-  // Sample card data
+  // Mouse tracking for card interaction
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (hoveredCard !== null && cardRefs.current[hoveredCard]) {
+        const card = cardRefs.current[hoveredCard]
+        const cardRect = card.getBoundingClientRect()
+        
+        // Get mouse position relative to the card center
+        const cardCenterX = cardRect.left + cardRect.width / 2
+        const cardCenterY = cardRect.top + cardRect.height / 2
+        
+        const deltaX = e.clientX - cardCenterX
+        const deltaY = e.clientY - cardCenterY
+        
+        // Normalize the values based on card size
+        const rotateX = (deltaY / cardRect.height) * -8 // Max 8 degrees
+        const rotateY = (deltaX / cardRect.width) * 8   // Max 8 degrees
+        const translateX = (deltaX / cardRect.width) * 8 // Max 8px movement
+        const translateY = (deltaY / cardRect.height) * 8 // Max 8px movement
+        
+        setMousePosition({
+          x: translateX,
+          y: translateY,
+          rotateX: Math.max(-8, Math.min(8, rotateX)),
+          rotateY: Math.max(-8, Math.min(8, rotateY))
+        })
+      }
+    }
+
+    const handleMouseLeave = () => {
+      setHoveredCard(null)
+      setMousePosition({ x: 0, y: 0, rotateX: 0, rotateY: 0 })
+    }
+
+    if (sectionRef.current) {
+      const section = sectionRef.current
+      section.addEventListener('mousemove', handleMouseMove)
+      section.addEventListener('mouseleave', handleMouseLeave)
+      
+      return () => {
+        section.removeEventListener('mousemove', handleMouseMove)
+        section.removeEventListener('mouseleave', handleMouseLeave)
+      }
+    }
+  }, [hoveredCard])
+
+  // Calculate transform style for cards
+  const getCardTransform = (index) => {
+    if (hoveredCard !== index) {
+      return 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateX(0px) translateY(0px) scale(1)'
+    }
+    
+    return `perspective(1000px) rotateX(${mousePosition.rotateX || 0}deg) rotateY(${mousePosition.rotateY || 0}deg) translateX(${mousePosition.x || 0}px) translateY(${mousePosition.y || 0}px) scale(1.05)`
+  }
+
+  const handleCardMouseEnter = (index) => {
+    setHoveredCard(index)
+  }
+
+  // Card data with specific content and icons
   const cards = [
-    { id: 1, title: "Card One", content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." },
-    { id: 2, title: "Card Two", content: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." },
-    { id: 3, title: "Card Three", content: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur." },
-    { id: 4, title: "Card Four", content: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." },
-    { id: 5, title: "Card Five", content: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium." },
-    { id: 6, title: "Card Six", content: "Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt." }
+    { 
+      id: 1, 
+      title: "High Quality Recruitment", 
+      content: "Rigorous vetting process ensures only top-tier talent joins your team. Every candidate undergoes comprehensive skills assessment and cultural fit evaluation.",
+      icon: "👥"
+    },
+    { 
+      id: 2, 
+      title: "Transparent Pricing", 
+      content: "No hidden costs or surprise fees. Clear, upfront pricing structure with detailed breakdown of all services and costs included in your package.",
+      icon: "💎"
+    },
+    { 
+      id: 3, 
+      title: "Ethical Impact", 
+      content: "Supporting fair employment practices and sustainable business growth. We create meaningful career opportunities while delivering exceptional value.",
+      icon: "🌱"
+    },
+    { 
+      id: 4, 
+      title: "GDPR Compliance", 
+      content: "Full adherence to UK and EU data protection regulations. Comprehensive security protocols ensure your data remains protected and compliant.",
+      icon: "🔐"
+    }
   ]
 
   return (
@@ -48,22 +128,32 @@ export default function WhyAetherbloom() {
           <h2 className={styles.sectionTitle}>Why Choose Aetherbloom</h2>
           <div className={styles.textParagraph}>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute 
-              irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
-              pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
-              deserunt mollit anim id est laborum.
+              We combine UK expertise with global talent to deliver exceptional results. Our transparent approach, 
+              ethical practices, and unwavering commitment to quality set us apart in the BPO industry.
             </p>
           </div>
         </div>
 
         <div className={styles.cardsContainer}>
           <div className={styles.cardsGrid}>
-            {cards.map((card) => (
-              <div key={card.id} className={styles.card}>
-                <h3 className={styles.cardTitle}>{card.title}</h3>
-                <p className={styles.cardContent}>{card.content}</p>
+            {cards.map((card, index) => (
+              <div 
+                key={card.id} 
+                ref={el => cardRefs.current[index] = el}
+                className={`${styles.card} ${hoveredCard === index ? styles.cardHovered : ''}`}
+                onMouseEnter={() => handleCardMouseEnter(index)}
+                style={{
+                  transform: getCardTransform(index),
+                  transition: hoveredCard === index ? 'transform 0.1s ease-out' : 'transform 0.3s ease-out'
+                }}
+              >
+                <div className={styles.cardImage}>
+                  <span className={styles.cardIcon}>{card.icon}</span>
+                </div>
+                <div className={styles.cardBody}>
+                  <h3 className={styles.cardTitle}>{card.title}</h3>
+                  <p className={styles.cardContent}>{card.content}</p>
+                </div>
               </div>
             ))}
           </div>
