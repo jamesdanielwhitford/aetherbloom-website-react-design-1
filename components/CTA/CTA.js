@@ -11,7 +11,10 @@ export default function CTA() {
     company: '',
     message: ''
   })
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [isHovering, setIsHovering] = useState(false)
   const sectionRef = useRef(null)
+  const cardRef = useRef(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,6 +39,69 @@ export default function CTA() {
       }
     }
   }, [])
+
+  // Mouse tracking for card interaction
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (cardRef.current && sectionRef.current) {
+        const section = sectionRef.current
+        const card = cardRef.current
+        const sectionRect = section.getBoundingClientRect()
+        const cardRect = card.getBoundingClientRect()
+        
+        // Get mouse position relative to the card center
+        const cardCenterX = cardRect.left + cardRect.width / 2
+        const cardCenterY = cardRect.top + cardRect.height / 2
+        
+        const deltaX = e.clientX - cardCenterX
+        const deltaY = e.clientY - cardCenterY
+        
+        // Normalize the values based on card size
+        const rotateX = (deltaY / cardRect.height) * -10 // Max 10 degrees
+        const rotateY = (deltaX / cardRect.width) * 10   // Max 10 degrees
+        const translateX = (deltaX / cardRect.width) * 10 // Max 10px movement
+        const translateY = (deltaY / cardRect.height) * 10 // Max 10px movement
+        
+        setMousePosition({
+          x: translateX,
+          y: translateY,
+          rotateX: Math.max(-10, Math.min(10, rotateX)),
+          rotateY: Math.max(-10, Math.min(10, rotateY))
+        })
+      }
+    }
+
+    const handleMouseEnter = () => {
+      setIsHovering(true)
+    }
+
+    const handleMouseLeave = () => {
+      setIsHovering(false)
+      setMousePosition({ x: 0, y: 0, rotateX: 0, rotateY: 0 })
+    }
+
+    if (sectionRef.current) {
+      const section = sectionRef.current
+      section.addEventListener('mousemove', handleMouseMove)
+      section.addEventListener('mouseenter', handleMouseEnter)
+      section.addEventListener('mouseleave', handleMouseLeave)
+      
+      return () => {
+        section.removeEventListener('mousemove', handleMouseMove)
+        section.removeEventListener('mouseenter', handleMouseEnter)
+        section.removeEventListener('mouseleave', handleMouseLeave)
+      }
+    }
+  }, [])
+
+  // Calculate transform style for the card
+  const getCardTransform = () => {
+    if (!isHovering) {
+      return 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateX(0px) translateY(0px) scale(1)'
+    }
+    
+    return `perspective(1000px) rotateX(${mousePosition.rotateX || 0}deg) rotateY(${mousePosition.rotateY || 0}deg) translateX(${mousePosition.x || 0}px) translateY(${mousePosition.y || 0}px) scale(1.02)`
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -68,23 +134,10 @@ export default function CTA() {
               </p>
             </div>
 
-            <div className={styles.benefitsList}>
-              <div className={styles.benefit}>
-                <span className={styles.benefitIcon}>⚡</span>
-                <span className={styles.benefitText}>Start saving within 72 hours</span>
-              </div>
-              <div className={styles.benefit}>
-                <span className={styles.benefitIcon}>🎯</span>
-                <span className={styles.benefitText}>UK-trained specialists</span>
-              </div>
-              <div className={styles.benefit}>
-                <span className={styles.benefitIcon}>📈</span>
-                <span className={styles.benefitText}>Scalable solutions</span>
-              </div>
-              <div className={styles.benefit}>
-                <span className={styles.benefitIcon}>🛡️</span>
-                <span className={styles.benefitText}>100% compliance guaranteed</span>
-              </div>
+            <div className={styles.additionalInfo}>
+              <p className={styles.assessmentText}>
+                Discover exactly how much you could save with a personalized assessment. Our team will analyze your current operations and provide a detailed cost-benefit analysis within 24 hours.
+              </p>
             </div>
 
             <div className={styles.contactInfo}>
@@ -100,23 +153,22 @@ export default function CTA() {
                   +44 20 7123 4567
                 </a>
               </div>
-              <div className={styles.contactItem}>
-                <span className={styles.contactIcon}>🏢</span>
-                <span className={styles.contactText}>
-                  London, UK & Manila, Philippines
-                </span>
-              </div>
             </div>
           </div>
 
           {/* Right Side - Contact Form */}
           <div className={styles.formContainer}>
-            <form className={styles.contactForm} onSubmit={handleSubmit}>
+            <form 
+              ref={cardRef}
+              className={styles.contactForm} 
+              onSubmit={handleSubmit}
+              style={{
+                transform: getCardTransform(),
+                transition: isHovering ? 'transform 0.1s ease-out' : 'transform 0.3s ease-out'
+              }}
+            >
               <div className={styles.formHeader}>
-                <h3 className={styles.formTitle}>Get Your Free Strategy Session</h3>
-                <p className={styles.formSubtitle}>
-                  Discover exactly how much you could save with a personalized assessment
-                </p>
+                <h3 className={styles.formTitle}>Start Your Free Assessment</h3>
               </div>
 
               <div className={styles.formGrid}>
@@ -173,10 +225,6 @@ export default function CTA() {
                 <span className={styles.buttonText}>Claim Your Free Session</span>
                 <span className={styles.buttonArrow}>→</span>
               </button>
-
-              <p className={styles.formNote}>
-                ✓ No commitment required • ✓ 30-minute strategy call • ✓ Custom savings calculation
-              </p>
             </form>
           </div>
         </div>

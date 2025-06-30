@@ -65,31 +65,17 @@
   max-width: 500px;
 }
 
-.benefitsList {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
+.additionalInfo {
+  margin-bottom: 1rem;
 }
 
-.benefit {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.5rem 0;
-}
-
-.benefitIcon {
-  font-size: 1.5rem;
-  width: 2rem;
-  text-align: center;
-  flex-shrink: 0;
-}
-
-.benefitText {
+.assessmentText {
   font-family: 'Inter', -apple-system, sans-serif;
   font-size: 1.1rem;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.9);
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 500px;
 }
 
 .contactInfo {
@@ -150,28 +136,31 @@
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 500px;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  will-change: transform;
+}
+
+.contactForm:hover {
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.3),
+    0 10px 30px rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 .formHeader {
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .formTitle {
   font-family: 'Poppins', -apple-system, sans-serif;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 500;
   color: #ffffff;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   line-height: 1.3;
-}
-
-.formSubtitle {
-  font-family: 'Inter', -apple-system, sans-serif;
-  font-size: 1rem;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.5;
 }
 
 .formGrid {
@@ -263,15 +252,6 @@
   transform: translateX(4px);
 }
 
-.formNote {
-  font-family: 'Inter', -apple-system, sans-serif;
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.7);
-  text-align: center;
-  margin-top: 1.5rem;
-  line-height: 1.5;
-}
-
 /* Responsive Design */
 @media (max-width: 1024px) {
   .ctaContainer {
@@ -324,34 +304,25 @@
     max-width: none;
   }
   
-  .contactForm {
-    padding: 2rem;
+  .assessmentText {
+    font-size: 1rem;
     max-width: none;
   }
   
+  .contactForm {
+    padding: 2rem;
+    max-width: none;
+    /* Disable 3D effects on mobile */
+    transform: none !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .contactForm:hover {
+    transform: none !important;
+  }
+  
   .formTitle {
-    font-size: 1.8rem;
-  }
-  
-  .benefitsList {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-  
-  .benefit {
-    justify-content: center;
-    text-align: center;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .benefitIcon {
-    width: auto;
-  }
-  
-  .benefitText {
-    font-size: 1rem;
+    font-size: 1.6rem;
   }
   
   .contactInfo {
@@ -372,31 +343,16 @@
     font-size: 2rem;
   }
   
+  .assessmentText {
+    font-size: 0.95rem;
+  }
+  
   .contactForm {
     padding: 1.5rem;
   }
   
   .formTitle {
-    font-size: 1.5rem;
-  }
-  
-  .formSubtitle {
-    font-size: 0.9rem;
-  }
-  
-  .benefitsList {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .benefit {
-    flex-direction: row;
-    justify-content: flex-start;
-    text-align: left;
-  }
-  
-  .benefitIcon {
-    width: 2rem;
+    font-size: 1.4rem;
   }
   
   .formInput,
@@ -427,8 +383,18 @@
   .buttonArrow,
   .formInput,
   .formTextarea,
-  .contactLink {
+  .contactLink,
+  .contactForm {
     transition: none !important;
+  }
+  
+  .contactForm {
+    transform: none !important;
+    will-change: auto;
+  }
+  
+  .contactForm:hover {
+    transform: none !important;
   }
 }
 
