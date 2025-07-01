@@ -93,6 +93,11 @@ export default function WhyAetherbloom() {
     setHoveredCard(index)
   }
 
+  const handleCardMouseLeave = () => {
+    setHoveredCard(null)
+    setMousePosition({ x: 0, y: 0, rotateX: 0, rotateY: 0 })
+  }
+
   // Card data with specific content and icons
   const cards = [
     { 
@@ -142,6 +147,7 @@ export default function WhyAetherbloom() {
                 ref={el => cardRefs.current[index] = el}
                 className={`${styles.card} ${hoveredCard === index ? styles.cardHovered : ''}`}
                 onMouseEnter={() => handleCardMouseEnter(index)}
+                onMouseLeave={handleCardMouseLeave}
                 style={{
                   transform: getCardTransform(index),
                   transition: hoveredCard === index ? 'transform 0.1s ease-out' : 'transform 0.3s ease-out'
