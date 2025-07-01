@@ -6,9 +6,10 @@ import styles from './Hero.module.css'
 export default function Hero() {
   const [isVisible, setIsVisible] = useState(true)
   const [currentTextIndex, setCurrentTextIndex] = useState(0)
+  const [isTransitioning, setIsTransitioning] = useState(false)
   const sectionRef = useRef(null)
 
-  const animatedTexts = ['Transformed', 'Empowered', 'in Full Bloom']
+  const animatedTexts = ['Transformed.', 'Empowered.', 'in Full Bloom.']
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -37,13 +38,39 @@ export default function Hero() {
   // Text animation effect
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentTextIndex((prevIndex) => 
-        (prevIndex + 1) % animatedTexts.length
-      )
-    }, 3000) // Change text every 3 seconds
+      setIsTransitioning(true)
+      
+      // After fade out animation completes, change text and fade in
+      setTimeout(() => {
+        setCurrentTextIndex((prevIndex) => 
+          (prevIndex + 1) % animatedTexts.length
+        )
+        setIsTransitioning(false)
+      }, 800) // Wait for fade out animation to complete
+    }, 4000) // Change text every 4 seconds (increased to accommodate animation)
 
     return () => clearInterval(interval)
   }, [animatedTexts.length])
+
+  // Split text into individual characters for animation
+  const renderAnimatedText = (text) => {
+    return text.split('').map((char, index) => (
+      <span
+        key={`${currentTextIndex}-${index}`}
+        className={styles.letter}
+        style={{
+          '--letter-index': index,
+          '--total-letters': text.length,
+          '--reverse-index': text.length - 1 - index,
+          animationDelay: isTransitioning 
+            ? `${index * 50}ms` // Fade out from first letter
+            : `${index * 50}ms` // Fade in from first letter
+        }}
+      >
+        {char === ' ' ? '\u00A0' : char}
+      </span>
+    ))
+  }
 
   return (
     <section ref={sectionRef} className={styles.heroContainer}>
@@ -53,10 +80,9 @@ export default function Hero() {
             <span className={styles.titleLine}>Your Business</span>
             <span className={styles.titleLineAnimated}>
               <span 
-                key={currentTextIndex}
-                className={styles.animatedText}
+                className={`${styles.animatedText} ${isTransitioning ? styles.fadeOut : styles.fadeIn}`}
               >
-                {animatedTexts[currentTextIndex]}
+                {renderAnimatedText(animatedTexts[currentTextIndex])}
               </span>
             </span>
           </h1>

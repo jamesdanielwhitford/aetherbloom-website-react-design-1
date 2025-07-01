@@ -60,12 +60,28 @@
 
 .animatedText {
   display: inline-block;
-  animation: textFadeIn 0.8s ease-in-out;
   color: #ffffff;
   font-weight: 400;
 }
 
-@keyframes textFadeIn {
+.animatedText.fadeIn .letter {
+  animation: letterFadeIn 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.animatedText.fadeOut .letter {
+  animation: letterFadeOut 0.6s ease-in forwards;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.letter {
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+@keyframes letterFadeIn {
   0% {
     opacity: 0;
     transform: translateY(20px);
@@ -73,6 +89,17 @@
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes letterFadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-15px);
   }
 }
 
@@ -138,14 +165,16 @@
     transition: none !important;
   }
   
-  .animatedText {
+  .letter {
     animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
   
-  @keyframes textFadeIn {
-    0%, 100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .animatedText.fadeIn .letter,
+  .animatedText.fadeOut .letter {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
   }
 }
