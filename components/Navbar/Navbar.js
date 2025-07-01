@@ -28,7 +28,11 @@ export default function Navbar() {
       <div className={styles.navContainer}>
         <div className={styles.navBrand}>
           <a href="#" className={styles.brandLink}>
-            <span className={styles.brandIcon}>🌸</span>
+            <img 
+              src="/logo.png" 
+              alt="Aetherbloom Logo" 
+              className={styles.brandIcon}
+            />
             <span className={styles.brandName}>Aetherbloom</span>
           </a>
         </div>

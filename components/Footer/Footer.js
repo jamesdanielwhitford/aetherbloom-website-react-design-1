@@ -43,7 +43,11 @@ export default function Footer() {
           <div className={styles.brandSection}>
             <div className={styles.logoContainer}>
               <div className={styles.logo}>
-                <div className={styles.logoSymbol}>✦</div>
+                <img 
+                  src="/logo.png" 
+                  alt="Aetherbloom Logo" 
+                  className={styles.logoSymbol}
+                />
                 <span className={styles.logoText}>Aetherbloom</span>
               </div>
             </div>
