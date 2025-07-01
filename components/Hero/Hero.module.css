@@ -18,16 +18,134 @@
   display: flex;
   align-items: center;
   padding-top: 5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.heroText {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.heroTitle {
+  font-family: 'Poppins', -apple-system, sans-serif;
+  font-weight: 300;
+  color: #ffffff;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: left;
+  transform: translateY(-10vh);
+}
+
+.titleLine {
+  font-size: 6rem;
+  line-height: 1.1;
+  display: block;
+}
+
+.titleLineAnimated {
+  font-size: 6rem;
+  line-height: 1.1;
+  display: block;
+  position: relative;
+  min-height: 1.2em;
+}
+
+.animatedText {
+  display: inline-block;
+  animation: textFadeIn 0.8s ease-in-out;
+  color: #ffffff;
+  font-weight: 400;
+}
+
+@keyframes textFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .heroContent {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  
+  .titleLine,
+  .titleLineAnimated {
+    font-size: 5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroContent {
+    padding-top: 6rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .titleLine,
+  .titleLineAnimated {
+    font-size: 4rem;
+  }
+  
+  .heroTitle {
+    transform: translateY(-5vh);
+  }
 }
 
 @media (max-width: 640px) {
   .heroContent {
     padding-top: 5rem;
   }
+  
+  .titleLine,
+  .titleLineAnimated {
+    font-size: 3.2rem;
+  }
+  
+  .heroTitle {
+    gap: 0.25rem;
+    transform: translateY(-3vh);
+  }
+}
+
+@media (max-width: 480px) {
+  .titleLine,
+  .titleLineAnimated {
+    font-size: 2.5rem;
+  }
+  
+  .heroTitle {
+    transform: translateY(-2vh);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .heroContent {
     transition: none !important;
+  }
+  
+  .animatedText {
+    animation: none !important;
+  }
+  
+  @keyframes textFadeIn {
+    0%, 100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
