@@ -10,12 +10,22 @@
   z-index: 1000;
   transition: all 0.4s cubic-bezier(0.4, 0.0, 0.6, 1);
   background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 60px;
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  /* Transparent white filter effect similar to footer */
+  backdrop-filter: 
+    hue-rotate(0deg) 
+    saturate(0.3) 
+    brightness(1.8) 
+    contrast(1.1);
+  -webkit-backdrop-filter: 
+    hue-rotate(0deg) 
+    saturate(0.3) 
+    brightness(1.8) 
+    contrast(1.1);
 }
 
 .navbar.scrolled {
@@ -24,6 +34,16 @@
   box-shadow: 
     0 12px 40px rgba(0, 0, 0, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  backdrop-filter: 
+    hue-rotate(0deg) 
+    saturate(0.3) 
+    brightness(2.0) 
+    contrast(1.2);
+  -webkit-backdrop-filter: 
+    hue-rotate(0deg) 
+    saturate(0.3) 
+    brightness(2.0) 
+    contrast(1.2);
 }
 
 .navContainer {
@@ -44,7 +64,7 @@
   align-items: center;
   gap: 0.75rem;
   text-decoration: none;
-  color: #ffffff;
+  color: #d84e28;
   font-weight: 700;
   font-size: 1.4rem;
   letter-spacing: -0.5px;
@@ -57,23 +77,18 @@
   height: 1.6rem;
   width: auto;
   object-fit: contain;
-  filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.3));
+  filter: drop-shadow(0 2px 8px rgba(216, 78, 40, 0.3));
 }
 
 .brandName {
-  background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.9) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #d84e28;
   transition: all 0.4s ease;
-  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+  text-shadow: 0 2px 8px rgba(216, 78, 40, 0.3);
 }
 
 .brandLink:hover .brandName {
-  background: linear-gradient(135deg, #ffffff 0%, #ff9340 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ff9340;
+  text-shadow: 0 2px 8px rgba(255, 147, 64, 0.4);
 }
 
 .navLinks {
@@ -88,7 +103,7 @@
   font-family: 'Inter', -apple-system, sans-serif;
   font-size: 0.95rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(216, 78, 40, 0.8);
   text-decoration: none;
   padding: 0.4rem 0.9rem;
   border-radius: 25px;
@@ -105,7 +120,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(216, 78, 40, 0.1);
   border-radius: 25px;
   opacity: 0;
   transform: scale(0.8);
@@ -114,7 +129,7 @@
 }
 
 .navLink:hover {
-  color: #ffffff;
+  color: #d84e28;
   transform: translateY(-1px);
 }
 
@@ -125,14 +140,16 @@
 
 .navActions {
   flex-shrink: 0;
+  /* Equal spacing: margin-right matches the top spacing of the navbar */
+  margin-right: 1rem;
 }
 
 .getStartedBtn {
   display: inline-flex;
   align-items: center;
   padding: 0.6rem 1.8rem;
-  background: linear-gradient(135deg, #d84e28 0%, #ff9340 100%);
-  color: #ffffff;
+  background: rgba(216, 78, 40, 0.15);
+  color: #d84e28;
   text-decoration: none;
   font-family: 'Inter', -apple-system, sans-serif;
   font-weight: 600;
@@ -142,9 +159,20 @@
   position: relative;
   overflow: hidden;
   box-shadow: 
-    0 4px 20px rgba(216, 78, 40, 0.3),
+    0 4px 20px rgba(216, 78, 40, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(216, 78, 40, 0.3);
+  /* Transparent orange filter effect */
+  backdrop-filter: 
+    hue-rotate(20deg) 
+    saturate(1.5) 
+    brightness(1.3) 
+    contrast(1.1);
+  -webkit-backdrop-filter: 
+    hue-rotate(20deg) 
+    saturate(1.5) 
+    brightness(1.3) 
+    contrast(1.1);
 }
 
 .getStartedBtn::before {
@@ -163,7 +191,17 @@
   box-shadow: 
     0 8px 30px rgba(216, 78, 40, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  background: linear-gradient(135deg, #ff9340 0%, #d84e28 100%);
+  background: rgba(216, 78, 40, 0.25);
+  backdrop-filter: 
+    hue-rotate(25deg) 
+    saturate(1.8) 
+    brightness(1.4) 
+    contrast(1.2);
+  -webkit-backdrop-filter: 
+    hue-rotate(25deg) 
+    saturate(1.8) 
+    brightness(1.4) 
+    contrast(1.2);
 }
 
 .getStartedBtn:hover::before {
@@ -186,7 +224,7 @@
 .mobileMenuToggle span {
   width: 20px;
   height: 2px;
-  background: #ffffff;
+  background: #d84e28;
   border-radius: 1px;
   transition: all 0.3s ease;
 }
@@ -199,6 +237,10 @@
   
   .navContainer {
     padding: 0.35rem 1.5rem;
+  }
+  
+  .navActions {
+    margin-right: 0.75rem;
   }
   
   .navLinks {
@@ -224,6 +266,10 @@
   
   .navContainer {
     padding: 0.3rem 1rem;
+  }
+  
+  .navActions {
+    margin-right: 0.5rem;
   }
   
   .navLinks {
@@ -252,6 +298,10 @@
   
   .navContainer {
     padding: 0.25rem 0.75rem;
+  }
+  
+  .navActions {
+    margin-right: 0.25rem;
   }
   
   .brandLink {
@@ -290,7 +340,7 @@
 .navLink:focus,
 .getStartedBtn:focus,
 .brandLink:focus {
-  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline: 2px solid rgba(216, 78, 40, 0.8);
   outline-offset: 2px;
 }
 
@@ -298,11 +348,16 @@
 @media (prefers-contrast: high) {
   .navbar {
     background: rgba(0, 0, 0, 0.9);
-    border-color: #ffffff;
+    border-color: #d84e28;
   }
   
   .navLink,
   .brandName {
-    color: #ffffff;
+    color: #d84e28;
+  }
+  
+  .getStartedBtn {
+    background: rgba(216, 78, 40, 0.9);
+    border-color: #d84e28;
   }
 }
