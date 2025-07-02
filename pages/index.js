@@ -21,11 +21,13 @@ export default function Home() {
       <Layout>
         <Navbar />
         <Hero />
-        <WhyAetherbloom />
-        <Services />
-        <PricingCalculator />
-        <CTA />
-        <Footer />
+        <div className="content-wrapper">
+          <WhyAetherbloom />
+          <Services />
+          <PricingCalculator />
+          <CTA />
+          <Footer />
+        </div>
       </Layout>
     </>
   )

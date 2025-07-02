@@ -58,6 +58,16 @@ body::after {
   z-index: -9;
 }
 
+/* Content wrapper for smooth scrolling of grouped sections */
+.content-wrapper {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  scroll-snap-align: start;
+  position: relative;
+  z-index: 1;
+}
+
 /* Fixed animated petals container - stays fixed during all scrolling */
 .fixed-petals-container {
   position: fixed;
@@ -280,6 +290,11 @@ img {
   
   .fixed-petal {
     animation: none;
+  }
+  
+  .content-wrapper {
+    scroll-behavior: auto !important;
+    scroll-snap-align: none !important;
   }
 }
 

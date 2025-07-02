@@ -8,6 +8,8 @@
   align-items: center;
   overflow: hidden;
   z-index: 1;
+  /* Enable scroll snap for hero section */
+  scroll-snap-align: start;
 }
 
 .heroContent {
@@ -176,5 +178,9 @@
     animation: none !important;
     opacity: 1 !important;
     transform: translateY(0) !important;
+  }
+  
+  .heroContainer {
+    scroll-snap-align: none !important;
   }
 }
