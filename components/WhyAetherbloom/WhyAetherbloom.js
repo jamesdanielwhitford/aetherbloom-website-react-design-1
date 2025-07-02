@@ -18,9 +18,9 @@ export default function WhyAetherbloom() {
         })
       },
       {
-        threshold: 0.1,
-        rootMargin: '-10% 0px -10% 0px'
-      }
+  threshold: 0.15,
+  rootMargin: '-45% 0px -5% 0px'
+}
     )
 
     if (sectionRef.current) {

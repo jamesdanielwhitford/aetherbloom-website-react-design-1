@@ -30,6 +30,7 @@
   opacity: 0;
   transform: translateY(50px);
   transition: all 0.8s cubic-bezier(0.4, 0.0, 0.6, 1);
+  transition-delay: 900ms;
 }
 
 .textContent.visible {
@@ -70,7 +71,7 @@
   opacity: 0;
   transform: translateY(60px);
   transition: all 0.8s cubic-bezier(0.4, 0.0, 0.6, 1);
-  transition-delay: 0.2s;
+  transition-delay: 1400ms;
 }
 
 .cardsContainer.visible {
