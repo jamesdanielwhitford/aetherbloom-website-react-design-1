@@ -128,8 +128,8 @@ export default function WhyAetherbloom() {
 
   return (
     <section ref={sectionRef} id="why-aetherbloom" className={styles.whySection}>
-      <div className={`${styles.whyContainer} ${isVisible ? 'fade-in' : 'fade-out'}`}>
-        <div className={styles.textContent}>
+      <div className={styles.whyContainer}>
+        <div className={`${styles.textContent} ${isVisible ? styles.visible : ''}`}>
           <h2 className={styles.sectionTitle}>Why Choose Aetherbloom</h2>
           <div className={styles.textParagraph}>
             <p>
@@ -139,7 +139,7 @@ export default function WhyAetherbloom() {
           </div>
         </div>
 
-        <div className={styles.cardsContainer}>
+        <div className={`${styles.cardsContainer} ${isVisible ? styles.visible : ''}`}>
           <div className={styles.cardsGrid}>
             {cards.map((card, index) => (
               <div 

@@ -1,11 +1,11 @@
 /* File: components/WhyAetherbloom/WhyAetherbloom.module.css */
 
 .whySection {
-  min-height: 100vh;
+  min-height: 130vh;
   display: flex;
   align-items: center;
   position: relative;
-  padding: 6rem 0;
+  padding: 8rem 0;
   overflow: visible;
 }
 
@@ -27,6 +27,14 @@
   width: 100%;
   max-width: 800px;
   text-align: center;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s cubic-bezier(0.4, 0.0, 0.6, 1);
+}
+
+.textContent.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .sectionTitle {
@@ -59,6 +67,15 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 0.8s cubic-bezier(0.4, 0.0, 0.6, 1);
+  transition-delay: 0.2s;
+}
+
+.cardsContainer.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .cardsGrid {
@@ -186,7 +203,8 @@
 /* Responsive Design */
 @media (max-width: 1024px) {
   .whySection {
-    padding: 5rem 0;
+    padding: 6rem 0;
+    min-height: 120vh;
   }
   
   .whyContainer {
@@ -227,7 +245,8 @@
 
 @media (max-width: 768px) {
   .whySection {
-    padding: 4rem 0;
+    padding: 5rem 0;
+    min-height: 110vh;
   }
   
   .whyContainer {
@@ -283,7 +302,8 @@
 
 @media (max-width: 480px) {
   .whySection {
-    padding: 3rem 0;
+    padding: 4rem 0;
+    min-height: 100vh;
   }
 
   .sectionTitle {
@@ -326,8 +346,16 @@
   .cardIcon,
   .cardTitle,
   .cardContent,
-  .cardImage::before {
+  .cardImage::before,
+  .textContent,
+  .cardsContainer {
     transition: none !important;
+  }
+  
+  .textContent,
+  .cardsContainer {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
   }
   
   .card {
