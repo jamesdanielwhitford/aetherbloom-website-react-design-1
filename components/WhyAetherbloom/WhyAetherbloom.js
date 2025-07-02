@@ -18,9 +18,9 @@ export default function WhyAetherbloom() {
         })
       },
       {
-  threshold: 0.15,
-  rootMargin: '-45% 0px -5% 0px'
-}
+        threshold: 0.1,
+        rootMargin: '-50px 0px -50px 0px'
+      }
     )
 
     if (sectionRef.current) {
@@ -129,7 +129,9 @@ export default function WhyAetherbloom() {
   return (
     <section ref={sectionRef} id="why-aetherbloom" className={styles.whySection}>
       <div className={styles.whyContainer}>
-        <div className={`${styles.textContent} ${isVisible ? styles.visible : ''}`}>
+        <div 
+          className={`${styles.textContent} ${isVisible ? styles.visible : ''}`}
+        >
           <h2 className={styles.sectionTitle}>Why Choose Aetherbloom</h2>
           <div className={styles.textParagraph}>
             <p>
@@ -139,7 +141,9 @@ export default function WhyAetherbloom() {
           </div>
         </div>
 
-        <div className={`${styles.cardsContainer} ${isVisible ? styles.visible : ''}`}>
+        <div 
+          className={`${styles.cardsContainer} ${isVisible ? styles.visible : ''}`}
+        >
           <div className={styles.cardsGrid}>
             {cards.map((card, index) => (
               <div 

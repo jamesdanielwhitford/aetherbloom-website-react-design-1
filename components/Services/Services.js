@@ -11,6 +11,7 @@ export default function Services() {
   const sectionRef = useRef(null)
   const cardRef = useRef(null)
 
+  // Intersection Observer for animations
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -19,8 +20,8 @@ export default function Services() {
         })
       },
       {
-        threshold: 0.5,
-        rootMargin: '-10% 0px -10% 0px'
+        threshold: 0.1,
+        rootMargin: '-50px 0px -50px 0px'
       }
     )
 
@@ -139,8 +140,8 @@ export default function Services() {
       <div className={styles.backgroundImage}></div>
       <div className={styles.overlay}></div>
       
-      <div className={`${styles.servicesContainer} ${isVisible ? 'fade-in' : 'fade-out'}`}>
-        <div className={styles.servicesContent}>
+      <div className={styles.servicesContainer}>
+        <div className={`${styles.servicesContent} ${isVisible ? styles.visible : ''}`}>
           {/* Left Side - Services List */}
           <div className={styles.servicesList}>
             <div className={styles.servicesMenu}>
