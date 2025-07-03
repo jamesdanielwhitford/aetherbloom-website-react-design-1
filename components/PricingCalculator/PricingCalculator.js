@@ -160,6 +160,15 @@ export default function PricingCalculator() {
     <section className={styles.calculatorSection} id="pricing" ref={sectionRef}>
       <div className={styles.calculatorContainer}>
         <div className={`${styles.calculatorWrapper} ${isVisible ? styles.visible : ''}`}>
+          
+          {/* Header Section */}
+          <div className={styles.headerSection}>
+            <h2 className={styles.sectionTitle}>How much can you save?</h2>
+            <p className={styles.sectionSubtitle}>
+              Try our pricing calculator to see transparent costs upfront and discover exactly how much you could save by partnering with Aetherbloom.
+            </p>
+          </div>
+
           <div className={styles.comparisonGrid}>
             
             {/* UK Employee Costs Section */}
