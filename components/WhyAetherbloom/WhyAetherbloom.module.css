@@ -25,7 +25,7 @@
 
 .textContent {
   width: 100%;
-  max-width: 800px;
+  max-width: 700px;
   text-align: center;
   opacity: 0;
   transform: translateY(50px);
@@ -55,11 +55,11 @@
 
 .textParagraph p {
   font-family: 'Inter', -apple-system, sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 300;
-  line-height: 1.7;
+  line-height: 1.6;
   color: rgba(255, 255, 255, 0.85);
-  max-width: 700px;
+  max-width: 600px;
   margin: 0 auto;
 }
 
@@ -216,6 +216,10 @@
     font-size: 3rem;
   }
 
+  .textParagraph p {
+    font-size: 1.4rem;
+  }
+
   .cardsGrid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
@@ -259,7 +263,7 @@
   }
 
   .textParagraph p {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
   }
 
   .cardsGrid {
@@ -311,7 +315,7 @@
   }
 
   .textParagraph p {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   .card {

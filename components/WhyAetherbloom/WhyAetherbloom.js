@@ -132,11 +132,14 @@ export default function WhyAetherbloom() {
         <div 
           className={`${styles.textContent} ${isVisible ? styles.visible : ''}`}
         >
-          <h2 className={styles.sectionTitle}>Why Choose Aetherbloom</h2>
+          <h2 className={styles.sectionTitle}>
+            This is Aetherbloom.<br />
+            How can we help you?
+          </h2>
           <div className={styles.textParagraph}>
             <p>
-              We combine UK expertise with global talent to deliver exceptional results. Our transparent approach, 
-              ethical practices, and unwavering commitment to quality set us apart in the BPO industry.
+              High-quality, ethical outsourcing<br />
+              that streamline your business processes.
             </p>
           </div>
         </div>
