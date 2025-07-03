@@ -7,7 +7,6 @@ export default function Navbar() {
     { name: 'About us', href: '#why-aetherbloom' },
     { name: 'Services', href: '#services' },
     { name: 'Impact', href: '#impact' },
-    { name: 'Pricing', href: '#pricing' },
     { name: 'Contact', href: '#contact' }
   ]
 
@@ -34,6 +33,9 @@ export default function Navbar() {
         </div>
 
         <div className={styles.navActions}>
+          <a href="#pricing" className={styles.pricingBtn}>
+            Pricing
+          </a>
           <a href="#contact" className={styles.getStartedBtn}>
             Get Started
           </a>

@@ -86,6 +86,19 @@ export default function Hero() {
               </span>
             </span>
           </h1>
+          
+          <p className={styles.heroDescription}>
+            Scale your operations with expertly-sourced South African professionals trained to UK standards. Cut costs by 40%+ while scaling with confidence.
+          </p>
+          
+          <div className={styles.heroButtons}>
+            <a href="#why-aetherbloom" className={styles.learnMoreBtn}>
+              Learn More
+            </a>
+            <a href="#pricing" className={styles.pricingBtn}>
+              See our Pricing
+            </a>
+          </div>
         </div>
       </div>
     </section>

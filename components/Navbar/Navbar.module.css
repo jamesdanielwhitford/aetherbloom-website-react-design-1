@@ -116,15 +116,66 @@
 
 .navActions {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   /* Equal spacing: margin-right matches the top spacing of the navbar */
   margin-right: 1rem;
+}
+
+.pricingBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 1.5rem;
+  background: rgba(76, 175, 80, 0.15);
+  border: 1px solid rgba(76, 175, 80, 0.4);
+  color: #ffffff;
+  text-decoration: none;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 40px;
+  transition: all 0.4s cubic-bezier(0.4, 0.0, 0.6, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 0 10px rgba(76, 175, 80, 0.1),
+    inset 0 0 0 1px rgba(76, 175, 80, 0.2);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+}
+
+.pricingBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.pricingBtn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 
+    0 0 20px rgba(76, 175, 80, 0.2),
+    inset 0 0 0 1px rgba(76, 175, 80, 0.3);
+  background: rgba(76, 175, 80, 0.25);
+  border-color: rgba(76, 175, 80, 0.6);
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.4);
+}
+
+.pricingBtn:hover::before {
+  left: 100%;
 }
 
 .getStartedBtn {
   display: inline-flex;
   align-items: center;
   padding: 0.6rem 1.8rem;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(216, 78, 40, 0.15);
+  border: 1px solid rgba(216, 78, 40, 0.4);
   color: #ffffff;
   text-decoration: none;
   font-family: 'Inter', -apple-system, sans-serif;
@@ -135,10 +186,10 @@
   position: relative;
   overflow: hidden;
   box-shadow: 
-    0 0 15px rgba(255, 255, 255, 0.1),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+    0 0 15px rgba(216, 78, 40, 0.1),
+    inset 0 0 0 1px rgba(216, 78, 40, 0.2);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
 }
 
 .getStartedBtn::before {
@@ -148,16 +199,17 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(216, 78, 40, 0.3), transparent);
   transition: left 0.6s ease;
 }
 
 .getStartedBtn:hover {
   transform: translateY(-2px) scale(1.02);
   box-shadow: 
-    0 0 25px rgba(255, 255, 255, 0.2),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.25);
+    0 0 25px rgba(216, 78, 40, 0.2),
+    inset 0 0 0 1px rgba(216, 78, 40, 0.3);
+  background: rgba(216, 78, 40, 0.25);
+  border-color: rgba(216, 78, 40, 0.6);
   text-shadow: 0 2px 8px rgba(255, 255, 255, 0.4);
 }
 
@@ -165,7 +217,8 @@
   left: 100%;
 }
 
-.getStartedBtn:active {
+.getStartedBtn:active,
+.pricingBtn:active {
   transform: translateY(-1px) scale(1.01);
 }
 
@@ -198,6 +251,7 @@
   
   .navActions {
     margin-right: 0.75rem;
+    gap: 0.75rem;
   }
   
   .navLinks {
@@ -207,6 +261,11 @@
   .navLink {
     font-size: 0.9rem;
     padding: 0.3rem 0.7rem;
+  }
+  
+  .pricingBtn {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.85rem;
   }
   
   .getStartedBtn {
@@ -227,6 +286,7 @@
   
   .navActions {
     margin-right: 0.5rem;
+    gap: 0.5rem;
   }
   
   .navLinks {
@@ -239,6 +299,11 @@
   
   .brandIcon {
     height: 1.4rem;
+  }
+  
+  .pricingBtn {
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
   }
   
   .getStartedBtn {
@@ -259,6 +324,7 @@
   
   .navActions {
     margin-right: 0.25rem;
+    gap: 0.4rem;
   }
   
   .brandLink {
@@ -267,6 +333,11 @@
   
   .brandIcon {
     height: 1.2rem;
+  }
+  
+  .pricingBtn {
+    padding: 0.35rem 0.8rem;
+    font-size: 0.75rem;
   }
   
   .getStartedBtn {
@@ -280,11 +351,13 @@
   .navbar,
   .navLink,
   .getStartedBtn,
+  .pricingBtn,
   .brandLink {
     transition: none !important;
   }
   
-  .getStartedBtn::before {
+  .getStartedBtn::before,
+  .pricingBtn::before {
     display: none;
   }
   
@@ -296,6 +369,7 @@
 /* Focus states for accessibility */
 .navLink:focus,
 .getStartedBtn:focus,
+.pricingBtn:focus,
 .brandLink:focus {
   outline: 2px solid rgba(216, 78, 40, 0.8);
   outline-offset: 2px;
@@ -314,7 +388,12 @@
   }
   
   .getStartedBtn {
-    background: rgba(255, 255, 255, 0.9);
-    border-color: #ffffff;
+    background: rgba(216, 78, 40, 0.9);
+    border-color: #D84E28;
+  }
+  
+  .pricingBtn {
+    background: rgba(76, 175, 80, 0.9);
+    border-color: #4CAF50;
   }
 }
