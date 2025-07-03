@@ -6,102 +6,20 @@ import styles from './WhyAetherbloom.module.css'
 export default function WhyAetherbloom() {
   const [isVisible, setIsVisible] = useState(false)
   const [hoveredCard, setHoveredCard] = useState(null)
-  const [isCycling, setIsCycling] = useState(true)
-  const [currentCycleIndex, setCurrentCycleIndex] = useState(0)
-  const [userHasHovered, setUserHasHovered] = useState(false)
-  const [lastHoveredCard, setLastHoveredCard] = useState(null)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const sectionRef = useRef(null)
-  const cycleTimerRef = useRef(null)
+  const cardRefs = useRef([])
 
-  const cards = [
-    {
-      title: "High Quality Recruitment and Training",
-      description: "UK-trained teams delivering exceptional customer experiences with rigorous selection processes and ongoing development programs.",
-      detailedDescription: "Our comprehensive 10-step talent selection process ensures only top-tier professionals join your team. From cultural fit analysis to technical interviews and background checks, we maintain the highest standards.",
-      pattern: "recruitment",
-      image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=600&fit=crop&crop=faces"
-    },
-    {
-      title: "Transparent Pricing",
-      description: "No hidden fees with real-time reporting dashboards and flexible contracts that scale with your business needs.",
-      detailedDescription: "SLA guarantees with real consequences, live performance dashboards, and the ability to scale your team in just 72 hours with complete cost transparency. No setup fees, just clear value.",
-      pattern: "pricing",
-      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=600&fit=crop&crop=entropy"
-    },
-    {
-      title: "GDPR Compliance",
-      description: "Built-in UK compliance standards with civil service-grade audits and data protection protocols from day one.",
-      detailedDescription: "ISO standards integrated, comprehensive data protection training, and regular compliance audits ensure your business meets all UK regulatory requirements with zero risk.",
-      pattern: "compliance",
-      image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=600&fit=crop&crop=entropy"
-    },
-    {
-      title: "Ethical Impact",
-      description: "Creating meaningful opportunities for South African youth through job readiness programs and leadership development.",
-      detailedDescription: "Free training programs, paid internships, leadership pipelines, and partnerships with community organizations to uplift individuals and communities while delivering excellence.",
-      pattern: "impact",
-      image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&h=600&fit=crop&crop=faces"
-    }
-  ]
-
-  // Auto-cycling logic
-  useEffect(() => {
-    if (isCycling && isVisible && !userHasHovered) {
-      cycleTimerRef.current = setInterval(() => {
-        setCurrentCycleIndex((prevIndex) => (prevIndex + 1) % cards.length)
-      }, 4500) // Change card every 3 seconds
-    } else {
-      if (cycleTimerRef.current) {
-        clearInterval(cycleTimerRef.current)
-      }
-    }
-
-    return () => {
-      if (cycleTimerRef.current) {
-        clearInterval(cycleTimerRef.current)
-      }
-    }
-  }, [isCycling, isVisible, userHasHovered, cards.length])
-
-  // Handle user hover
-  const handleCardHover = (index) => {
-    if (!userHasHovered) {
-      setUserHasHovered(true)
-      setIsCycling(false)
-    }
-    setHoveredCard(index)
-    setLastHoveredCard(index)
-  }
-
-  const handleCardLeave = () => {
-    setHoveredCard(null)
-  }
-
-  // Determine which card should be "active" (either from cycling or user hover)
-  const getActiveCard = () => {
-    if (userHasHovered) {
-      return hoveredCard !== null ? hoveredCard : lastHoveredCard
-    }
-    return isCycling ? currentCycleIndex : null
-  }
-
-  const activeCardIndex = getActiveCard()
-
-  // Intersection Observer for section visibility and animations
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true)
-          } else {
-            setIsVisible(false)
-          }
+          setIsVisible(entry.isIntersecting)
         })
       },
       {
-        threshold: 0.5,
-        rootMargin: '-10% 0px -10% 0px'
+        threshold: 0.1,
+        rootMargin: '-50px 0px -50px 0px'
       }
     )
 
@@ -116,46 +34,158 @@ export default function WhyAetherbloom() {
     }
   }, [])
 
+  // Simplified mouse tracking with reduced calculations
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (hoveredCard !== null && cardRefs.current[hoveredCard]) {
+        const card = cardRefs.current[hoveredCard]
+        const cardRect = card.getBoundingClientRect()
+        
+        // Get mouse position relative to the card center
+        const cardCenterX = cardRect.left + cardRect.width / 2
+        const cardCenterY = cardRect.top + cardRect.height / 2
+        
+        const deltaX = e.clientX - cardCenterX
+        const deltaY = e.clientY - cardCenterY
+        
+        // Reduced intensity for smoother interaction
+        const rotateX = (deltaY / cardRect.height) * -6 // Reduced from -8 to -6
+        const rotateY = (deltaX / cardRect.width) * 6   // Reduced from 8 to 6
+        const translateX = (deltaX / cardRect.width) * 6 // Reduced from 8 to 6
+        const translateY = (deltaY / cardRect.height) * 6 // Reduced from 8 to 6
+        
+        setMousePosition({
+          x: Math.max(-6, Math.min(6, translateX)),
+          y: Math.max(-6, Math.min(6, translateY)),
+          rotateX: Math.max(-6, Math.min(6, rotateX)),
+          rotateY: Math.max(-6, Math.min(6, rotateY))
+        })
+      }
+    }
+
+    // Use RAF for smoother animation
+    let rafId
+    const throttledMouseMove = (e) => {
+      if (rafId) return
+      rafId = requestAnimationFrame(() => {
+        handleMouseMove(e)
+        rafId = null
+      })
+    }
+
+    const handleMouseLeave = () => {
+      setHoveredCard(null)
+      setMousePosition({ x: 0, y: 0, rotateX: 0, rotateY: 0 })
+    }
+
+    if (sectionRef.current) {
+      const section = sectionRef.current
+      section.addEventListener('mousemove', throttledMouseMove)
+      section.addEventListener('mouseleave', handleMouseLeave)
+      
+      return () => {
+        section.removeEventListener('mousemove', throttledMouseMove)
+        section.removeEventListener('mouseleave', handleMouseLeave)
+        if (rafId) cancelAnimationFrame(rafId)
+      }
+    }
+  }, [hoveredCard])
+
+  // Simplified transform calculation
+  const getCardTransform = (index) => {
+    if (hoveredCard !== index) {
+      return 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateX(0px) translateY(0px) scale(1)'
+    }
+    
+    return `perspective(1000px) rotateX(${mousePosition.rotateX || 0}deg) rotateY(${mousePosition.rotateY || 0}deg) translateX(${mousePosition.x || 0}px) translateY(${mousePosition.y || 0}px) scale(1.03)`
+  }
+
+  const handleCardMouseEnter = (index) => {
+    setHoveredCard(index)
+  }
+
+  const handleCardMouseLeave = () => {
+    setHoveredCard(null)
+    setMousePosition({ x: 0, y: 0, rotateX: 0, rotateY: 0 })
+  }
+
+  // Card data with specific content and images
+  const cards = [
+    { 
+      id: 1, 
+      title: "High Quality Recruitment", 
+      content: "Rigorous vetting process ensures only top-tier talent joins your team. Every candidate undergoes comprehensive skills assessment and cultural fit evaluation.",
+      image: "/quality-recruitment.png"
+    },
+    { 
+      id: 2, 
+      title: "Transparent Pricing", 
+      content: "No hidden costs or surprise fees. Clear, upfront pricing structure with detailed breakdown of all services and costs included in your package.",
+      image: "/transparent-pricing.png"
+    },
+    { 
+      id: 3, 
+      title: "Ethical Impact", 
+      content: "Supporting fair employment practices and sustainable business growth. We create meaningful career opportunities while delivering exceptional value.",
+      image: "/ethical-impact.png"
+    },
+    { 
+      id: 4, 
+      title: "GDPR Compliance", 
+      content: "Full adherence to UK and EU data protection regulations. Comprehensive security protocols ensure your data remains protected and compliant.",
+      image: "/gdpr-compliance.png"
+    }
+  ]
+
   return (
-    <section ref={sectionRef} id="why-aetherbloom" className={`${styles.whySection} snap-section`}>
-      <div className={`${styles.whyContainer} section-content ${isVisible ? 'fade-in' : 'fade-out'}`}>
-        <div className={styles.whyHeader}>
-          <h2 className={styles.mainTitle}>
-            <span className={styles.titleLine}>This is Aetherbloom.</span>
-            <span className={styles.titleLine}>How can we help you?</span>
+    <section ref={sectionRef} id="why-aetherbloom" className={styles.whySection}>
+      <div className={styles.whyContainer}>
+        <div 
+          className={`${styles.textContent} ${isVisible ? styles.visible : ''}`}
+        >
+          <h2 className={styles.sectionTitle}>
+            This is Aetherbloom.<br />
+            How can we help you?
           </h2>
-          <p className={styles.descriptionText}>
-            Get your business ready to scale with high-quality, ethical outsourcing that streamline your business processes.
-          </p>
+          <div className={styles.textParagraph}>
+            <p>
+              High-quality, ethical outsourcing<br />
+              that streamline your business processes.
+            </p>
+          </div>
         </div>
 
-        <div className={styles.cardsGrid}>
-          {cards.map((card, index) => {
-            const isCardActive = activeCardIndex === index
-            
-            return (
+        <div 
+          className={`${styles.cardsContainer} ${isVisible ? styles.visible : ''}`}
+        >
+          <div className={styles.cardsGrid}>
+            {cards.map((card, index) => (
               <div 
-                key={index} 
-                className={`${styles.card} ${styles[card.pattern]} ${isCardActive ? styles.active : ''}`}
-                onMouseEnter={() => handleCardHover(index)}
-                onMouseLeave={handleCardLeave}
+                key={card.id} 
+                ref={el => cardRefs.current[index] = el}
+                className={`${styles.card} ${hoveredCard === index ? styles.cardHovered : ''} ${styles[`card${index + 1}`]}`}
+                onMouseEnter={() => handleCardMouseEnter(index)}
+                onMouseLeave={handleCardMouseLeave}
+                style={{
+                  transform: getCardTransform(index),
+                  transition: hoveredCard === index ? 'transform 0.05s ease-out' : 'transform 0.2s ease-out'
+                }}
               >
-                <div className={styles.cardBackground}>
-                  <div 
-                    className={styles.cardImage}
-                    style={{ backgroundImage: `url(${card.image})` }}
-                  ></div>
-                  <div className={styles.cardGlassOverlay}></div>
-                  <div className={styles.cardSheen}></div>
+                <div className={styles.cardImage}>
+                  <img 
+                    src={card.image} 
+                    alt={card.title}
+                    className={styles.cardIcon}
+                    loading="lazy"
+                  />
                 </div>
-                
-                <div className={styles.cardContent}>
+                <div className={styles.cardBody}>
                   <h3 className={styles.cardTitle}>{card.title}</h3>
-                  <p className={styles.cardDescription}>{card.description}</p>
+                  <p className={styles.cardContent}>{card.content}</p>
                 </div>
               </div>
-            )
-          })}
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -8,9 +8,10 @@
   align-items: center;
   overflow: hidden;
   z-index: 1;
+  /* Enable scroll snap for hero section */
+  scroll-snap-align: start;
 }
 
-/* Hero Content */
 .heroContent {
   position: relative;
   z-index: 10;
@@ -18,287 +19,310 @@
   height: 100%;
   display: flex;
   align-items: center;
-  padding: 0 4rem;
   padding-top: 5rem;
-  transition: opacity 0.8s ease-out;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .heroText {
-  max-width: 800px;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   gap: 2rem;
+  /* Removed transform: translateY(-10vh) to center text vertically */
 }
 
 .heroTitle {
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  font-weight: 700;
-  font-size: clamp(3rem, 8vw, 6rem);
-  line-height: 0.9;
-  letter-spacing: -0.02em;
+  font-family: 'Poppins', -apple-system, sans-serif;
+  font-weight: 300;
   color: #ffffff;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  text-align: left;
 }
 
-.titleLine1 {
+.titleLine {
+  font-size: 6rem;
+  line-height: 1.1;
   display: block;
-  opacity: 1;
 }
 
-.titleLine2 {
+.titleLineAnimated {
+  font-size: 6rem;
+  line-height: 1.1;
   display: block;
-  color: #ffffff;
   position: relative;
-  min-height: 1.2em; /* Prevent layout shift */
+  min-height: 1.2em;
 }
 
-/* Initial animation for the first text */
-.titleLine2:not(.fadeIn):not(.fadeOut) {
-  animation: fadeInLeft 1.2s ease-out both;
-  animation-delay: 0.2s;
-  opacity: 0;
-}
-
-/* Text change animations */
-.fadeIn {
-  animation: textFadeInUp 0.6s ease-out both;
-}
-
-.fadeOut {
-  animation: textFadeOutDown 0.5s ease-in both;
-}
-
-.heroSubtitle {
-  font-family: 'Inter', -apple-system, sans-serif;
-  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-  font-weight: 400;
-  line-height: 1.6;
+.animatedText {
+  display: inline-block;
   color: #ffffff;
-  max-width: 600px;
-  animation: fadeInUp 1.2s ease-out both;
-  animation-delay: 0.5s;
-  opacity: 0;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  font-weight: 400;
 }
 
-.heroActions {
+.animatedText.fadeIn .letter {
+  animation: letterFadeIn 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.animatedText.fadeOut .letter {
+  animation: letterFadeOut 0.6s ease-in forwards;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.letter {
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+@keyframes letterFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes letterFadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+}
+
+.heroDescription {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  max-width: 700px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.heroButtons {
   display: flex;
   gap: 1.5rem;
-  flex-wrap: wrap;
-  animation: fadeInUp 1.2s ease-out both;
-  animation-delay: 0.8s;
-  opacity: 0;
+  align-items: center;
 }
 
-.primaryButton {
-  display: inline-block;
-  padding: 1.2rem 2.5rem;
-  border-radius: 60px;
+.learnMoreBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  background: rgba(216, 78, 40, 0.2);
+  border: 2px solid #D84E28;
   color: #ffffff;
   text-decoration: none;
   font-family: 'Inter', -apple-system, sans-serif;
   font-weight: 600;
-  font-size: 1.1rem;
-  transition: all 0.6s cubic-bezier(0.4, 0.0, 0.6, 1);
-  position: relative;
-  overflow: hidden;
+  font-size: 1rem;
+  border-radius: 50px;
+  transition: all 0.3s cubic-bezier(0.4, 0.0, 0.6, 1);
   text-transform: uppercase;
-  letter-spacing: 1px;
-  
-  background: linear-gradient(135deg, #d84e28 0%, #ff9340 100%);
-  box-shadow: 
-    0 15px 40px rgba(216, 78, 40, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-}
-
-.primaryButton::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  transition: left 0.6s ease;
-}
-
-.primaryButton:hover::before {
-  left: 100%;
-}
-
-.primaryButton:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 
-    0 25px 60px rgba(216, 78, 40, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  background: linear-gradient(135deg, #ff9340 0%, #d84e28 100%);
-}
-
-.secondaryButton {
-  display: inline-block;
-  padding: 1.2rem 2.5rem;
-  border-radius: 60px;
-  color: #ffffff;
-  text-decoration: none;
-  font-family: 'Inter', -apple-system, sans-serif;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: all 0.6s cubic-bezier(0.4, 0.0, 0.6, 1);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.5px;
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(216, 78, 40, 0.3);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.secondaryButton:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.5);
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 15px 40px rgba(255, 255, 255, 0.1);
+.learnMoreBtn:hover {
+  background: rgba(216, 78, 40, 0.3);
+  border-color: #ff9340;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(216, 78, 40, 0.4);
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.4);
 }
 
-/* Text Animations */
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-100px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+.pricingBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  background: rgba(76, 175, 80, 0.2);
+  border: 2px solid #4CAF50;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 50px;
+  transition: all 0.3s cubic-bezier(0.4, 0.0, 0.6, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(76, 175, 80, 0.3);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Text transition animations */
-@keyframes textFadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes textFadeOutDown {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
+.pricingBtn:hover {
+  background: rgba(76, 175, 80, 0.3);
+  border-color: #66BB6A;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(76, 175, 80, 0.4);
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.4);
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
   .heroContent {
-    padding: 0 3rem;
-    padding-top: 5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
   
-  .heroActions {
-    gap: 1.2rem;
+  .titleLine,
+  .titleLineAnimated {
+    font-size: 5rem;
+  }
+  
+  .heroDescription {
+    font-size: 1.2rem;
+  }
+  
+  .heroButtons {
+    gap: 1.25rem;
+  }
+  
+  .learnMoreBtn,
+  .pricingBtn {
+    padding: 0.9rem 1.8rem;
+    font-size: 0.95rem;
   }
 }
 
-@media (max-width: 968px) {
+@media (max-width: 768px) {
   .heroContent {
-    padding: 0 2rem;
-    padding-top: 5rem;
+    padding-top: 6rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .titleLine,
+  .titleLineAnimated {
+    font-size: 4rem;
   }
   
   .heroText {
     gap: 1.5rem;
+    align-items: center;
+    text-align: center;
+    /* Removed transform: translateY(-5vh) to keep text centered */
   }
   
-  .primaryButton,
-  .secondaryButton {
+  .heroDescription {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+  
+  .heroButtons {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+  
+  .learnMoreBtn,
+  .pricingBtn {
+    width: 100%;
+    max-width: 300px;
     padding: 1rem 2rem;
-    font-size: 1rem;
   }
 }
 
 @media (max-width: 640px) {
   .heroContent {
-    padding: 0 1.5rem;
     padding-top: 5rem;
-    text-align: center;
   }
   
-  .heroActions {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+  .titleLine,
+  .titleLineAnimated {
+    font-size: 3.2rem;
   }
   
-  .primaryButton,
-  .secondaryButton {
-    width: 100%;
-    max-width: 280px;
-    text-align: center;
+  .heroTitle {
+    gap: 0.25rem;
+    /* Removed transform: translateY(-3vh) to keep text centered */
+  }
+  
+  .heroDescription {
+    font-size: 1rem;
+  }
+  
+  .learnMoreBtn,
+  .pricingBtn {
+    font-size: 0.9rem;
+    padding: 0.9rem 1.8rem;
   }
 }
 
 @media (max-width: 480px) {
-  .heroContent {
-    padding: 0 1rem;
-    padding-top: 5rem;
+  .titleLine,
+  .titleLineAnimated {
+    font-size: 2.5rem;
   }
   
-  .heroText {
-    gap: 1.2rem;
+  .heroTitle {
+    /* Removed transform: translateY(-2vh) to keep text centered */
+  }
+  
+  .heroDescription {
+    font-size: 0.95rem;
+  }
+  
+  .learnMoreBtn,
+  .pricingBtn {
+    font-size: 0.85rem;
+    padding: 0.8rem 1.6rem;
   }
 }
 
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  .heroTitle,
-  .titleLine2,
-  .heroSubtitle {
-    color: #ffffff;
-    text-shadow: 
-      0 2px 8px rgba(0, 0, 0, 1),
-      0 1px 4px rgba(0, 0, 0, 1);
-  }
-}
-
-/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  .titleLine2,
-  .heroSubtitle,
-  .heroActions {
-    animation: none !important;
-    opacity: 1;
-    transform: none;
+  .heroContent {
+    transition: none !important;
   }
   
-  .fadeIn,
-  .fadeOut {
+  .letter {
     animation: none !important;
-    opacity: 1;
+    opacity: 1 !important;
+    transform: none !important;
   }
   
-  .primaryButton,
-  .secondaryButton {
-    transition: none;
+  .animatedText.fadeIn .letter,
+  .animatedText.fadeOut .letter {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  
+  .heroContainer {
+    scroll-snap-align: none !important;
+  }
+  
+  .learnMoreBtn,
+  .pricingBtn {
+    transition: none !important;
+  }
+  
+  .learnMoreBtn:hover,
+  .pricingBtn:hover {
+    transform: none !important;
   }
 }

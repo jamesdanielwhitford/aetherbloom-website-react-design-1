@@ -1,68 +1,45 @@
 // File: components/Layout/Layout.js
 
 import { useState, useEffect, useRef } from 'react'
-import Navbar from '../Navbar/Navbar'
 import styles from './Layout.module.css'
 
 export default function Layout({ children }) {
   const [videoOpacity, setVideoOpacity] = useState(1)
-  const [isInHeroSection, setIsInHeroSection] = useState(true)
-  const heroSectionRef = useRef(null)
+  const mainRef = useRef(null)
 
-  // Intersection Observer to detect when hero section is visible
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.target.id === 'hero-section' || entry.target.className?.includes('heroContainer')) {
-            setIsInHeroSection(entry.isIntersecting)
-          }
-        })
-      },
-      {
-        threshold: [0, 0.1, 0.5, 0.9],
-        rootMargin: '-10% 0px -10% 0px'
-      }
-    )
-
-    // Find hero section in the DOM
-    const heroSection = document.querySelector('[class*="heroContainer"]') || 
-                       document.querySelector('#hero-section')
-    
-    if (heroSection) {
-      heroSectionRef.current = heroSection
-      observer.observe(heroSection)
-    }
-
-    return () => {
-      if (heroSectionRef.current) {
-        observer.unobserve(heroSectionRef.current)
-      }
-    }
-  }, [])
-
-  // Handle scroll-based video opacity with snap-scroll friendly transitions
+  // Handle scroll-based video opacity
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY
+      if (!mainRef.current) return
+      
+      const scrollPosition = mainRef.current.scrollTop
       const windowHeight = window.innerHeight
       
-      // Tighter fade range for snap scrolling - fade happens closer to section boundary
-      if (scrollPosition <= windowHeight * 0.7) {
-        // Fully visible in hero section
+      // Start fading at 40% of viewport height, complete fade by 90%
+      const fadeStartPoint = windowHeight * 0.4
+      const fadeEndPoint = windowHeight * 0.9
+      const fadeRange = fadeEndPoint - fadeStartPoint
+      
+      if (scrollPosition <= fadeStartPoint) {
         setVideoOpacity(1)
-      } else {
-        // Completely hidden in other sections
+      } else if (scrollPosition >= fadeEndPoint) {
         setVideoOpacity(0)
+      } else {
+        // Smooth fade between start and end points with easing
+        const fadeProgress = (scrollPosition - fadeStartPoint) / fadeRange
+        // Apply easing function for smoother transition
+        const easedProgress = fadeProgress * fadeProgress
+        const opacity = 1 - easedProgress
+        setVideoOpacity(Math.max(0, Math.min(1, opacity)))
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    const mainElement = mainRef.current
+    if (mainElement) {
+      mainElement.addEventListener('scroll', handleScroll)
+      return () => mainElement.removeEventListener('scroll', handleScroll)
+    }
   }, [])
-
-  // Use intersection observer as primary control for snap scrolling
-  const finalVideoOpacity = isInHeroSection ? videoOpacity : 0
 
   return (
     <div className={styles.layout}>
@@ -74,12 +51,12 @@ export default function Layout({ children }) {
         <div className="fixed-petal fixed-petal4"></div>
       </div>
       
-      {/* Fixed video background - only visible on hero section */}
+      {/* Fixed video background - controlled by scroll position */}
       <div 
         className={styles.fixedVideoContainer} 
         style={{ 
-          opacity: finalVideoOpacity,
-          visibility: finalVideoOpacity > 0 ? 'visible' : 'hidden'
+          opacity: videoOpacity,
+          visibility: videoOpacity > 0 ? 'visible' : 'hidden'
         }}
       >
         <video
@@ -92,11 +69,9 @@ export default function Layout({ children }) {
           <source src="/hero-video.mp4" type="video/mp4" />
           <div className={styles.videoFallback}></div>
         </video>
-        <div className={styles.fixedVideoOverlay}></div>
       </div>
       
-      <Navbar />
-      <main className={styles.main}>
+      <main ref={mainRef} className={styles.main}>
         {children}
       </main>
     </div>

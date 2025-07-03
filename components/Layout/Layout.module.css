@@ -12,10 +12,26 @@
   flex: 1;
   height: 100vh;
   overflow-y: scroll;
-  scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
   position: relative;
   z-index: 1;
+  /* Enable scroll snap for main sections */
+  scroll-snap-type: y mandatory;
+}
+
+/* Content wrapper for all sections after hero */
+.main :global(.content-wrapper) {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  scroll-snap-align: start;
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero section should also have scroll snap alignment */
+.main :global(.heroContainer) {
+  scroll-snap-align: start;
 }
 
 /* Fixed Video Background */
@@ -23,41 +39,34 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
-  z-index: 0; /* Above petals (-5) but below content (1+) */
+  z-index: 0;
   pointer-events: none;
-  /* Much longer transition for snap scrolling - video fades gradually even when scroll snaps */
-  transition: opacity 0.6s cubic-bezier(0.4, 0.0, 0.6, 1), visibility 0.6s cubic-bezier(0.4, 0.0, 0.6, 1);
+  background: transparent;
+  transition: visibility 0.3s cubic-bezier(0.4, 0.0, 0.6, 1);
 }
 
 .fixedVideo {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
+  background: transparent;
+  display: block;
+  /* Add darker tint to the video */
+  filter: brightness(0.6) contrast(1.1);
 }
 
 .videoFallback {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 100%);
+  background: transparent;
 }
 
-.fixedVideoOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* Custom scrollbar styling */
+/* Custom scrollbar styling for main container */
 .main::-webkit-scrollbar {
   width: 6px;
 }
@@ -75,8 +84,54 @@
   background: linear-gradient(180deg, #ff9340 0%, #d84e28 100%);
 }
 
-/* Firefox scrollbar */
+/* Custom scrollbar styling for content wrapper */
+.main :global(.content-wrapper)::-webkit-scrollbar {
+  width: 6px;
+}
+
+.main :global(.content-wrapper)::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.main :global(.content-wrapper)::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #d84e28 0%, #ff9340 100%);
+  border-radius: 3px;
+}
+
+.main :global(.content-wrapper)::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ff9340 0%, #d84e28 100%);
+}
+
+/* Firefox scrollbar for main container */
 .main {
   scrollbar-width: thin;
   scrollbar-color: #d84e28 rgba(255, 255, 255, 0.1);
+}
+
+/* Firefox scrollbar for content wrapper */
+.main :global(.content-wrapper) {
+  scrollbar-width: thin;
+  scrollbar-color: #d84e28 rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .main :global(.content-wrapper) {
+    /* On mobile, ensure content wrapper still works properly */
+    height: 100vh;
+    overflow-y: scroll;
+  }
+}
+
+/* Accessibility: Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .main,
+  .main :global(.content-wrapper) {
+    scroll-behavior: auto !important;
+    scroll-snap-type: none !important;
+  }
+  
+  .main :global(.content-wrapper) {
+    scroll-snap-align: none !important;
+  }
 }

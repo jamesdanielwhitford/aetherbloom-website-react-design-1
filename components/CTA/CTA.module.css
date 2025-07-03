@@ -5,413 +5,407 @@
   display: flex;
   align-items: center;
   position: relative;
-  overflow: hidden;
-  background: linear-gradient(135deg, rgba(216, 78, 40, 0.08) 0%, rgba(255, 147, 64, 0.05) 100%);
-}
-
-.ctaSection::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: 
-    radial-gradient(circle at 20% 30%, rgba(216, 78, 40, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(255, 147, 64, 0.08) 0%, transparent 50%),
-    linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
-  z-index: 1;
-}
-
-.ctaSection::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  z-index: 2;
+  padding: 6rem 0;
+  background: linear-gradient(135deg, rgba(216, 78, 40, 0.08) 0%, rgba(255, 147, 64, 0.06) 100%);
 }
 
 .ctaContainer {
   width: 100%;
-  max-width: 1600px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 5rem 2rem;
+  padding: 0 2rem;
   position: relative;
   z-index: 2;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 5rem;
-  align-items: center;
 }
 
+.ctaWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: stretch;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.4, 0.0, 0.6, 1);
+}
+
+.ctaWrapper.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Left Side - Content */
 .ctaContent {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3rem;
+  padding: 2rem 0;
 }
 
 .ctaHeader {
-  margin-bottom: 4rem;
+  margin-bottom: 1rem;
 }
 
 .ctaTitle {
   font-family: 'Poppins', -apple-system, sans-serif;
-  font-weight: 300;
-  line-height: 0.9;
-  margin-bottom: 2rem;
-  color: #ffffff;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-}
-
-.titleLine1,
-.titleLine2,
-.titleLine3 {
-  display: block;
-  position: relative;
-  animation: slideInTitle 1.2s ease-out forwards;
-  opacity: 0;
-  transform: translateX(-100px);
-}
-
-.titleLine1 {
-  font-size: 3rem;
-  font-weight: 300;
-  animation-delay: 0.2s;
-}
-
-.titleLine2 {
-  font-size: 5rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #d84e28 0%, #ff9340 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin: -0.5rem 0;
-  animation-delay: 0.4s;
-}
-
-.titleLine3 {
   font-size: 3.5rem;
-  font-weight: 400;
-  animation-delay: 0.6s;
-}
-
-@keyframes slideInTitle {
-  0% {
-    opacity: 0;
-    transform: translateX(-100px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  font-weight: 300;
+  line-height: 1.2;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .ctaSubtitle {
   font-family: 'Inter', -apple-system, sans-serif;
   font-size: 1.3rem;
   font-weight: 300;
-  line-height: 1.7;
+  line-height: 1.6;
   color: rgba(255, 255, 255, 0.85);
-  max-width: 600px;
-  animation: fadeInSubtitle 1.5s ease-out 0.8s forwards;
-  opacity: 0;
+  max-width: 500px;
 }
 
-@keyframes fadeInSubtitle {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.additionalInfo {
+  margin-bottom: 1rem;
 }
 
-.ctaActions {
-  margin-bottom: 4rem;
-  animation: fadeInActions 1.5s ease-out 1.2s forwards;
-  opacity: 0;
-}
-
-@keyframes fadeInActions {
-  0% {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.primaryCta {
-  display: inline-block;
-  padding: 1.5rem 4rem;
-  border-radius: 60px;
-  color: #ffffff;
-  text-decoration: none;
+.assessmentText {
   font-family: 'Inter', -apple-system, sans-serif;
-  font-weight: 600;
-  font-size: 1.2rem;
-  transition: all 0.6s cubic-bezier(0.4, 0.0, 0.6, 1);
-  position: relative;
-  overflow: hidden;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-bottom: 1.5rem;
-  
-  background: linear-gradient(135deg, #d84e28 0%, #ff9340 100%);
-  box-shadow: 
-    0 15px 50px rgba(216, 78, 40, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-}
-
-.primaryCta::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  transition: left 0.6s ease;
-}
-
-.primaryCta:hover::before {
-  left: 100%;
-}
-
-.primaryCta:hover {
-  transform: translateY(-6px) scale(1.05);
-  box-shadow: 
-    0 25px 80px rgba(216, 78, 40, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  background: linear-gradient(135deg, #ff9340 0%, #d84e28 100%);
-}
-
-.ctaNote {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-.noteIcon {
-  font-size: 1.5rem;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-}
-
-.noteText {
-  font-family: 'Inter', -apple-system, sans-serif;
-  font-size: 0.95rem;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.7);
-  letter-spacing: 0.5px;
-}
-
-.trustSignals {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-  animation: fadeInTrust 1.5s ease-out 1.6s forwards;
-  opacity: 0;
-}
-
-@keyframes fadeInTrust {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.trustSignal {
-  text-align: center;
-  padding: 1.5rem 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.4s ease;
-}
-
-.trustSignal:hover {
-  background: rgba(255, 255, 255, 0.08);
-  transform: translateY(-4px);
-  border-color: rgba(216, 78, 40, 0.3);
-}
-
-.trustMetric {
-  display: block;
-  font-family: 'Poppins', -apple-system, sans-serif;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #d84e28;
-  margin-bottom: 0.5rem;
-  text-shadow: 0 2px 10px rgba(216, 78, 40, 0.3);
-}
-
-.trustLabel {
-  display: block;
-  font-family: 'Inter', -apple-system, sans-serif;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 500px;
 }
 
 .contactInfo {
-  position: relative;
-  animation: slideInContact 1.5s ease-out 1.4s forwards;
-  opacity: 0;
-}
-
-@keyframes slideInContact {
-  0% {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.contactMethods {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 1rem;
+  padding: 2rem 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.contactMethod {
+.contactItem {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  padding: 2rem 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.4s ease;
 }
 
-.contactMethod:hover {
-  background: rgba(255, 255, 255, 0.08);
-  transform: translateX(-8px);
-  border-color: rgba(216, 78, 40, 0.2);
-}
-
-.contactIcon {
-  font-size: 2rem;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
-}
-
-.contactDetails {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-
-.contactLabel {
+.contactLink {
   font-family: 'Inter', -apple-system, sans-serif;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.6);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
-.contactValue {
+.contactLink:hover {
+  color: #ff9340;
+  text-decoration: underline;
+}
+
+.contactText {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Right Side - Contact Form */
+.formContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contactForm {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  padding: 3rem;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  will-change: transform;
+}
+
+.contactForm:hover {
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.3),
+    0 10px 30px rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.formHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.formTitle {
   font-family: 'Poppins', -apple-system, sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.8rem;
   font-weight: 500;
   color: #ffffff;
+  margin-bottom: 0;
+  line-height: 1.3;
 }
 
+.formGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.inputGroup {
+  position: relative;
+}
+
+.formInput,
+.formTextarea {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.formInput::placeholder,
+.formTextarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.formInput:focus,
+.formTextarea:focus {
+  outline: none;
+  border-color: #ff9340;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 2px rgba(255, 147, 64, 0.3);
+}
+
+.formTextarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.submitButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #d84e28 0%, #ff9340 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(216, 78, 40, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.submitButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(216, 78, 40, 0.4);
+  background: linear-gradient(135deg, #ff9340 0%, #d84e28 100%);
+}
+
+.submitButton:active {
+  transform: translateY(-1px);
+}
+
+.buttonText {
+  flex: 1;
+  text-align: center;
+}
+
+.buttonArrow {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.submitButton:hover .buttonArrow {
+  transform: translateX(4px);
+}
+
+/* Responsive Design */
 @media (max-width: 1024px) {
   .ctaContainer {
-    grid-template-columns: 1fr;
-    gap: 4rem;
-    text-align: center;
+    padding: 0 1.5rem;
   }
   
-  .titleLine2 {
-    font-size: 4rem;
+  .ctaWrapper {
+    gap: 3rem;
   }
   
-  .trustSignals {
-    grid-template-columns: repeat(2, 1fr);
+  .ctaTitle {
+    font-size: 3rem;
+  }
+  
+  .contactForm {
+    padding: 2.5rem;
   }
 }
 
 @media (max-width: 768px) {
+  .ctaSection {
+    padding: 4rem 0;
+  }
+  
   .ctaContainer {
-    padding: 3rem 1.5rem;
+    padding: 0 1rem;
   }
   
-  .titleLine1 {
+  .ctaWrapper {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .ctaContent {
+    order: 2;
+    text-align: center;
+    padding: 1rem 0;
+  }
+  
+  .formContainer {
+    order: 1;
+  }
+  
+  .ctaTitle {
     font-size: 2.5rem;
-  }
-  
-  .titleLine2 {
-    font-size: 3.5rem;
-  }
-  
-  .titleLine3 {
-    font-size: 2.8rem;
   }
   
   .ctaSubtitle {
     font-size: 1.1rem;
+    max-width: none;
   }
   
-  .primaryCta {
-    padding: 1.3rem 3rem;
-    font-size: 1.1rem;
+  .assessmentText {
+    font-size: 1rem;
+    max-width: none;
   }
   
-  .trustSignals {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+  .contactForm {
+    padding: 2rem;
+    max-width: none;
+    /* Disable 3D effects on mobile */
+    transform: none !important;
+    transition: all 0.3s ease !important;
   }
   
-  .contactMethod {
-    padding: 1.5rem;
+  .contactForm:hover {
+    transform: none !important;
+  }
+  
+  .formTitle {
+    font-size: 1.6rem;
+  }
+  
+  .contactInfo {
+    align-items: center;
+  }
+  
+  .contactItem {
+    justify-content: center;
   }
 }
 
 @media (max-width: 480px) {
-  .ctaContainer {
-    padding: 2rem 1rem;
+  .ctaSection {
+    padding: 3rem 0;
   }
   
-  .titleLine1 {
+  .ctaTitle {
     font-size: 2rem;
   }
   
-  .titleLine2 {
-    font-size: 2.8rem;
+  .assessmentText {
+    font-size: 0.95rem;
   }
   
-  .titleLine3 {
-    font-size: 2.2rem;
+  .contactForm {
+    padding: 1.5rem;
   }
   
-  .primaryCta {
-    padding: 1.2rem 2.5rem;
-    font-size: 1rem;
-    letter-spacing: 1px;
+  .formTitle {
+    font-size: 1.4rem;
   }
   
-  .contactMethod {
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
+  .formInput,
+  .formTextarea {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.95rem;
+  }
+  
+  .submitButton {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Input autofill styling */
+.formInput:-webkit-autofill,
+.formInput:-webkit-autofill:hover,
+.formInput:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.08) inset;
+  -webkit-text-fill-color: #ffffff;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .ctaWrapper,
+  .submitButton,
+  .buttonArrow,
+  .formInput,
+  .formTextarea,
+  .contactLink,
+  .contactForm {
+    transition: none !important;
+  }
+  
+  .contactForm {
+    transform: none !important;
+    will-change: auto;
+  }
+  
+  .contactForm:hover {
+    transform: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .contactForm {
+    background: rgba(0, 0, 0, 0.8);
+    border-color: #ffffff;
+  }
+  
+  .formInput,
+  .formTextarea {
+    background: rgba(0, 0, 0, 0.6);
+    border-color: #ffffff;
+    color: #ffffff;
+  }
+  
+  .formInput::placeholder,
+  .formTextarea::placeholder {
+    color: #cccccc;
   }
 }
