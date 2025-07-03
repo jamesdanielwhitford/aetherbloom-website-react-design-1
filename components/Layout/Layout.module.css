@@ -56,6 +56,8 @@
   left: 0;
   background: transparent;
   display: block;
+  /* Add darker tint to the video */
+  filter: brightness(0.6) contrast(1.1);
 }
 
 .videoFallback {
