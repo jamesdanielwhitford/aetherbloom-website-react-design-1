@@ -29,10 +29,10 @@
 
 .footerMain {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr 1.2fr;
+  grid-template-columns: 1.6fr 0.6fr 0.6fr 0.6fr 0.6fr 2fr;
   gap: 3rem;
   padding: 4rem 2rem 3rem;
-  align-items: start;
+  align-items: baseline;
 }
 
 /* Brand Section */
@@ -58,7 +58,7 @@
 
 .logo {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 0.75rem;
   text-decoration: none;
   color: #ffffff;
@@ -144,7 +144,7 @@
   font-family: 'Poppins', -apple-system, sans-serif;
   font-size: 1.1rem;
   font-weight: 600;
-  color: #334238;
+  color: #FFFFFF;
   margin: 0;
   padding: 0;
   line-height: 1.2;
@@ -247,7 +247,7 @@
   font-family: 'Poppins', -apple-system, sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  color: #334238;
+  color: #FFFFFF;
   margin: 0 0 0.5rem 0;
   line-height: 1.2;
 }
@@ -265,10 +265,12 @@
   display: flex;
   gap: 0.5rem;
   align-items: stretch;
+  flex-wrap: wrap;
 }
 
 .newsletterInput {
-  flex: 1;
+  flex: none; /* Remove flex: 1 to allow explicit width */
+  width: 100%; /* Make it take full width */
   padding: 0.75rem 1rem;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -278,6 +280,8 @@
   color: #ffffff;
   transition: all 0.3s ease;
   line-height: 1.2;
+  box-sizing: border-box;
+  min-width: 0;
 }
 
 .newsletterInput::placeholder {
@@ -306,6 +310,7 @@
   line-height: 1.2;
   display: flex;
   align-items: center;
+  width: 100%; /* Make it take full width */
 }
 
 .newsletterButton:hover {
@@ -351,7 +356,7 @@
 /* Responsive Design */
 @media (max-width: 1024px) {
   .footerMain {
-    grid-template-columns: 1.5fr 1fr 1fr 1fr 1.2fr;
+    grid-template-columns: 1.8fr 1fr 1fr 1fr 1fr 1.5fr;
     gap: 2rem;
     padding: 3rem 1.5rem 2rem;
   }

@@ -138,7 +138,7 @@ export default function Footer() {
 
           {/* Contact Section */}
           <div className={styles.contactSection}>
-            <h3 className={styles.columnTitle}>Contact Us</h3>
+            <h3 className={styles.columnTitle}>Contact</h3>
             <div className={styles.contactInfo}>
               <div className={styles.contactItem}>
                 <a href="tel:+44207123456" className={styles.contactLink}>
