@@ -159,136 +159,133 @@ export default function PricingCalculator() {
   return (
     <section className={styles.calculatorSection} id="pricing" ref={sectionRef}>
       <div className={styles.calculatorContainer}>
-        <div className={styles.calculatorHeader}>
-          <h2 className={styles.sectionTitle}>Calculate Your Savings</h2>
-          <p className={styles.sectionSubtitle}>
-            See exactly how much you could save by choosing Aetherbloom over traditional UK hiring
-          </p>
-        </div>
-
         <div className={`${styles.calculatorWrapper} ${isVisible ? styles.visible : ''}`}>
           <div className={styles.comparisonGrid}>
             
-            {/* UK Employee Costs */}
+            {/* UK Employee Costs Section */}
             <div className={styles.ukSection}>
-              <div className={styles.sectionHeader}>
-                <div className={styles.dropdown} ref={roleDropdownRef}>
-                  <button 
-                    className={styles.dropdownTrigger}
-                    onClick={() => setIsRoleDropdownOpen(!isRoleDropdownOpen)}
-                  >
-                    <span className={styles.dropdownLabel}>{selectedRole}</span>
-                    <span className={`${styles.dropdownArrow} ${isRoleDropdownOpen ? styles.open : ''}`}>
-                      ▼
-                    </span>
-                  </button>
+              <div className={styles.ukContent}>
+                <div className={styles.ukLeft}>
+                  <div className={styles.dropdown} ref={roleDropdownRef}>
+                    <button 
+                      className={styles.dropdownTrigger}
+                      onClick={() => setIsRoleDropdownOpen(!isRoleDropdownOpen)}
+                    >
+                      <span className={styles.dropdownLabel}>{selectedRole}</span>
+                      <span className={`${styles.dropdownArrow} ${isRoleDropdownOpen ? styles.open : ''}`}>
+                        ▼
+                      </span>
+                    </button>
+                    
+                    {isRoleDropdownOpen && (
+                      <div className={styles.dropdownMenu}>
+                        {roleOptions.map((role, index) => (
+                          <button
+                            key={index}
+                            className={`${styles.dropdownOption} ${role.name === selectedRole ? styles.selected : ''}`}
+                            onClick={() => {
+                              setSelectedRole(role.name)
+                              setIsRoleDropdownOpen(false)
+                            }}
+                          >
+                            <span className={styles.optionName}>{role.name}</span>
+                            <span className={styles.optionSalary}>{formatCurrency(role.salary)}</span>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                   
-                  {isRoleDropdownOpen && (
-                    <div className={styles.dropdownMenu}>
-                      {roleOptions.map((role, index) => (
-                        <button
-                          key={index}
-                          className={`${styles.dropdownOption} ${role.name === selectedRole ? styles.selected : ''}`}
-                          onClick={() => {
-                            setSelectedRole(role.name)
-                            setIsRoleDropdownOpen(false)
-                          }}
-                        >
-                          <span className={styles.optionName}>{role.name}</span>
-                          <span className={styles.optionSalary}>{formatCurrency(role.salary)}</span>
-                        </button>
-                      ))}
-                    </div>
-                  )}
+                  <div className={styles.totalCost}>
+                    {formatCurrency(ukCosts.total)}/year
+                  </div>
                 </div>
-                
-                <div className={styles.totalCost}>
-                  {formatCurrency(ukCosts.total)}/year
-                </div>
-              </div>
 
-              <div className={styles.costBreakdown}>
-                <div className={styles.costItem}>
-                  <span className={styles.costLabel}>Base Salary</span>
-                  <span className={styles.costValue}>{formatCurrency(ukCosts.salary)}</span>
-                </div>
-                <div className={styles.costItem}>
-                  <span className={styles.costLabel}>NI & Pension (13%)</span>
-                  <span className={styles.costValue}>{formatCurrency(ukCosts.niPension)}</span>
-                </div>
-                <div className={styles.costItem}>
-                  <span className={styles.costLabel}>Recruitment (15%)</span>
-                  <span className={styles.costValue}>{formatCurrency(ukCosts.recruitment)}</span>
-                </div>
-                <div className={styles.costItem}>
-                  <span className={styles.costLabel}>Training & Development</span>
-                  <span className={styles.costValue}>{formatCurrency(ukCosts.training)}</span>
-                </div>
-                <div className={styles.costItem}>
-                  <span className={styles.costLabel}>Office, IT & Benefits</span>
-                  <span className={styles.costValue}>{formatCurrency(ukCosts.office)}</span>
-                </div>
-                <div className={`${styles.costItem} ${styles.totalItem}`}>
-                  <span className={styles.costLabel}>Total cost</span>
-                  <span className={styles.costValue}>{formatCurrency(ukCosts.total)}</span>
+                <div className={styles.ukRight}>
+                  <div className={styles.breakdownItem}>
+                    <span className={styles.breakdownLabel}>Base Salary</span>
+                    <span className={styles.breakdownValue}>{formatCurrency(ukCosts.salary)}</span>
+                  </div>
+                  <div className={styles.breakdownItem}>
+                    <span className={styles.breakdownLabel}>NI & Pension (13%)</span>
+                    <span className={styles.breakdownValue}>{formatCurrency(ukCosts.niPension)}</span>
+                  </div>
+                  <div className={styles.breakdownItem}>
+                    <span className={styles.breakdownLabel}>Recruitment (15%)</span>
+                    <span className={styles.breakdownValue}>{formatCurrency(ukCosts.recruitment)}</span>
+                  </div>
+                  <div className={styles.breakdownItem}>
+                    <span className={styles.breakdownLabel}>Training & Development</span>
+                    <span className={styles.breakdownValue}>{formatCurrency(ukCosts.training)}</span>
+                  </div>
+                  <div className={styles.breakdownItem}>
+                    <span className={styles.breakdownLabel}>Office, IT & Benefits</span>
+                    <span className={styles.breakdownValue}>{formatCurrency(ukCosts.office)}</span>
+                  </div>
+                  <div className={`${styles.breakdownItem} ${styles.totalBreakdown}`}>
+                    <span className={styles.breakdownLabel}>Total cost</span>
+                    <span className={styles.breakdownValue}>{formatCurrency(ukCosts.total)}</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Aetherbloom Solution */}
+            {/* Aetherbloom Solution Section */}
             <div className={styles.aetherbloomSection}>
-              <div className={styles.sectionHeader}>
-                <div className={styles.dropdown} ref={tierDropdownRef}>
-                  <button 
-                    className={styles.dropdownTrigger}
-                    onClick={() => setIsTierDropdownOpen(!isTierDropdownOpen)}
-                  >
-                    <span className={styles.dropdownLabel}>Aetherbloom {tierData.name}</span>
-                    <span className={`${styles.dropdownArrow} ${isTierDropdownOpen ? styles.open : ''}`}>
-                      ▼
-                    </span>
-                  </button>
+              <div className={styles.aetherbloomContent}>
+                <div className={styles.aetherbloomLeft}>
+                  <div className={styles.dropdown} ref={tierDropdownRef}>
+                    <button 
+                      className={styles.dropdownTrigger}
+                      onClick={() => setIsTierDropdownOpen(!isTierDropdownOpen)}
+                    >
+                      <span className={styles.dropdownLabel}>Aetherbloom {tierData.name}</span>
+                      <span className={`${styles.dropdownArrow} ${isTierDropdownOpen ? styles.open : ''}`}>
+                        ▼
+                      </span>
+                    </button>
+                    
+                    {isTierDropdownOpen && (
+                      <div className={styles.dropdownMenu}>
+                        {tierOptions.map((tier, index) => (
+                          <button
+                            key={index}
+                            className={`${styles.dropdownOption} ${tier.id === selectedTier ? styles.selected : ''}`}
+                            onClick={() => {
+                              setSelectedTier(tier.id)
+                              setIsTierDropdownOpen(false)
+                            }}
+                          >
+                            <span className={styles.optionName}>Aetherbloom {tier.name}</span>
+                            <span className={styles.optionDetails}>
+                              {tier.hours} • {tier.monthly}
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                   
-                  {isTierDropdownOpen && (
-                    <div className={styles.dropdownMenu}>
-                      {tierOptions.map((tier, index) => (
-                        <button
-                          key={index}
-                          className={`${styles.dropdownOption} ${tier.id === selectedTier ? styles.selected : ''}`}
-                          onClick={() => {
-                            setSelectedTier(tier.id)
-                            setIsTierDropdownOpen(false)
-                          }}
-                        >
-                          <span className={styles.optionName}>Aetherbloom {tier.name}</span>
-                          <span className={styles.optionDetails}>
-                            {tier.hours} • {tier.monthly}
-                          </span>
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-                
-                <div className={styles.totalCost}>
-                  {formatCurrency(tierData.cost)}/year
-                </div>
-              </div>
-
-              <div className={styles.tierDetails}>
-                <div className={styles.tierInfo}>
-                  <span className={styles.tierLabel}>{tierData.name}</span>
-                  <span className={styles.tierHours}>{tierData.hours}</span>
-                  <span className={styles.tierMonthly}>{tierData.monthly}</span>
-                  <div className={`${styles.costItem} ${styles.totalItem}`}>
-                    <span className={styles.costLabel}>Total cost</span>
-                    <span className={styles.costValue}>{formatCurrency(tierData.cost)}</span>
+                  <div className={styles.totalCost}>
+                    {formatCurrency(tierData.cost)}/year
                   </div>
                 </div>
-                
-                {/* Savings Information */}
-                <div className={styles.savingsInfo}>
-                  <div className={styles.savingsDivider}></div>
+
+                <div className={styles.aetherbloomRight}>
+                  <div className={styles.breakdownItem}>
+                    <span className={styles.breakdownLabel}>{tierData.name}</span>
+                    <span className={styles.breakdownValue}>{tierData.hours}</span>
+                  </div>
+                  <div className={styles.breakdownItem}>
+                    <span className={styles.breakdownLabel}>Monthly Cost</span>
+                    <span className={styles.breakdownValue}>{tierData.monthly}</span>
+                  </div>
+                  <div className={`${styles.breakdownItem} ${styles.totalBreakdown}`}>
+                    <span className={styles.breakdownLabel}>Total cost</span>
+                    <span className={styles.breakdownValue}>{formatCurrency(tierData.cost)}</span>
+                  </div>
+                  
+                  {/* Savings Information */}
                   <div className={styles.savingsDisplay}>
                     <div className={styles.savingsAmount}>
                       <span className={styles.savingsLabel}>Annual Savings</span>
@@ -302,17 +299,6 @@ export default function PricingCalculator() {
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* CTA Section */}
-          <div className={styles.ctaSection}>
-            <a href="#contact" className={styles.ctaButton}>
-              Claim Your Free Strategy Session
-              <span className={styles.buttonArrow}>→</span>
-            </a>
-            <p className={styles.ctaNote}>
-              Start saving within 72 hours with our rapid deployment process
-            </p>
           </div>
         </div>
       </div>
