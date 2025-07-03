@@ -11,7 +11,7 @@
 
 .whyContainer {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 0 2rem;
   position: relative;
@@ -55,10 +55,10 @@
 
 .textParagraph p {
   font-family: 'Inter', -apple-system, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 300;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.85);
+  color: #ffffff;
   max-width: 600px;
   margin: 0 auto;
 }
@@ -81,9 +81,9 @@
 .cardsGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
+  gap: 2.5rem;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   align-items: stretch;
 }
 
@@ -102,22 +102,32 @@
   cursor: pointer;
   transform-style: preserve-3d;
   will-change: transform;
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
 }
 
-.card:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(216, 78, 40, 0.3);
+/* Alternating hover colors using index-based classes */
+.card1:hover,
+.card3:hover {
+  background: #39564F !important;
+  border-color: #39564F !important;
   box-shadow: 
     0 20px 50px rgba(0, 0, 0, 0.2),
-    0 10px 30px rgba(216, 78, 40, 0.1);
+    0 10px 30px rgba(57, 86, 79, 0.3) !important;
+}
+
+.card2:hover,
+.card4:hover {
+  background: #ffffff !important;
+  border-color: #ffffff !important;
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.2),
+    0 10px 30px rgba(255, 255, 255, 0.3) !important;
 }
 
 .cardHovered {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border-color: rgba(216, 78, 40, 0.3) !important;
-  box-shadow: 
-    0 20px 50px rgba(0, 0, 0, 0.2),
-    0 10px 30px rgba(216, 78, 40, 0.1) !important;
+  /* Remove background override to let the specific card hover styles take precedence */
 }
 
 .cardImage {
@@ -148,7 +158,9 @@
 }
 
 .cardIcon {
-  font-size: 3rem;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.3));
   transition: all 0.3s ease;
   position: relative;
@@ -179,9 +191,16 @@
   transition: all 0.3s ease;
 }
 
-.card:hover .cardTitle {
-  color: #ff9340;
-  text-shadow: 0 2px 10px rgba(255, 147, 64, 0.3);
+.card1:hover .cardTitle,
+.card3:hover .cardTitle {
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
+}
+
+.card2:hover .cardTitle,
+.card4:hover .cardTitle {
+  color: #D84E28;
+  text-shadow: 0 2px 10px rgba(216, 78, 40, 0.3);
 }
 
 .cardContent {
@@ -196,8 +215,14 @@
   align-items: flex-start;
 }
 
-.card:hover .cardContent {
+.card1:hover .cardContent,
+.card3:hover .cardContent {
   color: rgba(255, 255, 255, 0.9);
+}
+
+.card2:hover .cardContent,
+.card4:hover .cardContent {
+  color: #D84E28;
 }
 
 /* Responsive Design */
@@ -210,6 +235,7 @@
   .whyContainer {
     padding: 0 1.5rem;
     gap: 3rem;
+    max-width: 1200px;
   }
 
   .sectionTitle {
@@ -217,17 +243,18 @@
   }
 
   .textParagraph p {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 
   .cardsGrid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    max-width: 800px;
+    gap: 2rem;
+    max-width: 900px;
   }
 
   .card {
     min-height: 280px;
+    max-width: 420px;
   }
 
   .cardImage {
@@ -235,7 +262,8 @@
   }
 
   .cardIcon {
-    font-size: 2.5rem;
+    width: 100%;
+    height: 100%;
   }
 
   .cardBody {
@@ -263,17 +291,18 @@
   }
 
   .textParagraph p {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
 
   .cardsGrid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
-    max-width: 400px;
+    max-width: 500px;
   }
 
   .card {
     min-height: 250px;
+    max-width: 500px;
     /* Disable 3D effects on mobile */
     transform: none !important;
     transition: all 0.3s ease !important;
@@ -288,7 +317,8 @@
   }
 
   .cardIcon {
-    font-size: 2rem;
+    width: 100%;
+    height: 100%;
   }
 
   .cardBody {
@@ -315,7 +345,7 @@
   }
 
   .textParagraph p {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
 
   .card {
@@ -327,7 +357,8 @@
   }
 
   .cardIcon {
-    font-size: 1.8rem;
+    width: 100%;
+    height: 100%;
   }
 
   .cardBody {
@@ -392,7 +423,23 @@
     color: #ffffff;
   }
   
-  .card:hover .cardTitle {
-    color: #ffaa00;
+  .card1:hover,
+  .card3:hover {
+    background: #39564F !important;
+  }
+  
+  .card2:hover,
+  .card4:hover {
+    background: #ffffff !important;
+  }
+  
+  .card1:hover .cardTitle,
+  .card3:hover .cardTitle {
+    color: #ffffff;
+  }
+  
+  .card2:hover .cardTitle,
+  .card4:hover .cardTitle {
+    color: #D84E28;
   }
 }

@@ -98,31 +98,31 @@ export default function WhyAetherbloom() {
     setMousePosition({ x: 0, y: 0, rotateX: 0, rotateY: 0 })
   }
 
-  // Card data with specific content and icons
+  // Card data with specific content and images
   const cards = [
     { 
       id: 1, 
       title: "High Quality Recruitment", 
       content: "Rigorous vetting process ensures only top-tier talent joins your team. Every candidate undergoes comprehensive skills assessment and cultural fit evaluation.",
-      icon: "👥"
+      image: "/quality-recruitment.png"
     },
     { 
       id: 2, 
       title: "Transparent Pricing", 
       content: "No hidden costs or surprise fees. Clear, upfront pricing structure with detailed breakdown of all services and costs included in your package.",
-      icon: "💎"
+      image: "/transparent-pricing.png"
     },
     { 
       id: 3, 
       title: "Ethical Impact", 
       content: "Supporting fair employment practices and sustainable business growth. We create meaningful career opportunities while delivering exceptional value.",
-      icon: "🌱"
+      image: "/ethical-impact.png"
     },
     { 
       id: 4, 
       title: "GDPR Compliance", 
       content: "Full adherence to UK and EU data protection regulations. Comprehensive security protocols ensure your data remains protected and compliant.",
-      icon: "🔐"
+      image: "/gdpr-compliance.png"
     }
   ]
 
@@ -152,7 +152,7 @@ export default function WhyAetherbloom() {
               <div 
                 key={card.id} 
                 ref={el => cardRefs.current[index] = el}
-                className={`${styles.card} ${hoveredCard === index ? styles.cardHovered : ''}`}
+                className={`${styles.card} ${hoveredCard === index ? styles.cardHovered : ''} ${styles[`card${index + 1}`]}`}
                 onMouseEnter={() => handleCardMouseEnter(index)}
                 onMouseLeave={handleCardMouseLeave}
                 style={{
@@ -161,7 +161,11 @@ export default function WhyAetherbloom() {
                 }}
               >
                 <div className={styles.cardImage}>
-                  <span className={styles.cardIcon}>{card.icon}</span>
+                  <img 
+                    src={card.image} 
+                    alt={card.title}
+                    className={styles.cardIcon}
+                  />
                 </div>
                 <div className={styles.cardBody}>
                   <h3 className={styles.cardTitle}>{card.title}</h3>
