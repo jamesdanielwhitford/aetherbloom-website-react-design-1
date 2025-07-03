@@ -292,8 +292,8 @@ export default function PricingCalculator() {
                       <span className={styles.savingsValue}>{formatCurrency(savingsData.savings)}</span>
                     </div>
                     <div className={styles.savingsPercentage}>
+                      <span className={styles.percentageLabel}>Cost Reduction</span>
                       <span className={styles.percentageValue}>{savingsData.percentage}%</span>
-                      <span className={styles.percentageLabel}>cost reduction</span>
                     </div>
                   </div>
                 </div>
