@@ -33,7 +33,7 @@
   justify-content: center;
   align-items: flex-start;
   gap: 2rem;
-  transform: translateY(-10vh);
+  /* Removed transform: translateY(-10vh) to center text vertically */
 }
 
 .heroTitle {
@@ -221,14 +221,11 @@
     font-size: 4rem;
   }
   
-  .heroTitle {
-    transform: translateY(-5vh);
-  }
-  
   .heroText {
     gap: 1.5rem;
     align-items: center;
     text-align: center;
+    /* Removed transform: translateY(-5vh) to keep text centered */
   }
   
   .heroDescription {
@@ -262,7 +259,7 @@
   
   .heroTitle {
     gap: 0.25rem;
-    transform: translateY(-3vh);
+    /* Removed transform: translateY(-3vh) to keep text centered */
   }
   
   .heroDescription {
@@ -283,7 +280,7 @@
   }
   
   .heroTitle {
-    transform: translateY(-2vh);
+    /* Removed transform: translateY(-2vh) to keep text centered */
   }
   
   .heroDescription {
