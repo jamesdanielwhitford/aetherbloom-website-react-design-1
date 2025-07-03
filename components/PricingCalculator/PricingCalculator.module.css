@@ -260,12 +260,12 @@
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* Right Side Breakdown */
 .breakdownItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 0;
+  gap: 1rem;
+  min-height: 2.5rem;
 }
 
 .breakdownLabel {
