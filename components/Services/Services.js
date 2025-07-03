@@ -118,8 +118,7 @@ export default function Services() {
       features: [
         "Data Processing & Entry",
         "Financial Administration", 
-        "HR Support Services",
-        "Document Management"
+        "HR Support Services"
       ]
     },
     {

@@ -34,7 +34,7 @@ export default function WhyAetherbloom() {
     }
   }, [])
 
-  // Mouse tracking for card interaction
+  // Simplified mouse tracking with reduced calculations
   useEffect(() => {
     const handleMouseMove = (e) => {
       if (hoveredCard !== null && cardRefs.current[hoveredCard]) {
@@ -48,19 +48,29 @@ export default function WhyAetherbloom() {
         const deltaX = e.clientX - cardCenterX
         const deltaY = e.clientY - cardCenterY
         
-        // Normalize the values based on card size
-        const rotateX = (deltaY / cardRect.height) * -8 // Max 8 degrees
-        const rotateY = (deltaX / cardRect.width) * 8   // Max 8 degrees
-        const translateX = (deltaX / cardRect.width) * 8 // Max 8px movement
-        const translateY = (deltaY / cardRect.height) * 8 // Max 8px movement
+        // Reduced intensity for smoother interaction
+        const rotateX = (deltaY / cardRect.height) * -6 // Reduced from -8 to -6
+        const rotateY = (deltaX / cardRect.width) * 6   // Reduced from 8 to 6
+        const translateX = (deltaX / cardRect.width) * 6 // Reduced from 8 to 6
+        const translateY = (deltaY / cardRect.height) * 6 // Reduced from 8 to 6
         
         setMousePosition({
-          x: translateX,
-          y: translateY,
-          rotateX: Math.max(-8, Math.min(8, rotateX)),
-          rotateY: Math.max(-8, Math.min(8, rotateY))
+          x: Math.max(-6, Math.min(6, translateX)),
+          y: Math.max(-6, Math.min(6, translateY)),
+          rotateX: Math.max(-6, Math.min(6, rotateX)),
+          rotateY: Math.max(-6, Math.min(6, rotateY))
         })
       }
+    }
+
+    // Use RAF for smoother animation
+    let rafId
+    const throttledMouseMove = (e) => {
+      if (rafId) return
+      rafId = requestAnimationFrame(() => {
+        handleMouseMove(e)
+        rafId = null
+      })
     }
 
     const handleMouseLeave = () => {
@@ -70,23 +80,24 @@ export default function WhyAetherbloom() {
 
     if (sectionRef.current) {
       const section = sectionRef.current
-      section.addEventListener('mousemove', handleMouseMove)
+      section.addEventListener('mousemove', throttledMouseMove)
       section.addEventListener('mouseleave', handleMouseLeave)
       
       return () => {
-        section.removeEventListener('mousemove', handleMouseMove)
+        section.removeEventListener('mousemove', throttledMouseMove)
         section.removeEventListener('mouseleave', handleMouseLeave)
+        if (rafId) cancelAnimationFrame(rafId)
       }
     }
   }, [hoveredCard])
 
-  // Calculate transform style for cards
+  // Simplified transform calculation
   const getCardTransform = (index) => {
     if (hoveredCard !== index) {
       return 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateX(0px) translateY(0px) scale(1)'
     }
     
-    return `perspective(1000px) rotateX(${mousePosition.rotateX || 0}deg) rotateY(${mousePosition.rotateY || 0}deg) translateX(${mousePosition.x || 0}px) translateY(${mousePosition.y || 0}px) scale(1.05)`
+    return `perspective(1000px) rotateX(${mousePosition.rotateX || 0}deg) rotateY(${mousePosition.rotateY || 0}deg) translateX(${mousePosition.x || 0}px) translateY(${mousePosition.y || 0}px) scale(1.03)`
   }
 
   const handleCardMouseEnter = (index) => {
@@ -157,7 +168,7 @@ export default function WhyAetherbloom() {
                 onMouseLeave={handleCardMouseLeave}
                 style={{
                   transform: getCardTransform(index),
-                  transition: hoveredCard === index ? 'transform 0.1s ease-out' : 'transform 0.3s ease-out'
+                  transition: hoveredCard === index ? 'transform 0.05s ease-out' : 'transform 0.2s ease-out'
                 }}
               >
                 <div className={styles.cardImage}>
@@ -165,6 +176,7 @@ export default function WhyAetherbloom() {
                     src={card.image} 
                     alt={card.title}
                     className={styles.cardIcon}
+                    loading="lazy"
                   />
                 </div>
                 <div className={styles.cardBody}>
