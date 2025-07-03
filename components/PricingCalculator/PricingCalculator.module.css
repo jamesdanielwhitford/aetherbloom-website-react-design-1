@@ -1,12 +1,12 @@
 /* File: components/PricingCalculator/PricingCalculator.module.css */
 
 .calculatorSection {
-  min-height: 25vh;
+  min-height: 35vh;
   display: flex;
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  padding: 0.5rem 0;
+  padding: 1.5rem 0;
 }
 
 .calculatorContainer {
@@ -46,8 +46,8 @@
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 0.5rem 4rem;
-  min-height: 10vh;
+  padding: 1.5rem 4rem;
+  min-height: 15vh;
 }
 
 .ukContent {
@@ -62,13 +62,13 @@
 .ukLeft {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .ukRight {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.75rem;
   text-align: right;
 }
 
@@ -80,8 +80,8 @@
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 0.5rem 4rem;
-  min-height: 10vh;
+  padding: 1.5rem 4rem;
+  min-height: 15vh;
 }
 
 .aetherbloomContent {
@@ -96,20 +96,20 @@
 .aetherbloomLeft {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .aetherbloomRight {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.75rem;
   text-align: right;
 }
 
 /* Dropdown Styles */
 .dropdown {
   position: relative;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .dropdownTrigger {
@@ -267,6 +267,7 @@
   align-items: center;
   gap: 1rem;
   min-height: 2.5rem;
+  padding: 0.25rem 0;
 }
 
 .breakdownLabel {
@@ -294,7 +295,7 @@
 .totalBreakdown {
   border-top: 2px solid #e0e0e0;
   padding-top: 1rem;
-  margin-top: 1rem;
+  margin-top: 1.25rem;
   font-weight: 600;
 }
 
@@ -312,9 +313,9 @@
 .savingsDisplay {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
   margin-top: 1.5rem;
-  padding-top: 1rem;
+  padding-top: 1.25rem;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -363,114 +364,6 @@
   text-transform: capitalize;
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .calculatorSection {
-    min-height: 20vh;
-    padding: 0.5rem 0;
-  }
-
-  .ukSection,
-  .aetherbloomSection {
-    padding: 0.5rem 2rem;
-    min-height: 8vh;
-  }
-  
-  .dropdownLabel {
-    font-size: 2rem;
-  }
-  
-  .totalCost {
-    font-size: 3rem;
-  }
-  
-  .savingsValue {
-    font-size: 1.1rem;
-  }
-  
-  .percentageValue {
-    font-size: 1.3rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .calculatorSection {
-    min-height: auto;
-    padding: 0.25rem 0;
-  }
-
-  .ukSection,
-  .aetherbloomSection {
-    padding: 0.5rem 1.5rem;
-    flex-direction: column;
-    text-align: center;
-    gap: 0.5rem;
-    justify-content: center;
-    min-height: auto;
-  }
-  
-  .ukContent,
-  .aetherbloomContent {
-    flex-direction: column;
-    gap: 0.5rem;
-    text-align: center;
-  }
-  
-  .ukRight,
-  .aetherbloomRight {
-    text-align: center;
-  }
-  
-  .dropdownLabel {
-    font-size: 1.8rem;
-  }
-  
-  .totalCost {
-    font-size: 2.5rem;
-  }
-  
-  .savingsDisplay {
-    margin-top: 0.5rem;
-  }
-  
-  .savingsAmount,
-  .savingsPercentage {
-    text-align: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .calculatorSection {
-    padding: 0.25rem 0;
-  }
-
-  .ukSection,
-  .aetherbloomSection {
-    padding: 0.25rem;
-  }
-  
-  .dropdownLabel {
-    font-size: 1.5rem;
-  }
-  
-  .totalCost {
-    font-size: 2rem;
-  }
-  
-  .savingsValue {
-    font-size: 0.9rem;
-  }
-  
-  .percentageValue {
-    font-size: 1.1rem;
-  }
-  
-  .breakdownLabel,
-  .breakdownValue {
-    font-size: 0.8rem;
-  }
-}
-
 /* Custom scrollbar for dropdown menus */
 .dropdownMenu::-webkit-scrollbar {
   width: 4px;
@@ -487,6 +380,181 @@
 
 .dropdownMenu::-webkit-scrollbar-thumb:hover {
   background: #ff9340;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .calculatorSection {
+    min-height: 30vh;
+    padding: 1.25rem 0;
+  }
+
+  .ukSection,
+  .aetherbloomSection {
+    padding: 1.25rem 2rem;
+    min-height: 12vh;
+  }
+  
+  .ukRight,
+  .aetherbloomRight {
+    gap: 0.5rem;
+  }
+  
+  .breakdownItem {
+    min-height: 2.25rem;
+    padding: 0.2rem 0;
+  }
+  
+  .dropdownLabel {
+    font-size: 2rem;
+  }
+  
+  .totalCost {
+    font-size: 3rem;
+  }
+  
+  .savingsValue {
+    font-size: 1.2rem;
+  }
+  
+  .percentageValue {
+    font-size: 1.4rem;
+  }
+  
+  .savingsDisplay {
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .calculatorSection {
+    min-height: auto;
+    padding: 1rem 0;
+  }
+
+  .ukSection,
+  .aetherbloomSection {
+    padding: 1rem 1.5rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    justify-content: center;
+    min-height: auto;
+  }
+  
+  .ukContent,
+  .aetherbloomContent {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .ukLeft,
+  .aetherbloomLeft {
+    gap: 1rem;
+  }
+  
+  .ukRight,
+  .aetherbloomRight {
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .breakdownItem {
+    min-height: 2rem;
+    padding: 0.15rem 0;
+  }
+  
+  .dropdownLabel {
+    font-size: 1.8rem;
+  }
+  
+  .totalCost {
+    font-size: 2.5rem;
+  }
+  
+  .savingsDisplay {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    gap: 0.5rem;
+  }
+  
+  .savingsAmount,
+  .savingsPercentage {
+    text-align: center;
+    padding: 0.25rem 0;
+  }
+  
+  .totalBreakdown {
+    padding-top: 0.75rem;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .calculatorSection {
+    padding: 1.5rem 0;
+  }
+
+  .ukSection,
+  .aetherbloomSection {
+    padding: 1.5rem 1rem;
+    gap: 1rem;
+  }
+  
+  .ukLeft,
+  .aetherbloomLeft {
+    gap: 1rem;
+  }
+  
+  .ukRight,
+  .aetherbloomRight {
+    gap: 0.75rem;
+  }
+  
+  .breakdownItem {
+    min-height: 2rem;
+    padding: 0.25rem 0;
+  }
+  
+  .dropdownLabel {
+    font-size: 1.5rem;
+  }
+  
+  .totalCost {
+    font-size: 2rem;
+  }
+  
+  .savingsValue {
+    font-size: 1rem;
+  }
+  
+  .percentageValue {
+    font-size: 1.2rem;
+  }
+  
+  .breakdownLabel,
+  .breakdownValue {
+    font-size: 0.9rem;
+  }
+  
+  .savingsDisplay {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    gap: 0.75rem;
+  }
+  
+  .savingsAmount,
+  .savingsPercentage {
+    padding: 0.4rem 0;
+  }
+  
+  .totalBreakdown {
+    padding-top: 1rem;
+    margin-top: 1rem;
+  }
 }
 
 /* Accessibility improvements */
