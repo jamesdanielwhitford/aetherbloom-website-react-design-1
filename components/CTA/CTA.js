@@ -142,13 +142,11 @@ export default function CTA() {
 
             <div className={styles.contactInfo}>
               <div className={styles.contactItem}>
-                <span className={styles.contactIcon}>📧</span>
-                <a href="mailto:hello@aetherbloom.com" className={styles.contactLink}>
-                  hello@aetherbloom.com
+                <a href="mailto:info@aetherbloom.co.za" className={styles.contactLink}>
+                  info@aetherbloom.co.za
                 </a>
               </div>
               <div className={styles.contactItem}>
-                <span className={styles.contactIcon}>📞</span>
                 <a href="tel:+44207123456" className={styles.contactLink}>
                   +44 20 7123 4567
                 </a>

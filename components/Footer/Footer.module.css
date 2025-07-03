@@ -33,7 +33,6 @@
   gap: 3rem;
   padding: 4rem 2rem 3rem;
   align-items: start;
-  align-content: start;
 }
 
 /* Brand Section */
@@ -44,8 +43,17 @@
   align-items: flex-start;
 }
 
+.brandHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
 .logoContainer {
-  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
 }
 
 .logo {
@@ -58,6 +66,7 @@
   font-size: 1.8rem;
   letter-spacing: -0.5px;
   transition: all 0.3s ease;
+  line-height: 1.2;
 }
 
 .logoSymbol {
@@ -65,46 +74,17 @@
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-shrink: 0;
 }
 
 .logoText {
   color: #ffffff;
   transition: all 0.4s ease;
-  line-height: 1;
   font-family: 'Poppins', -apple-system, sans-serif;
+  line-height: 1.2;
 }
 
 .logo:hover .logoText {
-  color: #a8d8a8;
-}
-
-.brandLink {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  text-decoration: none;
-  color: #ffffff;
-  font-weight: 700;
-  font-size: 1.8rem;
-  letter-spacing: -0.5px;
-  transition: all 0.3s ease;
-  margin-bottom: 0.5rem;
-}
-
-.brandIcon {
-  font-size: 2rem;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
-}
-
-.brandName {
-  color: #ffffff;
-  transition: all 0.4s ease;
-}
-
-.brandLink:hover .brandName {
   color: #a8d8a8;
 }
 
@@ -115,19 +95,19 @@
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.8);
   max-width: 280px;
-  margin-bottom: 1rem;
+  margin: 0;
 }
 
 .contactEmail {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
+  width: 100%;
 }
 
 .socialLinks {
   display: flex;
   gap: 1rem;
+  align-items: center;
 }
 
 .socialLink {
@@ -142,16 +122,13 @@
   text-decoration: none;
   transition: all 0.3s ease;
   backdrop-filter: blur(8px);
+  color: #ffffff;
 }
 
 .socialLink:hover {
   background: rgba(168, 216, 168, 0.2);
   border-color: rgba(168, 216, 168, 0.4);
   transform: translateY(-2px);
-}
-
-.socialIcon {
-  font-size: 1.2rem;
 }
 
 /* Link Columns */
@@ -167,7 +144,7 @@
   font-family: 'Poppins', -apple-system, sans-serif;
   font-size: 1.1rem;
   font-weight: 600;
-  color: #ffffff;
+  color: #334238;
   margin: 0;
   padding: 0;
   line-height: 1.2;
@@ -219,19 +196,6 @@
 .contactItem {
   display: flex;
   align-items: flex-start;
-  gap: 0.75rem;
-}
-
-.contactIcon {
-  font-size: 1.1rem;
-  width: 1.5rem;
-  text-align: center;
-  flex-shrink: 0;
-  margin-top: 0.1rem;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .contactLink {
@@ -283,7 +247,7 @@
   font-family: 'Poppins', -apple-system, sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  color: #ffffff;
+  color: #334238;
   margin: 0 0 0.5rem 0;
   line-height: 1.2;
 }
@@ -353,14 +317,23 @@
 /* Footer Bottom */
 .footerBottom {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 2rem;
   background: rgba(255, 255, 255, 0.05);
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 2rem 0;
 }
 
 .bottomContent {
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .copyright {
@@ -402,10 +375,13 @@
     align-items: center;
   }
   
+  .brandHeader {
+    align-items: center;
+    text-align: center;
+  }
+  
   .logoContainer {
-    display: flex;
     justify-content: center;
-    width: 100%;
   }
   
   .logo {
@@ -465,10 +441,13 @@
     align-items: center;
   }
   
+  .brandHeader {
+    align-items: center;
+    text-align: center;
+  }
+  
   .logoContainer {
-    display: flex;
     justify-content: center;
-    width: 100%;
   }
   
   .logo {
@@ -525,23 +504,9 @@
     height: 36px;
   }
   
-  .socialIcon {
-    font-size: 1rem;
-  }
-  
   .columnTitle {
     align-self: center;
     text-align: center;
-  }
-  
-  /* Legacy brand link styling for backwards compatibility */
-  .brandLink {
-    font-size: 1.6rem;
-    justify-content: center;
-  }
-  
-  .brandIcon {
-    font-size: 1.8rem;
   }
 }
 
@@ -556,7 +521,6 @@
 
 /* Accessibility improvements */
 @media (prefers-reduced-motion: reduce) {
-  .brandLink,
   .socialLink,
   .footerLink,
   .contactLink,
